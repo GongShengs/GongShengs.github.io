@@ -95,6 +95,9 @@ nav .nav-item-patreon {
 nav .nav-item-codepen {
     background-image: url(/theme-img/artstation_logo_dark.png);
 }
+nav .nav-item-search {
+    background-image: url(/theme-img/search_icon_dark.png);
+}
 
 @media (prefers-color-scheme: dark) {
     nav .nav-item-github {
@@ -105,6 +108,9 @@ nav .nav-item-codepen {
     }
     nav .nav-item-codepen {
         background-image: url(https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-White-Large.png);
+    }
+    nav .nav-item-search {
+        background-image: url(/theme-img/search_icon_dark.png);
     }
 }
 
