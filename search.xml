@@ -1,341 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>如何使用VS Code写MD</title>
-    <url>/2021/07/23/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8VS_Code%E5%86%99MD/</url>
-    <content><![CDATA[<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>语法：<a href="https://www.runoob.com/markdown/md-tutorial.html">MarkDown</a></p>
-<p>编写平台：vs code</p>
-<p>插件：Markdown Preview Enhanced<br>Better Markdown &amp; Latex Shortcuts</p>
-<p>参考资料：<br><a href="https://zhuanlan.zhihu.com/p/366596949">https://zhuanlan.zhihu.com/p/366596949</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Maya 插件开发学习</title>
-    <url>/2021/07/23/Maya_%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/</url>
-    <content><![CDATA[<h1 id="Maya-插件开发学习"><a href="#Maya-插件开发学习" class="headerlink" title="Maya 插件开发学习"></a>Maya 插件开发学习</h1><ul>
-<li>环境配置<ul>
-<li>vs code</li>
-<li>maya 脚本编辑器</li>
-</ul>
-</li>
-<li>语言分类<ul>
-<li>mel</li>
-<li>python</li>
-<li>QT</li>
-</ul>
-</li>
-</ul>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="maya-脚本编辑器配置"><a href="#maya-脚本编辑器配置" class="headerlink" title="maya 脚本编辑器配置"></a>maya 脚本编辑器配置</h3><p>如图所示，对脚本编辑器进行配置</p>
-<p><img src="Maya_Editor_Set.png" alt="d"></p>
-<h3 id="vs-code-环境配置"><a href="#vs-code-环境配置" class="headerlink" title="vs code 环境配置"></a>vs code 环境配置</h3><p>相关参考链接：</p>
-<ul>
-<li><a href="https://www.bilibili.com/video/BV1Cz4y1R7MC?from=search&seid=14150298653133706761">Python开发Maya脚本插件 开发环境详细配置</a></li>
-</ul>
-<h2 id="语言分类"><a href="#语言分类" class="headerlink" title="语言分类"></a>语言分类</h2><h3 id="mel"><a href="#mel" class="headerlink" title="mel"></a>mel</h3><h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>  maya.cmds——这是一个把MEL命令用python包装（ wrappers）的库，可以用于替代MEL命令，因为绝大多数的MEL命令都能查找得到一一对应的maya.cmds命令。只适合面向过程编程。</p>
-<p>  pymel.core——该pymel库将许多最常用的MEL命令和API的方法重组到类的层次结构中，这样的设计让你的编程更简单易懂，更具有pythonic化，因为它是具有真正意义上的面向对象特性。由于该pymel库是第三方开发的，Autodesk公司并不提供技术上的支持帮助。</p>
-<p>  maya.OpenMaya——这是Maya C++ API的Python包装（ wrappers）的库，称之为Python API 1.0， 适合开发插件和需要MEL未公开的功能的其他任务。</p>
-<p>  maya.api.OpenMaya——这是Maya C++ API的Python包装（ wrappers）的库，称之为Python API 2.0。</p>
-<h3 id="QT"><a href="#QT" class="headerlink" title="QT"></a>QT</h3><p>为了通用性，GUI选择QT。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Autodesk FBX SDK 介绍</title>
-    <url>/2021/07/23/Autodesk_FBX_SDK/</url>
-    <content><![CDATA[<h1 id="Autodesk-FBX-SDK-介绍"><a href="#Autodesk-FBX-SDK-介绍" class="headerlink" title="Autodesk FBX SDK 介绍"></a>Autodesk FBX SDK 介绍</h1><p><a href="https://www.autodesk.com/products/fbx/overview">Autodesk FBX</a>是Autodesk公司出品的一款用于跨平台的免费三维创作与交换格式的软件，通过FBX用户能访问大多数三维供应商的三维文件。FBX 文件格式支持所有主要的三维数据元素以及二维、音频和视频媒体元素。</p>
-<p>官方提供了相对应的SDK提供给开发者使用，有C++，C#，Python等多个版本。相关的<a href="https://www.autodesk.com/products/fbx/overview">下载地址</a>。<br>不同环境安装方案：</p>
-<ul>
-<li>Unity中，如果安装了了Fbx Exporter插件，会自动内置FBX的SDK库。</li>
-<li>Houdini中，请看<a href="https://zhuanlan.zhihu.com/p/144349799">Houdini 对于fbx sdk python的简单应用</a></li>
-</ul>
-<h3 id="相关学习途径"><a href="#相关学习途径" class="headerlink" title="相关学习途径"></a>相关学习途径</h3><ul>
-<li>通过阅读Fbx Exporter的源代码来学习Fbx SDK的使用</li>
-<li><a href="https://banexdevblog.wordpress.com/2014/06/23/a-quick-tutorial-about-the-fbx-ascii-format/">A QUICK TUTORIAL ABOUT THE FBX ASCII FORMAT</a></li>
-<li><a href="https://www.gamedev.net/tutorials/programming/graphics/how-to-work-with-fbx-sdk-r3582/">How to Work with FBX SDK</a></li>
-<li><a href="https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_welcome_to_the_fbx_sdk_html">Welcome to the FBX SDK</a></li>
-</ul>
-<h3 id="Fbx的数据结构"><a href="#Fbx的数据结构" class="headerlink" title="Fbx的数据结构"></a>Fbx的数据结构</h3><p>Fbx是节点式的数据结构，如下图所示：<br><img src="v2-d9e57228d64b062291395dfbc6f84025_720w.jpg" alt="Fbx结构图"></p>
-<h3 id="Fbx-SDK-的使用，以Python为例"><a href="#Fbx-SDK-的使用，以Python为例" class="headerlink" title="Fbx SDK 的使用，以Python为例"></a>Fbx SDK 的使用，以Python为例</h3><p>这是修改Fbx Mesh 属性的例子</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2.7</span></span><br><span class="line"><span class="keyword">import</span> fbx</span><br><span class="line"><span class="keyword">from</span> fbx <span class="keyword">import</span> FbxVector2</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Run</span>():</span></span><br><span class="line">    node = hou.pwd()</span><br><span class="line">    fileName=node.parm(<span class="string">&quot;file&quot;</span>).<span class="built_in">eval</span>()</span><br><span class="line">    csv_path = node.parm(<span class="string">&#x27;csv_path&#x27;</span>).<span class="built_in">eval</span>()</span><br><span class="line">    directory = node.parm(<span class="string">&#x27;directory&#x27;</span>).<span class="built_in">eval</span>()</span><br><span class="line">    num =<span class="number">1</span></span><br><span class="line">    <span class="comment">#birth_data = []</span></span><br><span class="line">    <span class="comment">#birth_data.append(fileName)</span></span><br><span class="line">    birth_data = DuplicateArray(ReadCsvByPath(csv_path,num))</span><br><span class="line">    <span class="keyword">for</span> path <span class="keyword">in</span> birth_data:</span><br><span class="line">        </span><br><span class="line">        fileName = os.path.basename(path)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;@&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> fileName:</span><br><span class="line">            <span class="built_in">print</span> path</span><br><span class="line">            <span class="built_in">iter</span>=<span class="number">0</span></span><br><span class="line">            fbxManager = fbx.FbxManager.Create()</span><br><span class="line">            fbxScene = fbx.FbxScene.Create(fbxManager, <span class="string">&quot;&quot;</span>)</span><br><span class="line">            fbxImporter = fbx.FbxImporter.Create(fbxManager, <span class="string">&quot;&quot;</span>)</span><br><span class="line">            fbxImporter.Initialize(path)</span><br><span class="line">            fbxImporter.Import(fbxScene)</span><br><span class="line">            fbxRoot = fbxScene.GetRootNode() </span><br><span class="line">            <span class="keyword">if</span> IsCollider(fileName) == <span class="literal">True</span>:</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> GetFbxNodeList(fbxRoot,<span class="built_in">list</span> = []):</span><br><span class="line">                    <span class="comment">#i.GetMesh().ClearLayers()</span></span><br><span class="line">                    <span class="keyword">if</span> i.GetMesh()!= <span class="literal">None</span>:</span><br><span class="line">                        i.GetMesh().ClearLayers()</span><br><span class="line">                        <span class="built_in">iter</span>+=<span class="number">1</span></span><br><span class="line">                </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> GetFbxNodeList(fbxRoot,<span class="built_in">list</span> = []):</span><br><span class="line">                <span class="comment">#i.GetMesh().ClearLayers()</span></span><br><span class="line">                <span class="keyword">if</span> i.GetMesh()!= <span class="literal">None</span>:</span><br><span class="line">                    mesh = i.GetMesh()</span><br><span class="line">                    LayerCount = mesh.GetLayerCount()</span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(LayerCount):</span><br><span class="line">                        Layer = mesh.GetLayer(j)</span><br><span class="line">                        </span><br><span class="line">                        <span class="keyword">if</span>(Layer.GetVertexColors()!=<span class="literal">None</span>):</span><br><span class="line">                            Layer.SetVertexColors(<span class="literal">None</span>)</span><br><span class="line">                            <span class="built_in">iter</span>+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> LayerCount&gt;=<span class="number">4</span>:</span><br><span class="line">                        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(LayerCount):</span><br><span class="line">                            <span class="keyword">if</span> j==<span class="number">1</span> <span class="keyword">or</span> j==<span class="number">2</span>:</span><br><span class="line">                                Layer = mesh.GetLayer(j)</span><br><span class="line">                                uv = Layer.GetUVs()</span><br><span class="line">                                DirectArray = uv.GetDirectArray()</span><br><span class="line">                                DirectArray.SetCount(<span class="number">1</span>)</span><br><span class="line">                                DirectArray.SetAt(<span class="number">0</span>,FbxVector2(<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">                                <span class="built_in">iter</span>+=<span class="number">1</span></span><br><span class="line">                            <span class="keyword">elif</span> j&gt;<span class="number">3</span>:</span><br><span class="line">                                Layer = mesh.GetLayer(j)</span><br><span class="line">                                Layer.SetUVs(<span class="literal">None</span>)</span><br><span class="line">                                <span class="built_in">iter</span>+=<span class="number">1</span></span><br><span class="line">                    <span class="keyword">if</span> LayerCount&lt;<span class="number">4</span>:</span><br><span class="line">                        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(LayerCount):</span><br><span class="line">                            <span class="keyword">if</span> j&gt;<span class="number">0</span>:</span><br><span class="line">                                Layer = mesh.GetLayer(j)</span><br><span class="line">                                Layer.SetUVs(<span class="literal">None</span>)</span><br><span class="line">                                <span class="built_in">iter</span>+=<span class="number">1</span>            </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">iter</span>!=<span class="number">0</span>:</span><br><span class="line">                ExportFbx(fbxManager,path,fbxScene)    </span><br><span class="line">            fbxScene.Destroy()</span><br><span class="line">            fbxImporter.Destroy()</span><br><span class="line">            fbxManager.Destroy()</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetFbxNodeList</span>(<span class="params">fbxRoot,<span class="built_in">list</span> = []</span>):</span></span><br><span class="line">    num = fbxRoot.GetChildCount()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(fbxRoot.GetChildCount()):</span><br><span class="line">        fbxChildRoot = fbxRoot.GetChild(i)</span><br><span class="line">        <span class="built_in">list</span>.append(fbxChildRoot)</span><br><span class="line">        <span class="keyword">if</span> fbxChildRoot.GetChildCount()&gt;<span class="number">0</span> :</span><br><span class="line">            GetFbxNodeList(fbxChildRoot,<span class="built_in">list</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ExportFbx</span>(<span class="params">fbxManager,fileName,fbxScene</span>):</span></span><br><span class="line">    fbxExporter = fbx.FbxExporter.Create(fbxManager, <span class="string">&quot;Exporter&quot;</span>)</span><br><span class="line">    fileFormat = -<span class="number">1</span></span><br><span class="line">    fbxExporter.Initialize(fileName,fileFormat,fbxManager.GetIOSettings())</span><br><span class="line">    fbxExporter.Export(fbxScene)</span><br><span class="line">    fbxExporter.Destroy()</span><br><span class="line">    </span><br><span class="line"><span class="comment">#获取输入路径下的指定类型的文件路径列表       </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetFbxListInDirectory</span>(<span class="params">filepath,file_type,<span class="built_in">list</span>=[]</span>):</span></span><br><span class="line">    path_list = os.listdir(filepath)</span><br><span class="line">    <span class="keyword">for</span> f1 <span class="keyword">in</span> path_list:</span><br><span class="line">        f1_path = os.path.join(filepath,f1)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(f1_path):</span><br><span class="line">            suffix = os.path.splitext(f1_path)[<span class="number">0</span>][<span class="number">1</span>:]</span><br><span class="line">            <span class="keyword">if</span> suffix.lower() == file_type:</span><br><span class="line">                f1_path.replace(<span class="string">&quot;\\&quot;</span>,<span class="string">&quot;/&quot;</span>)</span><br><span class="line">                <span class="built_in">list</span>.append(f1_path)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(f1_path):</span><br><span class="line">            GetFbxListInDirectory(f1_path,file_type,<span class="built_in">list</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span> </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">IsCollider</span>(<span class="params">fileName</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;Collider&quot;</span> <span class="keyword">in</span> fileName <span class="keyword">or</span> <span class="string">&quot;collider&quot;</span> <span class="keyword">in</span> fileName:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DuplicateArray</span>(<span class="params">Imported_Array</span>):</span>     </span><br><span class="line">    <span class="type">List</span> = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> Imported_Array:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> <span class="type">List</span>:</span><br><span class="line">            <span class="type">List</span>.append(i)</span><br><span class="line">    <span class="keyword">return</span> <span class="type">List</span></span><br><span class="line"><span class="comment">#读取csv的列信息，并返回一个数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ReadCsvByPath</span>(<span class="params">csv_path,num</span>):</span></span><br><span class="line">    birth_data = []</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(csv_path) <span class="keyword">as</span> csvfile:</span><br><span class="line">        csv_reader = csv.reader(csvfile)  <span class="comment"># 使用csv.reader读取csvfile中的文件</span></span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> csv_reader:  <span class="comment"># 将csv 文件中的数据保存到birth_data中</span></span><br><span class="line">            birth_data.append(<span class="built_in">str</span>(row[num]))</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> birth_data</span><br></pre></td></tr></table></figure>
-<h3 id="FBX-SDK-的学习总结"><a href="#FBX-SDK-的学习总结" class="headerlink" title="FBX SDK 的学习总结"></a>FBX SDK 的学习总结</h3><ul>
-<li>SDK使用的结构<ul>
-<li>FbxManager </li>
-<li>FbxScene </li>
-<li>FbxImporter</li>
-<li>FbxExporter</li>
-</ul>
-</li>
-<li>关于Fbx 属性修改<br>Fbx的Node存在Layer的概念，Layer用于存储各种Mesh的数据，mesh本身的基础数据(如：法线，切线，顶点位置，uv，顶点色)都存储在Layer0上，当模型增加uv2,uv3等数据时，会增加新的Layer层级并存储在对应层级下</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/07/24/Houdini%20Digital%20Assets%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Houdini-Digital-Assets-学习笔记"><a href="#Houdini-Digital-Assets-学习笔记" class="headerlink" title="Houdini Digital Assets 学习笔记"></a>Houdini Digital Assets 学习笔记</h1><p>Digital assets let you create reusable nodes and tools from existing networks.</p>
-<p>可以创建复用的节点和工具。 </p>
-<p>存储格式：.hda(.otl是旧版本)</p>
-<h2 id="创建的方法"><a href="#创建的方法" class="headerlink" title="创建的方法"></a>创建的方法</h2><ol>
-<li>Subnetwork 右键  Create digital asset    </li>
-<li>资产命名<ul>
-<li>Operator Name 命名空间的名字</li>
-<li>Operator Label tab管理器的名称</li>
-<li>Save to library 存储位置，建议制作自己的资产库，便于个人管理。</li>
-</ul>
-</li>
-<li>编辑面板属性，脚本等细节</li>
-<li>4.完成创建</li>
-</ol>
-<h2 id="面板参数介绍"><a href="#面板参数介绍" class="headerlink" title="面板参数介绍"></a>面板参数介绍</h2><h3 id="Operator-Type-window-资产的编辑窗口"><a href="#Operator-Type-window-资产的编辑窗口" class="headerlink" title="Operator Type window 资产的编辑窗口"></a>Operator Type window 资产的编辑窗口</h3><p>此窗口可以编辑资产除子节点之外的所有数据（参数面板，label and icon，嵌入文件，自定义脚本）</p>
-<p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B00.png" alt="资产的编辑窗口"></p>
-<ul>
-<li>Operator Type 就是上文提到的Operator Name，此时的状态是不可更改的。</li>
-<li>Save to Library 存储位置。</li>
-<li>Install Library to 安装到哪，统一适用packages管理，我觉得更好些。</li>
-<li>Switch to Definition 切换定义</li>
-</ul>
-<h4 id="Basic-tab基础标签"><a href="#Basic-tab基础标签" class="headerlink" title="Basic tab基础标签"></a>Basic tab基础标签</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01.png" alt="Basic"></p>
-<ul>
-<li>Label 标签名 显示在tab</li>
-<li>Icon 图标 建议使用houdini内置的图标，其他处理方式请查看帮助。</li>
-<li>Version 版本 版本号提醒</li>
-<li>Minimum Inputs 最小输入端口数量</li>
-<li>Maximum Inputs 最大输入端口数量</li>
-<li>Maximum Outputs 最大输出端口数量</li>
-</ul>
-<h4 id="Parameters-tab-参数标签"><a href="#Parameters-tab-参数标签" class="headerlink" title="Parameters tab 参数标签"></a>Parameters tab 参数标签</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02.png" alt="Parameters"></p>
-<ul>
-<li><p>创建参数</p>
-<ul>
-<li>将子节点属性直接拖入Existing Parameters</li>
-<li>从create Parameters 中拖入Existing Parameters，然后进行和子节点的关联</li>
-</ul>
-</li>
-<li><p>create Parameters 创建属性</p>
-</li>
-<li><p>Existing Parameters 已有的参数</p>
-</li>
-<li><p>Parameter Description参数说明</p>
-<ul>
-<li>Name 是 参数的名称，当脚本或者其他方式调用时使用此名称， Label 是面板上显示的名称。</li>
-<li>Callback Script 回调脚本 当参数有所变化就会触发，经常用于button</li>
-<li>Tags 标签 可以存储一些参数属性，例如opengl实时显示材质之类。</li>
-</ul>
-</li>
-<li><p>Channels中存储属性的默认值，但是ramp类型的不在这里设置 它的属性参数中有一项叫 get from  Parameter</p>
-</li>
-</ul>
-<h4 id="Node-Tabs-节点面板"><a href="#Node-Tabs-节点面板" class="headerlink" title="Node Tabs 节点面板"></a>Node Tabs 节点面板</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03.png" alt="Node"></p>
-<p>Enitble Nodes 是目前我最常用的，为了能编辑内部节点</p>
-<h4 id="Input-Output-tab"><a href="#Input-Output-tab" class="headerlink" title="Input/Output tab"></a>Input/Output tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04.png" alt="Input/Output"></p>
-<p>输入输出 可以进行一些输入输出的信息描述</p>
-<h4 id="Help-Tabs"><a href="#Help-Tabs" class="headerlink" title="Help Tabs"></a>Help Tabs</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05.png" alt="Help"></p>
-<p>可以使用wiki 进行节点帮助的创建，我认为在大规模使用的情况下 是很有用的。</p>
-<h4 id="Code-Tabs"><a href="#Code-Tabs" class="headerlink" title="Code Tabs"></a>Code Tabs</h4><p>适用于其他类型的资产，现在不讨论。</p>
-<h4 id="Scripts-tab"><a href="#Scripts-tab" class="headerlink" title="Scripts tab"></a>Scripts tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06.png" alt="Scripts"></p>
-<p>触发脚本的标签<br>当有一些自定义的触发操作，批处理之类就可以使用该标签进行创建。</p>
-<h4 id="Interactive-tab"><a href="#Interactive-tab" class="headerlink" title="Interactive tab"></a>Interactive tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07.png" alt="Interactive"></p>
-<p>交互标签 用于hda 和用户交互的操作<br>例如 hda的菜单位置，界面交互，热键之类</p>
-<p>菜单设置    在    shelf Tools-Context- NetWork Plane - TAB Submenu Path</p>
-<h4 id="IExtra-Files-tab"><a href="#IExtra-Files-tab" class="headerlink" title="IExtra Files tab"></a>IExtra Files tab</h4><p>内嵌文件标签</p>
-<p>用于将一些纹理 bgeo文件嵌入hda 中,嵌入后使用opdef 在资产中进行调用。</p>
-<h4 id="Save-Tab"><a href="#Save-Tab" class="headerlink" title="Save Tab"></a>Save Tab</h4><p>保存 目前还未涉及到，感觉默认就行。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
-<li>关于私有资产保护问题<ul>
-<li>可以创建黑盒，在你不想公开的情况下。</li>
-<li>方法：<ol>
-<li>选择需要创建黑盒的hda</li>
-<li>Assets - Create Black Boxed Asset from Selection </li>
-<li>选择存储位置，完成创建。    </li>
-</ol>
-</li>
-</ul>
-</li>
-<li>当想修改官方的资产但不想影响资产的默认的问题<ol>
-<li>打开资产管理面板，右键资产 show in Asset Manager </li>
-<li>右键点击资产中的hda 选择duplicate 进行修改创建。</li>
-</ol>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/07/24/Houdini%20Engine%20For%20Unity-Plugin%20API/</url>
-    <content><![CDATA[<h1 id="Houdini-Engine-for-Unity-Plugin-API"><a href="#Houdini-Engine-for-Unity-Plugin-API" class="headerlink" title="Houdini Engine for Unity-Plugin API"></a>Houdini Engine for Unity-Plugin API</h1><p><a href="http://www.sidefx.com/docs/unity/pluginapi.html">官方文档</a></p>
-<p>HEU分为三部分：</p>
-<ul>
-<li>Asset layer</li>
-<li>Utility layer</li>
-<li>HAPI layer</li>
-</ul>
-<h2 id="Asset-layer"><a href="#Asset-layer" class="headerlink" title="Asset layer"></a>Asset layer</h2><p>即资产创建以及参数获取和修改的操作，包含以下几个类：</p>
-<ul>
-<li>HEU_HoudiniAssetRoot这是Unity中Houdini Engine资产的根组件。它是轻量级的，仅充当层次结构的根并提供用户界面。</li>
-<li>HEU_HoudiniAsset这是主要的资产组件，其中包含资产的所有元数据，以及构建，烹饪，查询和修改资产的功能。</li>
-<li>HEU_ParameterUtility包含便利功能，用于查询和修改资产上的参数。</li>
-</ul>
-<p>官方提供了一个相关的实例文档<br>Plugins / HoudiniEngineUnity / Scripts / Examples / HEU_ExampleEvergreenQuery.cs</p>
-<h3 id="文档阅读笔记"><a href="#文档阅读笔记" class="headerlink" title="文档阅读笔记"></a>文档阅读笔记</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">using HoudiniEngineUnity;</span><br><span class="line"></span><br><span class="line">HEU_AssetDatabase.GetAssetFullPath</span><br><span class="line"></span><br><span class="line">//Manages the asset database to store persistent assets such as materials, textures, asset data, etc. Wraps around Unity AssetDatabase. Only available in Editor. Probably not needed at runtime as data probably does not need to persist past session.</span><br><span class="line">//Given relative path to an asset (with Assets/ in the path), this returns the full path to it.</span><br><span class="line"></span><br><span class="line">HEU_SessionBase </span><br><span class="line">//Base class for a Houdini Engine session. Contains functionality to interface with the Houdini Engine for a particular session.</span><br><span class="line"></span><br><span class="line">HEU_SessionManager.GetOrCreateDefaultSession()</span><br><span class="line">//Manages a session for Houdini Engine. Supports all types of sessions.</span><br><span class="line">//获取或者创建有效会话</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HEU_HAPIUtility.InstantiateHDA(evergreenFullPath, Vector3.zero, session, true);</span><br><span class="line">//houdini引擎的工作，如创建hda，cook等。</span><br><span class="line">//Load and instantiate an HDA asset in Unity and Houdini, for the asset located at given path.创建指定路径的hda</span><br><span class="line"></span><br><span class="line">public static GameObject InstantiateHDA(string filePath, Vector3 initialPosition, HEU_SessionBase session, bool bBuildAsync)</span><br><span class="line">FilePath文件路径	 initialPosition 初始位置  获取会话 是否重载</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HEU_EditorUtility.SelectObject(rootGO);</span><br><span class="line">//Wrapper around Unity Editor functions.Unity编辑器函数的包装。</span><br><span class="line">//选择物体 返回数组</span><br><span class="line"></span><br><span class="line">HEU_HoudiniAsset houdiniAsset = QueryHoudiniAsset(rootGO);</span><br><span class="line">//HEU_HoudiniAsset 资产组件</span><br><span class="line">//QueryHoudiniAsset Shows how to get the HEU_HoudiniAsset component from a HDA root gameobject.</span><br><span class="line"></span><br><span class="line">// Make sure the HDA is cooked before querying or changing its properties.</span><br><span class="line">CookAsset(houdiniAsset);</span><br><span class="line"></span><br><span class="line">// Example of querying and changing parms.</span><br><span class="line">ChangeParmsAndCook(houdiniAsset);</span><br><span class="line"></span><br><span class="line">// This will query objects, geometry, parts, and attributes in the asset.</span><br><span class="line">QueryObjects(houdiniAsset);</span><br><span class="line"></span><br><span class="line">// This will query the gravity attribute.</span><br><span class="line">QueryAttribute(houdiniAsset, &quot;EvergreenGenerator&quot;, &quot;EvergreenGenerator1&quot;, 0, &quot;Cd&quot;);</span><br><span class="line"></span><br><span class="line">HEU_HoudiniAssetRoot</span><br><span class="line">//The root object of a Houdini Engine asset. Used for organizing hierarchy, and more importantly displaying custom UI.</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/07/24/Houdini%20Digital%20Assets%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Houdini%20Digital%20Assets%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Houdini-Digital-Assets-学习笔记"><a href="#Houdini-Digital-Assets-学习笔记" class="headerlink" title="Houdini Digital Assets 学习笔记"></a>Houdini Digital Assets 学习笔记</h1><p>Digital assets let you create reusable nodes and tools from existing networks.</p>
-<p>可以创建复用的节点和工具。 </p>
-<p>存储格式：.hda(.otl是旧版本)</p>
-<h2 id="创建的方法"><a href="#创建的方法" class="headerlink" title="创建的方法"></a>创建的方法</h2><ol>
-<li>Subnetwork 右键  Create digital asset    </li>
-<li>资产命名<ul>
-<li>Operator Name 命名空间的名字</li>
-<li>Operator Label tab管理器的名称</li>
-<li>Save to library 存储位置，建议制作自己的资产库，便于个人管理。</li>
-</ul>
-</li>
-<li>编辑面板属性，脚本等细节</li>
-<li>4.完成创建</li>
-</ol>
-<h2 id="面板参数介绍"><a href="#面板参数介绍" class="headerlink" title="面板参数介绍"></a>面板参数介绍</h2><h3 id="Operator-Type-window-资产的编辑窗口"><a href="#Operator-Type-window-资产的编辑窗口" class="headerlink" title="Operator Type window 资产的编辑窗口"></a>Operator Type window 资产的编辑窗口</h3><p>此窗口可以编辑资产除子节点之外的所有数据（参数面板，label and icon，嵌入文件，自定义脚本）</p>
-<p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B00.png" alt="资产的编辑窗口"></p>
-<ul>
-<li>Operator Type 就是上文提到的Operator Name，此时的状态是不可更改的。</li>
-<li>Save to Library 存储位置。</li>
-<li>Install Library to 安装到哪，统一适用packages管理，我觉得更好些。</li>
-<li>Switch to Definition 切换定义</li>
-</ul>
-<h4 id="Basic-tab基础标签"><a href="#Basic-tab基础标签" class="headerlink" title="Basic tab基础标签"></a>Basic tab基础标签</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01.png" alt="Basic"></p>
-<ul>
-<li>Label 标签名 显示在tab</li>
-<li>Icon 图标 建议使用houdini内置的图标，其他处理方式请查看帮助。</li>
-<li>Version 版本 版本号提醒</li>
-<li>Minimum Inputs 最小输入端口数量</li>
-<li>Maximum Inputs 最大输入端口数量</li>
-<li>Maximum Outputs 最大输出端口数量</li>
-</ul>
-<h4 id="Parameters-tab-参数标签"><a href="#Parameters-tab-参数标签" class="headerlink" title="Parameters tab 参数标签"></a>Parameters tab 参数标签</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02.png" alt="Parameters"></p>
-<ul>
-<li><p>创建参数</p>
-<ul>
-<li>将子节点属性直接拖入Existing Parameters</li>
-<li>从create Parameters 中拖入Existing Parameters，然后进行和子节点的关联</li>
-</ul>
-</li>
-<li><p>create Parameters 创建属性</p>
-</li>
-<li><p>Existing Parameters 已有的参数</p>
-</li>
-<li><p>Parameter Description参数说明</p>
-<ul>
-<li>Name 是 参数的名称，当脚本或者其他方式调用时使用此名称， Label 是面板上显示的名称。</li>
-<li>Callback Script 回调脚本 当参数有所变化就会触发，经常用于button</li>
-<li>Tags 标签 可以存储一些参数属性，例如opengl实时显示材质之类。</li>
-</ul>
-</li>
-<li><p>Channels中存储属性的默认值，但是ramp类型的不在这里设置 它的属性参数中有一项叫 get from  Parameter</p>
-</li>
-</ul>
-<h4 id="Node-Tabs-节点面板"><a href="#Node-Tabs-节点面板" class="headerlink" title="Node Tabs 节点面板"></a>Node Tabs 节点面板</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03.png" alt="Node"></p>
-<p>Enitble Nodes 是目前我最常用的，为了能编辑内部节点</p>
-<h4 id="Input-Output-tab"><a href="#Input-Output-tab" class="headerlink" title="Input/Output tab"></a>Input/Output tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04.png" alt="Input/Output"></p>
-<p>输入输出 可以进行一些输入输出的信息描述</p>
-<h4 id="Help-Tabs"><a href="#Help-Tabs" class="headerlink" title="Help Tabs"></a>Help Tabs</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05.png" alt="Help"></p>
-<p>可以使用wiki 进行节点帮助的创建，我认为在大规模使用的情况下 是很有用的。</p>
-<h4 id="Code-Tabs"><a href="#Code-Tabs" class="headerlink" title="Code Tabs"></a>Code Tabs</h4><p>适用于其他类型的资产，现在不讨论。</p>
-<h4 id="Scripts-tab"><a href="#Scripts-tab" class="headerlink" title="Scripts tab"></a>Scripts tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06.png" alt="Scripts"></p>
-<p>触发脚本的标签<br>当有一些自定义的触发操作，批处理之类就可以使用该标签进行创建。</p>
-<h4 id="Interactive-tab"><a href="#Interactive-tab" class="headerlink" title="Interactive tab"></a>Interactive tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07.png" alt="Interactive"></p>
-<p>交互标签 用于hda 和用户交互的操作<br>例如 hda的菜单位置，界面交互，热键之类</p>
-<p>菜单设置    在    shelf Tools-Context- NetWork Plane - TAB Submenu Path</p>
-<h4 id="IExtra-Files-tab"><a href="#IExtra-Files-tab" class="headerlink" title="IExtra Files tab"></a>IExtra Files tab</h4><p>内嵌文件标签</p>
-<p>用于将一些纹理 bgeo文件嵌入hda 中,嵌入后使用opdef 在资产中进行调用。</p>
-<h4 id="Save-Tab"><a href="#Save-Tab" class="headerlink" title="Save Tab"></a>Save Tab</h4><p>保存 目前还未涉及到，感觉默认就行。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
-<li>关于私有资产保护问题<ul>
-<li>可以创建黑盒，在你不想公开的情况下。</li>
-<li>方法：<ol>
-<li>选择需要创建黑盒的hda</li>
-<li>Assets - Create Black Boxed Asset from Selection </li>
-<li>选择存储位置，完成创建。    </li>
-</ol>
-</li>
-</ul>
-</li>
-<li>当想修改官方的资产但不想影响资产的默认的问题<ol>
-<li>打开资产管理面板，右键资产 show in Asset Manager </li>
-<li>右键点击资产中的hda 选择duplicate 进行修改创建。</li>
-</ol>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>Houdini 引擎面板功能介绍</title>
-    <url>/2021/07/24/Houdini%20Engine%20For%20Unity%20%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/Houdini%20Engine%20For%20Unity%20%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h1 id="Houdini-引擎面板功能介绍"><a href="#Houdini-引擎面板功能介绍" class="headerlink" title="Houdini 引擎面板功能介绍"></a>Houdini 引擎面板功能介绍</h1><h2 id="Houdini-资产UI面板"><a href="#Houdini-资产UI面板" class="headerlink" title="Houdini 资产UI面板"></a>Houdini 资产UI面板</h2><p><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D0.png" alt="Houdini 资产UI面板"></p>
-<ul>
-<li>Rebuild Assest 重建资产。强制重建资产，并保留最新参数。</li>
-<li>Recook Assesrt 重新cook资产。 重新输出资产</li>
-<li>Keep Only Output 仅保持输出。删除资产，保留输出的结果。</li>
-<li>Duplicate Assest 复制资产</li>
-<li>Reset Asset 重置资产。将参数重置为默认值。</li>
-<li>Bake GameObject 烘焙GameObject</li>
-<li>Bake Prefab 烘焙预制体。</li>
-<li>Bake Update 烘焙更新 更新之前烘焙的GameObject和预制体。如果计划烘焙更新，请不要修改物体名称。<h2 id="Asset-Options-资产选项"><a href="#Asset-Options-资产选项" class="headerlink" title="Asset Options 资产选项"></a>Asset Options 资产选项</h2><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D1.png" alt="Asset Options 资产选项"></li>
-</ul>
-<ol>
-<li>Auto-Cook On Parameter Change 当参数变化时自动cook</li>
-<li>Push Tranform To Houdini 变换传递至houdini</li>
-<li>Transform Change Triggers Cooks 位移的变化触发cook</li>
-<li>Cooking Triggers Downsteam Cooks 烘焙时触发其他关联的资产进行烘焙</li>
-<li>Generate UVs 创建UV</li>
-<li>Generate Tangents 创建切线</li>
-<li>Generate Normals 创建法线</li>
-<li>Generate Mesh Using Points 使用点创建mesh，但所有的属性都在点上而非顶点上。</li>
-<li>Use LOD Groups 使用LOD组</li>
-<li>Ignore NonDisplay Nodes 忽略不可显示的节点</li>
-<li>Split Geos By Group 通过组分离geo </li>
-<li>Save HDA Preset 保存hda预设</li>
-<li>Load HDA Preset 导入 hda预设</li>
-<li>Reset Material Overrides 重置材质替代<h2 id="导入节点"><a href="#导入节点" class="headerlink" title="导入节点"></a>导入节点</h2><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D2.png" alt="导入节点"></li>
-<li>Input Type 输入类型 Unity_Mesh unity的gameObject或者预制体  hda houdini资产</li>
-<li>Keep World Transform 保持世界空间位移</li>
-<li>Pack Geometry Before Mergi 在合并前物体打包。仅适用于unity物体</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>Houdini 引擎面板功能介绍</title>
-    <url>/2021/07/24/Houdini%20Engine%20For%20Unity%20%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h1 id="Houdini-引擎面板功能介绍"><a href="#Houdini-引擎面板功能介绍" class="headerlink" title="Houdini 引擎面板功能介绍"></a>Houdini 引擎面板功能介绍</h1><h2 id="Houdini-资产UI面板"><a href="#Houdini-资产UI面板" class="headerlink" title="Houdini 资产UI面板"></a>Houdini 资产UI面板</h2><p><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D0.png" alt="Houdini 资产UI面板"></p>
-<ul>
-<li>Rebuild Assest 重建资产。强制重建资产，并保留最新参数。</li>
-<li>Recook Assesrt 重新cook资产。 重新输出资产</li>
-<li>Keep Only Output 仅保持输出。删除资产，保留输出的结果。</li>
-<li>Duplicate Assest 复制资产</li>
-<li>Reset Asset 重置资产。将参数重置为默认值。</li>
-<li>Bake GameObject 烘焙GameObject</li>
-<li>Bake Prefab 烘焙预制体。</li>
-<li>Bake Update 烘焙更新 更新之前烘焙的GameObject和预制体。如果计划烘焙更新，请不要修改物体名称。<h2 id="Asset-Options-资产选项"><a href="#Asset-Options-资产选项" class="headerlink" title="Asset Options 资产选项"></a>Asset Options 资产选项</h2><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D1.png" alt="Asset Options 资产选项"></li>
-</ul>
-<ol>
-<li>Auto-Cook On Parameter Change 当参数变化时自动cook</li>
-<li>Push Tranform To Houdini 变换传递至houdini</li>
-<li>Transform Change Triggers Cooks 位移的变化触发cook</li>
-<li>Cooking Triggers Downsteam Cooks 烘焙时触发其他关联的资产进行烘焙</li>
-<li>Generate UVs 创建UV</li>
-<li>Generate Tangents 创建切线</li>
-<li>Generate Normals 创建法线</li>
-<li>Generate Mesh Using Points 使用点创建mesh，但所有的属性都在点上而非顶点上。</li>
-<li>Use LOD Groups 使用LOD组</li>
-<li>Ignore NonDisplay Nodes 忽略不可显示的节点</li>
-<li>Split Geos By Group 通过组分离geo </li>
-<li>Save HDA Preset 保存hda预设</li>
-<li>Load HDA Preset 导入 hda预设</li>
-<li>Reset Material Overrides 重置材质替代<h2 id="导入节点"><a href="#导入节点" class="headerlink" title="导入节点"></a>导入节点</h2><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D2.png" alt="导入节点"></li>
-<li>Input Type 输入类型 Unity_Mesh unity的gameObject或者预制体  hda houdini资产</li>
-<li>Keep World Transform 保持世界空间位移</li>
-<li>Pack Geometry Before Mergi 在合并前物体打包。仅适用于unity物体</li>
-</ol>
-]]></content>
-  </entry>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Houdini Engine for Unity-Plugin API</title>
+      <link href="/2021/07/24/Houdini%20Engine%20For%20Unity-Plugin%20API/"/>
+      <url>/2021/07/24/Houdini%20Engine%20For%20Unity-Plugin%20API/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Houdini-Engine-for-Unity-Plugin-API"><a href="#Houdini-Engine-for-Unity-Plugin-API" class="headerlink" title="Houdini Engine for Unity-Plugin API"></a>Houdini Engine for Unity-Plugin API</h1><p><a href="http://www.sidefx.com/docs/unity/pluginapi.html">官方文档</a></p><p>HEU分为三部分：</p><ul><li>Asset layer</li><li>Utility layer</li><li>HAPI layer</li></ul><h2 id="Asset-layer"><a href="#Asset-layer" class="headerlink" title="Asset layer"></a>Asset layer</h2><p>即资产创建以及参数获取和修改的操作，包含以下几个类：</p><ul><li>HEU_HoudiniAssetRoot这是Unity中Houdini Engine资产的根组件。它是轻量级的，仅充当层次结构的根并提供用户界面。</li><li>HEU_HoudiniAsset这是主要的资产组件，其中包含资产的所有元数据，以及构建，烹饪，查询和修改资产的功能。</li><li>HEU_ParameterUtility包含便利功能，用于查询和修改资产上的参数。</li></ul><p>官方提供了一个相关的实例文档<br>Plugins / HoudiniEngineUnity / Scripts / Examples / HEU_ExampleEvergreenQuery.cs</p><h3 id="文档阅读笔记"><a href="#文档阅读笔记" class="headerlink" title="文档阅读笔记"></a>文档阅读笔记</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">using HoudiniEngineUnity;</span><br><span class="line"></span><br><span class="line">HEU_AssetDatabase.GetAssetFullPath</span><br><span class="line"></span><br><span class="line">//Manages the asset database to store persistent assets such as materials, textures, asset data, etc. Wraps around Unity AssetDatabase. Only available in Editor. Probably not needed at runtime as data probably does not need to persist past session.</span><br><span class="line">//Given relative path to an asset (with Assets/ in the path), this returns the full path to it.</span><br><span class="line"></span><br><span class="line">HEU_SessionBase </span><br><span class="line">//Base class for a Houdini Engine session. Contains functionality to interface with the Houdini Engine for a particular session.</span><br><span class="line"></span><br><span class="line">HEU_SessionManager.GetOrCreateDefaultSession()</span><br><span class="line">//Manages a session for Houdini Engine. Supports all types of sessions.</span><br><span class="line">//获取或者创建有效会话</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HEU_HAPIUtility.InstantiateHDA(evergreenFullPath, Vector3.zero, session, true);</span><br><span class="line">//houdini引擎的工作，如创建hda，cook等。</span><br><span class="line">//Load and instantiate an HDA asset in Unity and Houdini, for the asset located at given path.创建指定路径的hda</span><br><span class="line"></span><br><span class="line">public static GameObject InstantiateHDA(string filePath, Vector3 initialPosition, HEU_SessionBase session, bool bBuildAsync)</span><br><span class="line">FilePath文件路径 initialPosition 初始位置  获取会话 是否重载</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HEU_EditorUtility.SelectObject(rootGO);</span><br><span class="line">//Wrapper around Unity Editor functions.Unity编辑器函数的包装。</span><br><span class="line">//选择物体 返回数组</span><br><span class="line"></span><br><span class="line">HEU_HoudiniAsset houdiniAsset = QueryHoudiniAsset(rootGO);</span><br><span class="line">//HEU_HoudiniAsset 资产组件</span><br><span class="line">//QueryHoudiniAsset Shows how to get the HEU_HoudiniAsset component from a HDA root gameobject.</span><br><span class="line"></span><br><span class="line">// Make sure the HDA is cooked before querying or changing its properties.</span><br><span class="line">CookAsset(houdiniAsset);</span><br><span class="line"></span><br><span class="line">// Example of querying and changing parms.</span><br><span class="line">ChangeParmsAndCook(houdiniAsset);</span><br><span class="line"></span><br><span class="line">// This will query objects, geometry, parts, and attributes in the asset.</span><br><span class="line">QueryObjects(houdiniAsset);</span><br><span class="line"></span><br><span class="line">// This will query the gravity attribute.</span><br><span class="line">QueryAttribute(houdiniAsset, &quot;EvergreenGenerator&quot;, &quot;EvergreenGenerator1&quot;, 0, &quot;Cd&quot;);</span><br><span class="line"></span><br><span class="line">HEU_HoudiniAssetRoot</span><br><span class="line">//The root object of a Houdini Engine asset. Used for organizing hierarchy, and more importantly displaying custom UI.</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Houdini 引擎面板功能介绍</title>
+      <link href="/2021/07/24/Houdini%20Engine%20For%20Unity%20%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"/>
+      <url>/2021/07/24/Houdini%20Engine%20For%20Unity%20%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Houdini-引擎面板功能介绍"><a href="#Houdini-引擎面板功能介绍" class="headerlink" title="Houdini 引擎面板功能介绍"></a>Houdini 引擎面板功能介绍</h1><h2 id="Houdini-资产UI面板"><a href="#Houdini-资产UI面板" class="headerlink" title="Houdini 资产UI面板"></a>Houdini 资产UI面板</h2><p><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D0.png" alt="Houdini 资产UI面板"></p><ul><li>Rebuild Assest 重建资产。强制重建资产，并保留最新参数。</li><li>Recook Assesrt 重新cook资产。 重新输出资产</li><li>Keep Only Output 仅保持输出。删除资产，保留输出的结果。</li><li>Duplicate Assest 复制资产</li><li>Reset Asset 重置资产。将参数重置为默认值。</li><li>Bake GameObject 烘焙GameObject</li><li>Bake Prefab 烘焙预制体。</li><li>Bake Update 烘焙更新 更新之前烘焙的GameObject和预制体。如果计划烘焙更新，请不要修改物体名称。<h2 id="Asset-Options-资产选项"><a href="#Asset-Options-资产选项" class="headerlink" title="Asset Options 资产选项"></a>Asset Options 资产选项</h2><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D1.png" alt="Asset Options 资产选项"></li></ul><ol><li>Auto-Cook On Parameter Change 当参数变化时自动cook</li><li>Push Tranform To Houdini 变换传递至houdini</li><li>Transform Change Triggers Cooks 位移的变化触发cook</li><li>Cooking Triggers Downsteam Cooks 烘焙时触发其他关联的资产进行烘焙</li><li>Generate UVs 创建UV</li><li>Generate Tangents 创建切线</li><li>Generate Normals 创建法线</li><li>Generate Mesh Using Points 使用点创建mesh，但所有的属性都在点上而非顶点上。</li><li>Use LOD Groups 使用LOD组</li><li>Ignore NonDisplay Nodes 忽略不可显示的节点</li><li>Split Geos By Group 通过组分离geo </li><li>Save HDA Preset 保存hda预设</li><li>Load HDA Preset 导入 hda预设</li><li>Reset Material Overrides 重置材质替代<h2 id="导入节点"><a href="#导入节点" class="headerlink" title="导入节点"></a>导入节点</h2><img src="HoudiniEngineForUnity%E9%9D%A2%E6%9D%BF%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D2.png" alt="导入节点"></li><li>Input Type 输入类型 Unity_Mesh unity的gameObject或者预制体  hda houdini资产</li><li>Keep World Transform 保持世界空间位移</li><li>Pack Geometry Before Mergi 在合并前物体打包。仅适用于unity物体</li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Houdini Digital Assets 学习笔记</title>
+      <link href="/2021/07/24/Houdini%20Digital%20Assets%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <url>/2021/07/24/Houdini%20Digital%20Assets%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Houdini-Digital-Assets-学习笔记"><a href="#Houdini-Digital-Assets-学习笔记" class="headerlink" title="Houdini Digital Assets 学习笔记"></a>Houdini Digital Assets 学习笔记</h1><p>Digital assets let you create reusable nodes and tools from existing networks.</p><p>可以创建复用的节点和工具。 </p><p>存储格式：.hda(.otl是旧版本)</p><h2 id="创建的方法"><a href="#创建的方法" class="headerlink" title="创建的方法"></a>创建的方法</h2><ol><li>Subnetwork 右键  Create digital asset    </li><li>资产命名<ul><li>Operator Name 命名空间的名字</li><li>Operator Label tab管理器的名称</li><li>Save to library 存储位置，建议制作自己的资产库，便于个人管理。</li></ul></li><li>编辑面板属性，脚本等细节</li><li>4.完成创建</li></ol><h2 id="面板参数介绍"><a href="#面板参数介绍" class="headerlink" title="面板参数介绍"></a>面板参数介绍</h2><h3 id="Operator-Type-window-资产的编辑窗口"><a href="#Operator-Type-window-资产的编辑窗口" class="headerlink" title="Operator Type window 资产的编辑窗口"></a>Operator Type window 资产的编辑窗口</h3><p>此窗口可以编辑资产除子节点之外的所有数据（参数面板，label and icon，嵌入文件，自定义脚本）</p><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B00.png" alt="资产的编辑窗口"></p><ul><li>Operator Type 就是上文提到的Operator Name，此时的状态是不可更改的。</li><li>Save to Library 存储位置。</li><li>Install Library to 安装到哪，统一适用packages管理，我觉得更好些。</li><li>Switch to Definition 切换定义</li></ul><h4 id="Basic-tab基础标签"><a href="#Basic-tab基础标签" class="headerlink" title="Basic tab基础标签"></a>Basic tab基础标签</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01.png" alt="Basic"></p><ul><li>Label 标签名 显示在tab</li><li>Icon 图标 建议使用houdini内置的图标，其他处理方式请查看帮助。</li><li>Version 版本 版本号提醒</li><li>Minimum Inputs 最小输入端口数量</li><li>Maximum Inputs 最大输入端口数量</li><li>Maximum Outputs 最大输出端口数量</li></ul><h4 id="Parameters-tab-参数标签"><a href="#Parameters-tab-参数标签" class="headerlink" title="Parameters tab 参数标签"></a>Parameters tab 参数标签</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02.png" alt="Parameters"></p><ul><li><p>创建参数</p><ul><li>将子节点属性直接拖入Existing Parameters</li><li>从create Parameters 中拖入Existing Parameters，然后进行和子节点的关联</li></ul></li><li><p>create Parameters 创建属性</p></li><li><p>Existing Parameters 已有的参数</p></li><li><p>Parameter Description参数说明</p><ul><li>Name 是 参数的名称，当脚本或者其他方式调用时使用此名称， Label 是面板上显示的名称。</li><li>Callback Script 回调脚本 当参数有所变化就会触发，经常用于button</li><li>Tags 标签 可以存储一些参数属性，例如opengl实时显示材质之类。</li></ul></li><li><p>Channels中存储属性的默认值，但是ramp类型的不在这里设置 它的属性参数中有一项叫 get from  Parameter</p></li></ul><h4 id="Node-Tabs-节点面板"><a href="#Node-Tabs-节点面板" class="headerlink" title="Node Tabs 节点面板"></a>Node Tabs 节点面板</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03.png" alt="Node"></p><p>Enitble Nodes 是目前我最常用的，为了能编辑内部节点</p><h4 id="Input-Output-tab"><a href="#Input-Output-tab" class="headerlink" title="Input/Output tab"></a>Input/Output tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04.png" alt="Input/Output"></p><p>输入输出 可以进行一些输入输出的信息描述</p><h4 id="Help-Tabs"><a href="#Help-Tabs" class="headerlink" title="Help Tabs"></a>Help Tabs</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05.png" alt="Help"></p><p>可以使用wiki 进行节点帮助的创建，我认为在大规模使用的情况下 是很有用的。</p><h4 id="Code-Tabs"><a href="#Code-Tabs" class="headerlink" title="Code Tabs"></a>Code Tabs</h4><p>适用于其他类型的资产，现在不讨论。</p><h4 id="Scripts-tab"><a href="#Scripts-tab" class="headerlink" title="Scripts tab"></a>Scripts tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06.png" alt="Scripts"></p><p>触发脚本的标签<br>当有一些自定义的触发操作，批处理之类就可以使用该标签进行创建。</p><h4 id="Interactive-tab"><a href="#Interactive-tab" class="headerlink" title="Interactive tab"></a>Interactive tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07.png" alt="Interactive"></p><p>交互标签 用于hda 和用户交互的操作<br>例如 hda的菜单位置，界面交互，热键之类</p><p>菜单设置    在    shelf Tools-Context- NetWork Plane - TAB Submenu Path</p><h4 id="IExtra-Files-tab"><a href="#IExtra-Files-tab" class="headerlink" title="IExtra Files tab"></a>IExtra Files tab</h4><p>内嵌文件标签</p><p>用于将一些纹理 bgeo文件嵌入hda 中,嵌入后使用opdef 在资产中进行调用。</p><h4 id="Save-Tab"><a href="#Save-Tab" class="headerlink" title="Save Tab"></a>Save Tab</h4><p>保存 目前还未涉及到，感觉默认就行。</p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol><li>关于私有资产保护问题<ul><li>可以创建黑盒，在你不想公开的情况下。</li><li>方法：<ol><li>选择需要创建黑盒的hda</li><li>Assets - Create Black Boxed Asset from Selection </li><li>选择存储位置，完成创建。    </li></ol></li></ul></li><li>当想修改官方的资产但不想影响资产的默认的问题<ol><li>打开资产管理面板，右键资产 show in Asset Manager </li><li>右键点击资产中的hda 选择duplicate 进行修改创建。</li></ol></li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何使用VS Code写MD</title>
+      <link href="/2021/07/23/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8VS_Code%E5%86%99MD/"/>
+      <url>/2021/07/23/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8VS_Code%E5%86%99MD/</url>
+      
+        <content type="html"><![CDATA[<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>语法：<a href="https://www.runoob.com/markdown/md-tutorial.html">MarkDown</a></p><p>编写平台：vs code</p><p>插件：Markdown Preview Enhanced<br>Better Markdown &amp; Latex Shortcuts</p><p>参考资料：<br><a href="https://zhuanlan.zhihu.com/p/366596949">https://zhuanlan.zhihu.com/p/366596949</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Maya 插件开发学习</title>
+      <link href="/2021/07/23/Maya_%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/"/>
+      <url>/2021/07/23/Maya_%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Maya-插件开发学习"><a href="#Maya-插件开发学习" class="headerlink" title="Maya 插件开发学习"></a>Maya 插件开发学习</h1><ul><li>环境配置<ul><li>vs code</li><li>maya 脚本编辑器</li></ul></li><li>语言分类<ul><li>mel</li><li>python</li><li>QT</li></ul></li></ul><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="maya-脚本编辑器配置"><a href="#maya-脚本编辑器配置" class="headerlink" title="maya 脚本编辑器配置"></a>maya 脚本编辑器配置</h3><p>如图所示，对脚本编辑器进行配置</p><p><img src="Maya_Editor_Set.png" alt="d"></p><h3 id="vs-code-环境配置"><a href="#vs-code-环境配置" class="headerlink" title="vs code 环境配置"></a>vs code 环境配置</h3><p>相关参考链接：</p><ul><li><a href="https://www.bilibili.com/video/BV1Cz4y1R7MC?from=search&seid=14150298653133706761">Python开发Maya脚本插件 开发环境详细配置</a></li></ul><h2 id="语言分类"><a href="#语言分类" class="headerlink" title="语言分类"></a>语言分类</h2><h3 id="mel"><a href="#mel" class="headerlink" title="mel"></a>mel</h3><h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>  maya.cmds——这是一个把MEL命令用python包装（ wrappers）的库，可以用于替代MEL命令，因为绝大多数的MEL命令都能查找得到一一对应的maya.cmds命令。只适合面向过程编程。</p><p>  pymel.core——该pymel库将许多最常用的MEL命令和API的方法重组到类的层次结构中，这样的设计让你的编程更简单易懂，更具有pythonic化，因为它是具有真正意义上的面向对象特性。由于该pymel库是第三方开发的，Autodesk公司并不提供技术上的支持帮助。</p><p>  maya.OpenMaya——这是Maya C++ API的Python包装（ wrappers）的库，称之为Python API 1.0， 适合开发插件和需要MEL未公开的功能的其他任务。</p><p>  maya.api.OpenMaya——这是Maya C++ API的Python包装（ wrappers）的库，称之为Python API 2.0。</p><h3 id="QT"><a href="#QT" class="headerlink" title="QT"></a>QT</h3><p>为了通用性，GUI选择QT。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Autodesk FBX SDK 介绍</title>
+      <link href="/2021/07/23/Autodesk_FBX_SDK/"/>
+      <url>/2021/07/23/Autodesk_FBX_SDK/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Autodesk-FBX-SDK-介绍"><a href="#Autodesk-FBX-SDK-介绍" class="headerlink" title="Autodesk FBX SDK 介绍"></a>Autodesk FBX SDK 介绍</h1><p><a href="https://www.autodesk.com/products/fbx/overview">Autodesk FBX</a>是Autodesk公司出品的一款用于跨平台的免费三维创作与交换格式的软件，通过FBX用户能访问大多数三维供应商的三维文件。FBX 文件格式支持所有主要的三维数据元素以及二维、音频和视频媒体元素。</p><p>官方提供了相对应的SDK提供给开发者使用，有C++，C#，Python等多个版本。相关的<a href="https://www.autodesk.com/products/fbx/overview">下载地址</a>。<br>不同环境安装方案：</p><ul><li>Unity中，如果安装了了Fbx Exporter插件，会自动内置FBX的SDK库。</li><li>Houdini中，请看<a href="https://zhuanlan.zhihu.com/p/144349799">Houdini 对于fbx sdk python的简单应用</a></li></ul><h3 id="相关学习途径"><a href="#相关学习途径" class="headerlink" title="相关学习途径"></a>相关学习途径</h3><ul><li>通过阅读Fbx Exporter的源代码来学习Fbx SDK的使用</li><li><a href="https://banexdevblog.wordpress.com/2014/06/23/a-quick-tutorial-about-the-fbx-ascii-format/">A QUICK TUTORIAL ABOUT THE FBX ASCII FORMAT</a></li><li><a href="https://www.gamedev.net/tutorials/programming/graphics/how-to-work-with-fbx-sdk-r3582/">How to Work with FBX SDK</a></li><li><a href="https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_welcome_to_the_fbx_sdk_html">Welcome to the FBX SDK</a></li></ul><h3 id="Fbx的数据结构"><a href="#Fbx的数据结构" class="headerlink" title="Fbx的数据结构"></a>Fbx的数据结构</h3><p>Fbx是节点式的数据结构，如下图所示：<br><img src="v2-d9e57228d64b062291395dfbc6f84025_720w.jpg" alt="Fbx结构图"></p><h3 id="Fbx-SDK-的使用，以Python为例"><a href="#Fbx-SDK-的使用，以Python为例" class="headerlink" title="Fbx SDK 的使用，以Python为例"></a>Fbx SDK 的使用，以Python为例</h3><p>这是修改Fbx Mesh 属性的例子</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2.7</span></span><br><span class="line"><span class="keyword">import</span> fbx</span><br><span class="line"><span class="keyword">from</span> fbx <span class="keyword">import</span> FbxVector2</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Run</span>():</span></span><br><span class="line">    node = hou.pwd()</span><br><span class="line">    fileName=node.parm(<span class="string">&quot;file&quot;</span>).<span class="built_in">eval</span>()</span><br><span class="line">    csv_path = node.parm(<span class="string">&#x27;csv_path&#x27;</span>).<span class="built_in">eval</span>()</span><br><span class="line">    directory = node.parm(<span class="string">&#x27;directory&#x27;</span>).<span class="built_in">eval</span>()</span><br><span class="line">    num =<span class="number">1</span></span><br><span class="line">    <span class="comment">#birth_data = []</span></span><br><span class="line">    <span class="comment">#birth_data.append(fileName)</span></span><br><span class="line">    birth_data = DuplicateArray(ReadCsvByPath(csv_path,num))</span><br><span class="line">    <span class="keyword">for</span> path <span class="keyword">in</span> birth_data:</span><br><span class="line">        </span><br><span class="line">        fileName = os.path.basename(path)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;@&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> fileName:</span><br><span class="line">            <span class="built_in">print</span> path</span><br><span class="line">            <span class="built_in">iter</span>=<span class="number">0</span></span><br><span class="line">            fbxManager = fbx.FbxManager.Create()</span><br><span class="line">            fbxScene = fbx.FbxScene.Create(fbxManager, <span class="string">&quot;&quot;</span>)</span><br><span class="line">            fbxImporter = fbx.FbxImporter.Create(fbxManager, <span class="string">&quot;&quot;</span>)</span><br><span class="line">            fbxImporter.Initialize(path)</span><br><span class="line">            fbxImporter.Import(fbxScene)</span><br><span class="line">            fbxRoot = fbxScene.GetRootNode() </span><br><span class="line">            <span class="keyword">if</span> IsCollider(fileName) == <span class="literal">True</span>:</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> GetFbxNodeList(fbxRoot,<span class="built_in">list</span> = []):</span><br><span class="line">                    <span class="comment">#i.GetMesh().ClearLayers()</span></span><br><span class="line">                    <span class="keyword">if</span> i.GetMesh()!= <span class="literal">None</span>:</span><br><span class="line">                        i.GetMesh().ClearLayers()</span><br><span class="line">                        <span class="built_in">iter</span>+=<span class="number">1</span></span><br><span class="line">                </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> GetFbxNodeList(fbxRoot,<span class="built_in">list</span> = []):</span><br><span class="line">                <span class="comment">#i.GetMesh().ClearLayers()</span></span><br><span class="line">                <span class="keyword">if</span> i.GetMesh()!= <span class="literal">None</span>:</span><br><span class="line">                    mesh = i.GetMesh()</span><br><span class="line">                    LayerCount = mesh.GetLayerCount()</span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(LayerCount):</span><br><span class="line">                        Layer = mesh.GetLayer(j)</span><br><span class="line">                        </span><br><span class="line">                        <span class="keyword">if</span>(Layer.GetVertexColors()!=<span class="literal">None</span>):</span><br><span class="line">                            Layer.SetVertexColors(<span class="literal">None</span>)</span><br><span class="line">                            <span class="built_in">iter</span>+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> LayerCount&gt;=<span class="number">4</span>:</span><br><span class="line">                        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(LayerCount):</span><br><span class="line">                            <span class="keyword">if</span> j==<span class="number">1</span> <span class="keyword">or</span> j==<span class="number">2</span>:</span><br><span class="line">                                Layer = mesh.GetLayer(j)</span><br><span class="line">                                uv = Layer.GetUVs()</span><br><span class="line">                                DirectArray = uv.GetDirectArray()</span><br><span class="line">                                DirectArray.SetCount(<span class="number">1</span>)</span><br><span class="line">                                DirectArray.SetAt(<span class="number">0</span>,FbxVector2(<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">                                <span class="built_in">iter</span>+=<span class="number">1</span></span><br><span class="line">                            <span class="keyword">elif</span> j&gt;<span class="number">3</span>:</span><br><span class="line">                                Layer = mesh.GetLayer(j)</span><br><span class="line">                                Layer.SetUVs(<span class="literal">None</span>)</span><br><span class="line">                                <span class="built_in">iter</span>+=<span class="number">1</span></span><br><span class="line">                    <span class="keyword">if</span> LayerCount&lt;<span class="number">4</span>:</span><br><span class="line">                        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(LayerCount):</span><br><span class="line">                            <span class="keyword">if</span> j&gt;<span class="number">0</span>:</span><br><span class="line">                                Layer = mesh.GetLayer(j)</span><br><span class="line">                                Layer.SetUVs(<span class="literal">None</span>)</span><br><span class="line">                                <span class="built_in">iter</span>+=<span class="number">1</span>            </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">iter</span>!=<span class="number">0</span>:</span><br><span class="line">                ExportFbx(fbxManager,path,fbxScene)    </span><br><span class="line">            fbxScene.Destroy()</span><br><span class="line">            fbxImporter.Destroy()</span><br><span class="line">            fbxManager.Destroy()</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetFbxNodeList</span>(<span class="params">fbxRoot,<span class="built_in">list</span> = []</span>):</span></span><br><span class="line">    num = fbxRoot.GetChildCount()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(fbxRoot.GetChildCount()):</span><br><span class="line">        fbxChildRoot = fbxRoot.GetChild(i)</span><br><span class="line">        <span class="built_in">list</span>.append(fbxChildRoot)</span><br><span class="line">        <span class="keyword">if</span> fbxChildRoot.GetChildCount()&gt;<span class="number">0</span> :</span><br><span class="line">            GetFbxNodeList(fbxChildRoot,<span class="built_in">list</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ExportFbx</span>(<span class="params">fbxManager,fileName,fbxScene</span>):</span></span><br><span class="line">    fbxExporter = fbx.FbxExporter.Create(fbxManager, <span class="string">&quot;Exporter&quot;</span>)</span><br><span class="line">    fileFormat = -<span class="number">1</span></span><br><span class="line">    fbxExporter.Initialize(fileName,fileFormat,fbxManager.GetIOSettings())</span><br><span class="line">    fbxExporter.Export(fbxScene)</span><br><span class="line">    fbxExporter.Destroy()</span><br><span class="line">    </span><br><span class="line"><span class="comment">#获取输入路径下的指定类型的文件路径列表       </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetFbxListInDirectory</span>(<span class="params">filepath,file_type,<span class="built_in">list</span>=[]</span>):</span></span><br><span class="line">    path_list = os.listdir(filepath)</span><br><span class="line">    <span class="keyword">for</span> f1 <span class="keyword">in</span> path_list:</span><br><span class="line">        f1_path = os.path.join(filepath,f1)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(f1_path):</span><br><span class="line">            suffix = os.path.splitext(f1_path)[<span class="number">0</span>][<span class="number">1</span>:]</span><br><span class="line">            <span class="keyword">if</span> suffix.lower() == file_type:</span><br><span class="line">                f1_path.replace(<span class="string">&quot;\\&quot;</span>,<span class="string">&quot;/&quot;</span>)</span><br><span class="line">                <span class="built_in">list</span>.append(f1_path)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(f1_path):</span><br><span class="line">            GetFbxListInDirectory(f1_path,file_type,<span class="built_in">list</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span> </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">IsCollider</span>(<span class="params">fileName</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;Collider&quot;</span> <span class="keyword">in</span> fileName <span class="keyword">or</span> <span class="string">&quot;collider&quot;</span> <span class="keyword">in</span> fileName:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DuplicateArray</span>(<span class="params">Imported_Array</span>):</span>     </span><br><span class="line">    <span class="type">List</span> = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> Imported_Array:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> <span class="type">List</span>:</span><br><span class="line">            <span class="type">List</span>.append(i)</span><br><span class="line">    <span class="keyword">return</span> <span class="type">List</span></span><br><span class="line"><span class="comment">#读取csv的列信息，并返回一个数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ReadCsvByPath</span>(<span class="params">csv_path,num</span>):</span></span><br><span class="line">    birth_data = []</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(csv_path) <span class="keyword">as</span> csvfile:</span><br><span class="line">        csv_reader = csv.reader(csvfile)  <span class="comment"># 使用csv.reader读取csvfile中的文件</span></span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> csv_reader:  <span class="comment"># 将csv 文件中的数据保存到birth_data中</span></span><br><span class="line">            birth_data.append(<span class="built_in">str</span>(row[num]))</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> birth_data</span><br></pre></td></tr></table></figure><h3 id="FBX-SDK-的学习总结"><a href="#FBX-SDK-的学习总结" class="headerlink" title="FBX SDK 的学习总结"></a>FBX SDK 的学习总结</h3><ul><li>SDK使用的结构<ul><li>FbxManager </li><li>FbxScene </li><li>FbxImporter</li><li>FbxExporter</li></ul></li><li>关于Fbx 属性修改<br>Fbx的Node存在Layer的概念，Layer用于存储各种Mesh的数据，mesh本身的基础数据(如：法线，切线，顶点位置，uv，顶点色)都存储在Layer0上，当模型增加uv2,uv3等数据时，会增加新的Layer层级并存储在对应层级下</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>
