@@ -136,24 +136,37 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1 id="Wormhole-Shader-Effect"><a href="#Wormhole-Shader-Effect" class="headerlink" title="Wormhole Shader Effect"></a>Wormhole Shader Effect</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+        <h1><span id="wormhole-shader-effect">Wormhole Shader Effect</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#overview"><strong>Overview</strong></a></li>
+<li><a href="#basic-concept"><strong>Basic Concept</strong></a></li>
+<li><a href="#initial-setup"><strong>Initial Setup</strong></a></li>
+<li><a href="#setting-up-blueprint-actor-to-feed-wormhole-location"><strong>Setting up Blueprint Actor to Feed Wormhole Location</strong></a></li>
+<li><a href="#distance-gradient-mask"><strong>Distance Gradient Mask</strong></a></li>
+<li><a href="#deforming-vertices"><strong>Deforming Vertices</strong></a></li>
+<li><a href="#making-the-material-function"><strong>Making the Material Function</strong></a></li>
+</ul>
+<!-- tocstop -->
+
+<p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
 <p><img src="post07.gif" alt="post07.gif"></p>
 <p>This effect is actually just a re-working of one of my old doodles, the effects is quite simple, but it seemed like a really nice use-case. I’ve seen similar effects being used for “Loot Pickup Effects” in games. It is a basic Vertex Deformation Shader under the hood</p>
-<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a><strong>Overview</strong></h2><p>This effect basically uses a Vector3 input(Location of wormhole i.e area that sucks in geometry) to generate a Distance Gradient, then the pixels that are inside this sphere get sucked towards the center with a falloff controlled by the gradient strength. we will be creating this as a material Function inside UE4 so that it can be easily applied to any existing material that we have. So let’s get started!</p>
-<h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a><strong>Basic Concept</strong></h2><p>The basic concept behind this effect is to use a world space Distance Field Sphere Mask to blend between two different WorldPosition Offsets, one is the central location of the mask i.e center of the wormhole and the other is the regular location of the pixels in the world</p>
-<h2 id="Initial-Setup"><a href="#Initial-Setup" class="headerlink" title="Initial Setup"></a><strong>Initial Setup</strong></h2><p>First there are a couple setups we need to make, so that we can feed the location of the wormhole from a Gameplay object or a Blueprint. In my case I use a <strong>Material Parameter Collection(MPC)</strong> to store the location value and then use it in the shader.</p>
+<h2><span id="overview"><strong>Overview</strong></span></h2><p>This effect basically uses a Vector3 input(Location of wormhole i.e area that sucks in geometry) to generate a Distance Gradient, then the pixels that are inside this sphere get sucked towards the center with a falloff controlled by the gradient strength. we will be creating this as a material Function inside UE4 so that it can be easily applied to any existing material that we have. So let’s get started!</p>
+<h2><span id="basic-concept"><strong>Basic Concept</strong></span></h2><p>The basic concept behind this effect is to use a world space Distance Field Sphere Mask to blend between two different WorldPosition Offsets, one is the central location of the mask i.e center of the wormhole and the other is the regular location of the pixels in the world</p>
+<h2><span id="initial-setup"><strong>Initial Setup</strong></span></h2><p>First there are a couple setups we need to make, so that we can feed the location of the wormhole from a Gameplay object or a Blueprint. In my case I use a <strong>Material Parameter Collection(MPC)</strong> to store the location value and then use it in the shader.</p>
 <p><img src="MPC_Setup.png" alt="MPC_Setup.png"></p>
 <p>So in your content browser right-click&gt;Materials &amp; Textures&gt;MaterialParameterCollection to create a new MPC Asset,give it a name(I named mine “M_Bhole_Collection”..seemed like a good idea at the time..),then double click to open it up and click on the “+” sign next to vector Parameters to add a new Vector Parameter to the collection. Name it “Texloc” or anything you want really, but this is the parameter we will store the location from the blueprint.</p>
 <p><img src="MPC_Setup_01.png" alt="MPC_Setup_01.png"></p>
 <p><img src="MPC_Setup_02.png" alt="MPC_Setup_02.png"></p>
-<h2 id="Setting-up-Blueprint-Actor-to-Feed-Wormhole-Location"><a href="#Setting-up-Blueprint-Actor-to-Feed-Wormhole-Location" class="headerlink" title="Setting up Blueprint Actor to Feed Wormhole Location"></a><strong>Setting up Blueprint Actor to Feed Wormhole Location</strong></h2><p>In this section we will set up a basic blueprint actor that we will use as our gameplay object whose location we will feed into the shader to serve as the Wormhole’s global Location</p>
+<h2><span id="setting-up-blueprint-actor-to-feed-wormhole-location"><strong>Setting up Blueprint Actor to Feed Wormhole Location</strong></span></h2><p>In this section we will set up a basic blueprint actor that we will use as our gameplay object whose location we will feed into the shader to serve as the Wormhole’s global Location</p>
 <p>Create a new Blueprint Asset type Actor, give it a name(I called mine BP_Texture_Locator), open up the event graph and set it up as shown below:</p>
 <p><img src="BP_TextureLocator.png" alt="BP_TextureLocator.png"></p>
 <p><img src="BP_Setup_01.png" alt="BP_Setup_01.png"></p>
 <p>On the “Set Vector Parameter node”, when you click on the collection Paramter dropwon, it should list all of the MPC’s available in your project, choose the one you had created earlier. Then when you click the “Parameter Name” dropdown it will list all of the Vector Parameters available in that MPC. Choose the “TexLoc” parameter.</p>
 <p>With this set up, now the location of this BP actor will be fed to the “<strong>TexLoc</strong>“ variable every tick, we can now use it in our shader to define the location of the Wormhole.</p>
 <p>Next create a new Material, we use a material only because it is easier to test with while we make the shader. Later we will take all of the stuff created in this material and put it into a Material Function, this function will be where we put all of our shader math, we set this up as a material Function so that this Effect can easily be layered onto any exisitng surface shader.</p>
-<h2 id="Distance-Gradient-Mask"><a href="#Distance-Gradient-Mask" class="headerlink" title="Distance Gradient Mask"></a><strong>Distance Gradient Mask</strong></h2><p>There’s multiple ways to apprach this part, one solution is to use a Distance Field Sphere mask as I’ve shown Post-Process-Scan-Effect</p>
+<h2><span id="distance-gradient-mask"><strong>Distance Gradient Mask</strong></span></h2><p>There’s multiple ways to apprach this part, one solution is to use a Distance Field Sphere mask as I’ve shown Post-Process-Scan-Effect</p>
 <p>But i used a slightly different method this time, but it yeilds the same results:</p>
 <p><img src="Mask_01.png" alt="Mask_01.png"></p>
 <p>What this does is it creates, a spherical gradient based on the distance between the pixels and the location of the Blueprint actor</p>
@@ -163,7 +176,7 @@
 <p><img src="MPC_Parameter.png" alt="MPC_Parameter.png"></p>
 <p>This node lets us read variables from MPC’s inside our shader. If you click the node and look at it’s details panel, you will notice that you can link the MPC asset you created and choose the parameter the node will reference.</p>
 <p><img src="MPC_Parameter_Settings.png" alt="MPC_Parameter_Settings.png"></p>
-<h2 id="Deforming-Vertices"><a href="#Deforming-Vertices" class="headerlink" title="Deforming Vertices"></a><strong>Deforming Vertices</strong></h2><p>The basic concept here is to crush all the vertices of the geo to a finite point defined by the location of the Blueprint. Look at the following example.</p>
+<h2><span id="deforming-vertices"><strong>Deforming Vertices</strong></span></h2><p>The basic concept here is to crush all the vertices of the geo to a finite point defined by the location of the Blueprint. Look at the following example.</p>
 <p><img src="WPO_Crush.png" alt="WPO_Crush.png"></p>
 <p>If you plug that into the World Position Offset pinof the material, you will get something like this</p>
 <p><img src="WPO_01.gif" alt="WPO_01.gif"></p>
@@ -172,7 +185,7 @@
 <p><img src="Mask_02.png" alt="Mask_02.png"></p>
 <p>Now if you try moving the BP actor around in the level you’ll notice that the vertices of the meshes get pulled towards it’s center based on the gradient mask falloff.</p>
 <p><img src="Mask_g02.gif" alt="Mask_g02.gif"></p>
-<h2 id="Making-the-Material-Function"><a href="#Making-the-Material-Function" class="headerlink" title="Making the Material Function"></a><strong>Making the Material Function</strong></h2><p>At this point all the basic setups for the effect are complete, We can now wrap all this functionality into a Material Function so that, the effect can be easily layered on top of any existing shaders</p>
+<h2><span id="making-the-material-function"><strong>Making the Material Function</strong></span></h2><p>At this point all the basic setups for the effect are complete, We can now wrap all this functionality into a Material Function so that, the effect can be easily layered on top of any existing shaders</p>
 <p>Create a new material Function, I called mine MF_VertCrush and set it up as shown, below, it’s exactly the same as what I made before but with some tweaks:</p>
 <p>Right click and open in new tab to view higher resolution:</p>
 <p><img src="MF_VertCrush_Full.png" alt="MF_VertCrush_Full.png"></p>

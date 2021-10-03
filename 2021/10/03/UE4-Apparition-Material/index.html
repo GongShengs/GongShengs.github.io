@@ -136,28 +136,40 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1 id="UE4-Apparition-Material"><a href="#UE4-Apparition-Material" class="headerlink" title="UE4 Apparition Material"></a>UE4 Apparition Material</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+        <h1><span id="ue4-apparition-material">UE4 Apparition Material</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#introduction"><strong>Introduction</strong></a></li>
+<li><a href="#the-sphere-mask"><strong>The Sphere Mask</strong></a></li>
+<li><a href="#pattern-texture"><strong>Pattern Texture</strong></a></li>
+<li><a href="#binary_generatortga"><strong>Binary_Generator.tga</strong></a></li>
+<li><a href="#edge-masking-for-emissive"><strong>Edge Masking for Emissive</strong></a></li>
+<li><a href="#final-touches"><strong>Final Touches</strong></a></li>
+</ul>
+<!-- tocstop -->
+
+<p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
 <p><img src="post06.gif" alt="post06.gif"></p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><strong>Introduction</strong></h2><p>This was a simple apparition material I came up with when I was messing around with Inigo Quillez’s distance field functions. This shader uses a scaling Distance Field Sphere as a mask transition the opacity, then we use some vdb textures to make the transition look interesting.</p>
-<h2 id="The-Sphere-Mask"><a href="#The-Sphere-Mask" class="headerlink" title="The Sphere Mask"></a><strong>The Sphere Mask</strong></h2><p>This part is basically the same as what I did in my Post-Process Scan Effect Article with only one difference, please refer to that post for an explanation of how we set up the animated distance field,</p>
+<h2><span id="introduction"><strong>Introduction</strong></span></h2><p>This was a simple apparition material I came up with when I was messing around with Inigo Quillez’s distance field functions. This shader uses a scaling Distance Field Sphere as a mask transition the opacity, then we use some vdb textures to make the transition look interesting.</p>
+<h2><span id="the-sphere-mask"><strong>The Sphere Mask</strong></span></h2><p>This part is basically the same as what I did in my Post-Process Scan Effect Article with only one difference, please refer to that post for an explanation of how we set up the animated distance field,</p>
 <p><img src="DistanceFieldSphere.png" alt="DistanceFieldSphere.png"></p>
 <p>As you can see the only big difference is that here we use the objects position instead of a Vector3 Paramter, technically you can add or subtract values from the object position to position the Distance Field Sphere as you like.</p>
 <p>If you plug in the result from this network to the material’s <strong>Opacity Mask</strong> input, you will see something like this</p>
 <p><img src="DF_Masking.gif" alt="DF_Masking.gif"></p>
 <p>As you can see the Distance Field Sphere creates a spherical Apparition shape forthe mesh, you can technicaly use any kind of Distance Field Function you want, so any kind of shape is possible, the sphere is the simples and cheapest i nterms of instruction count</p>
 <p>In the next step we are going to use some pattern textures to make the effect look more interesting, and then finally we will combine it with some emissives for the finishing touch</p>
-<h2 id="Pattern-Texture"><a href="#Pattern-Texture" class="headerlink" title="Pattern Texture"></a><strong>Pattern Texture</strong></h2><p>I am using a Texture with three different greyscale patterns packed into each channel to drive the effect, here is what my setup looks like:</p>
-<h2 id="Binary-Generator-tga"><a href="#Binary-Generator-tga" class="headerlink" title="Binary_Generator.tga"></a><strong>Binary_Generator.tga</strong></h2><p><img src="TextureSetup.jpg%22" alt="TextureSetup.jpg&quot;"></p>
+<h2><span id="pattern-texture"><strong>Pattern Texture</strong></span></h2><p>I am using a Texture with three different greyscale patterns packed into each channel to drive the effect, here is what my setup looks like:</p>
+<h2><span id="binary_generatortga"><strong>Binary_Generator.tga</strong></span></h2><p><img src="TextureSetup.jpg%22" alt="TextureSetup.jpg&quot;"></p>
 <p>Now we will combine the gresycale information from the Pattern to modify the mask as shown below:</p>
 <p><img src="Noise_Combine.png" alt="Noise_Combine.png"></p>
 <p>As you can see we subtract the Red channel of the pattern texture from the result of the Distance Field Function to create the value difference at the edges that brings in the pattern, into the mask function. We also multiply the red channel by a scalar Parameter <strong>MaskSpread</strong>(note:As you increase the spread value, you will also need to increase the radius of the DF Sphere to compensate for the spread so that the entire mesh is covered in the transition, i.8 mutliple the objectradius by a higher value.), which controls the spread of teh noise values from the edges, if we increase this value, you will get more noise spread</p>
 <p>If we preview the clamp node, we will get a preview of what the mask looks like now:</p>
 <p><img src="MaskNoisePre.gif" alt="MaskNoisePre.gif"></p>
-<h2 id="Edge-Masking-for-Emissive"><a href="#Edge-Masking-for-Emissive" class="headerlink" title="Edge Masking for Emissive"></a><strong>Edge Masking for Emissive</strong></h2><p>In this section we will create and edge mask, so that the edges of the transition can be highlighted with an emissive color, this setup is also borrowed from my Post-Process Scan Effect Article so read about it there for a full explanation.</p>
+<h2><span id="edge-masking-for-emissive"><strong>Edge Masking for Emissive</strong></span></h2><p>In this section we will create and edge mask, so that the edges of the transition can be highlighted with an emissive color, this setup is also borrowed from my Post-Process Scan Effect Article so read about it there for a full explanation.</p>
 <p><img src="EdgeMask.png" alt="EdgeMask.png"></p>
 <p>What I have done here is basically take the Mask Field (Result of the Subtract node) and run it through an Edge Mask Function,This basically masks the edges of the Distance Field Sphere ,this gives us the result shown below wich we will sue to lerp with an emissive value for the edges</p>
 <p><img src="EdgeMask.gif" alt="EdgeMask.gif"></p>
-<h2 id="Final-Touches"><a href="#Final-Touches" class="headerlink" title="Final Touches"></a><strong>Final Touches</strong></h2><p>Now we just plug in the emissive mask and Opacity Mask to their respective inputs</p>
+<h2><span id="final-touches"><strong>Final Touches</strong></span></h2><p>Now we just plug in the emissive mask and Opacity Mask to their respective inputs</p>
 <p><br>All we have to do now is multiply the emissive mask with an Emissive Color Value and plug that output into the Emissive input of the material, and plug our Opacity Mask output to the opacity input of the material, and Voila we are done!</p>
 <p><img src="Final_Nodes.png" alt="Final_Nodes.png"></p>
 <p><img src="CubeGif_02.gif" alt="CubeGif_02.gif"></p>

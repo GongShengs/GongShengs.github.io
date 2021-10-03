@@ -136,11 +136,21 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1 id="Rainy-SurfaceShader-in-UE4-Part-2"><a href="#Rainy-SurfaceShader-in-UE4-Part-2" class="headerlink" title="Rainy SurfaceShader in UE4 Part 2"></a>Rainy SurfaceShader in UE4 Part 2</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+        <h1><span id="rainy-surfaceshader-in-ue4-part-2">Rainy SurfaceShader in UE4 Part 2</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#slope-awareness"><strong>Slope Awareness</strong></a></li>
+<li><a href="#texture-setup"><strong>Texture Setup</strong></a></li>
+<li><a href="#droplet-streaking-setup"><strong>Droplet Streaking Setup</strong></a></li>
+<li><a href="#combining-with-ripple-effect"><strong>Combining with Ripple Effect</strong></a></li>
+</ul>
+<!-- tocstop -->
+
+<p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
 <p><img src="Cam1_opt.gif" alt="Cam1_opt"></p>
-<p>This is a continuation of the <a href="">first part</a>, so if you havn’t read that I recommend going through that first since this will continue where that left off, and you will need to be aware of that setup, so that you know how to combine both at the end..</p>
+<p>This is a continuation of the <a href>first part</a>, so if you havn’t read that I recommend going through that first since this will continue where that left off, and you will need to be aware of that setup, so that you know how to combine both at the end..</p>
 <p>Just as a side not, as I was writing this post, i actually came up with an even simpler and easier to use solution for this rain system, using just one Post-Process Material, I will cover that some other time</p>
-<h2 id="Slope-Awareness"><a href="#Slope-Awareness" class="headerlink" title="Slope Awareness"></a><strong>Slope Awareness</strong></h2><p>So making the Function “slope aware” is actually incredibly simple, all we are doing is using a Z-gradient to blend betweek the Ripples Effect and the Streaking Effect that we create in this post.</p>
+<h2><span id="slope-awareness"><strong>Slope Awareness</strong></span></h2><p>So making the Function “slope aware” is actually incredibly simple, all we are doing is using a Z-gradient to blend betweek the Ripples Effect and the Streaking Effect that we create in this post.</p>
 <p><img src="RainTest_T3.gif" alt="RainTest_T3"></p>
 <p><img src="post05.gif" alt="post05"></p>
 <p>Below you can see simple way to get a z-gradient</p>
@@ -148,11 +158,11 @@
 <p>The result looks like this</p>
 <p><img src="z-gradient.gif" alt="z-gradient"></p>
 <p>We use this result later to blend betweek the ripples and the water streaks</p>
-<h2 id="Texture-Setup"><a href="#Texture-Setup" class="headerlink" title="Texture Setup"></a><strong>Texture Setup</strong></h2><p>So, if you remember the previous post, the texture setup we use is shown below, in this part we are going to make use of the Green and Blue Channels to make the water appear to drip.</p>
+<h2><span id="texture-setup"><strong>Texture Setup</strong></span></h2><p>So, if you remember the previous post, the texture setup we use is shown below, in this part we are going to make use of the Green and Blue Channels to make the water appear to drip.</p>
 <p><img src="Texture_Packing.jpg" alt="Texture_Packing"></p>
 <p>And the Normal Map</p>
 <p><img src="texturenormal.png" alt="texturenormal"></p>
-<h2 id="Droplet-Streaking-Setup"><a href="#Droplet-Streaking-Setup" class="headerlink" title="Droplet Streaking Setup"></a><strong>Droplet Streaking Setup</strong></h2><p>For the streaking, all we are actually doing is setting the texture to be World Aligned along the xz and yz axis, and then panning the gradient texture in the blue channel to create some simple alpha eroision, that makes the drops appear to streak.</p>
+<h2><span id="droplet-streaking-setup"><strong>Droplet Streaking Setup</strong></span></h2><p>For the streaking, all we are actually doing is setting the texture to be World Aligned along the xz and yz axis, and then panning the gradient texture in the blue channel to create some simple alpha eroision, that makes the drops appear to streak.</p>
 <p>First we create two input parameters, <strong>Streaks_Tiling</strong> and <strong>Streak_Length. RainSpeed</strong> was created in the last part, but it will be used for the streaking as well</p>
 <p><img src="input_parameters.png" alt="input_parameters"></p>
 <p>Next we set up the rain streaking texture to be world aligned along the xz and yz plane. We use the <strong>Green Channel</strong> which contains the streak pattern.</p>
@@ -172,7 +182,7 @@
 <p><img src="streakmask.gif" alt="streakmask"><img src="streaknormal.gif" alt="streaknormal"></p>
 <p>The panning gradient creates an alpha erosion effect, that creates the illusion of dripping water</p>
 <p>Note:There is a better solution for the Dripping water, I will cover that in one of my future posts.</p>
-<h2 id="Combining-with-Ripple-Effect"><a href="#Combining-with-Ripple-Effect" class="headerlink" title="Combining with Ripple Effect"></a><strong>Combining with Ripple Effect</strong></h2><p>Now all that’s left to do is blend between this streaking effect and the ripple effect using the z-gradient we created earlier in the post</p>
+<h2><span id="combining-with-ripple-effect"><strong>Combining with Ripple Effect</strong></span></h2><p>Now all that’s left to do is blend between this streaking effect and the ripple effect using the z-gradient we created earlier in the post</p>
 <p>This is the part where you will need to refer to the previous blog post, as we are essentially just adding a lerp for all the function outputs from the previous blog post, you can read it here</p>
 <p>Find the normal output taht was setup in the previous Post and add a linear interpolation between the ripple normal and the streak normal</p>
 <p><img src="normalblend.png" alt="normalblend"></p>

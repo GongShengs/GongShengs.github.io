@@ -136,10 +136,34 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1 id="Houdini-Digital-Assets-学习笔记"><a href="#Houdini-Digital-Assets-学习笔记" class="headerlink" title="Houdini Digital Assets 学习笔记"></a>Houdini Digital Assets 学习笔记</h1><p>Digital assets let you create reusable nodes and tools from existing networks.</p>
+        <h1><span id="houdini-digital-assets-学习笔记">Houdini Digital Assets 学习笔记</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E7%9A%84%E6%96%B9%E6%B3%95">创建的方法</a></li>
+<li><a href="#%E9%9D%A2%E6%9D%BF%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D">面板参数介绍</a><ul>
+<li><a href="#operator-type-window-%E8%B5%84%E4%BA%A7%E7%9A%84%E7%BC%96%E8%BE%91%E7%AA%97%E5%8F%A3">Operator Type window 资产的编辑窗口</a><ul>
+<li><a href="#basic-tab%E5%9F%BA%E7%A1%80%E6%A0%87%E7%AD%BE">Basic tab基础标签</a></li>
+<li><a href="#parameters-tab-%E5%8F%82%E6%95%B0%E6%A0%87%E7%AD%BE">Parameters tab 参数标签</a></li>
+<li><a href="#node-tabs-%E8%8A%82%E7%82%B9%E9%9D%A2%E6%9D%BF">Node Tabs 节点面板</a></li>
+<li><a href="#inputoutput-tab">Input/Output tab</a></li>
+<li><a href="#help-tabs">Help Tabs</a></li>
+<li><a href="#code-tabs">Code Tabs</a></li>
+<li><a href="#scripts-tab">Scripts tab</a></li>
+<li><a href="#interactive-tab">Interactive tab</a></li>
+<li><a href="#iextra-files-tab">IExtra Files tab</a></li>
+<li><a href="#save-tab">Save Tab</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
+</ul>
+<!-- tocstop -->
+
+<p>Digital assets let you create reusable nodes and tools from existing networks.</p>
 <p>可以创建复用的节点和工具。 </p>
 <p>存储格式：.hda(.otl是旧版本)</p>
-<h2 id="创建的方法"><a href="#创建的方法" class="headerlink" title="创建的方法"></a>创建的方法</h2><ol>
+<h2><span id="创建的方法">创建的方法</span></h2><ol>
 <li>Subnetwork 右键  Create digital asset    </li>
 <li>资产命名<ul>
 <li>Operator Name 命名空间的名字</li>
@@ -150,7 +174,7 @@
 <li>编辑面板属性，脚本等细节</li>
 <li>4.完成创建</li>
 </ol>
-<h2 id="面板参数介绍"><a href="#面板参数介绍" class="headerlink" title="面板参数介绍"></a>面板参数介绍</h2><h3 id="Operator-Type-window-资产的编辑窗口"><a href="#Operator-Type-window-资产的编辑窗口" class="headerlink" title="Operator Type window 资产的编辑窗口"></a>Operator Type window 资产的编辑窗口</h3><p>此窗口可以编辑资产除子节点之外的所有数据（参数面板，label and icon，嵌入文件，自定义脚本）</p>
+<h2><span id="面板参数介绍">面板参数介绍</span></h2><h3><span id="operator-type-window-资产的编辑窗口">Operator Type window 资产的编辑窗口</span></h3><p>此窗口可以编辑资产除子节点之外的所有数据（参数面板，label and icon，嵌入文件，自定义脚本）</p>
 <p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B00.png" alt="资产的编辑窗口"></p>
 <ul>
 <li>Operator Type 就是上文提到的Operator Name，此时的状态是不可更改的。</li>
@@ -158,7 +182,7 @@
 <li>Install Library to 安装到哪，统一适用packages管理，我觉得更好些。</li>
 <li>Switch to Definition 切换定义</li>
 </ul>
-<h4 id="Basic-tab基础标签"><a href="#Basic-tab基础标签" class="headerlink" title="Basic tab基础标签"></a>Basic tab基础标签</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01.png" alt="Basic"></p>
+<h4><span id="basic-tab基础标签">Basic tab基础标签</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01.png" alt="Basic"></p>
 <ul>
 <li>Label 标签名 显示在tab</li>
 <li>Icon 图标 建议使用houdini内置的图标，其他处理方式请查看帮助。</li>
@@ -167,7 +191,7 @@
 <li>Maximum Inputs 最大输入端口数量</li>
 <li>Maximum Outputs 最大输出端口数量</li>
 </ul>
-<h4 id="Parameters-tab-参数标签"><a href="#Parameters-tab-参数标签" class="headerlink" title="Parameters tab 参数标签"></a>Parameters tab 参数标签</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02.png" alt="Parameters"></p>
+<h4><span id="parameters-tab-参数标签">Parameters tab 参数标签</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02.png" alt="Parameters"></p>
 <ul>
 <li><p>创建参数</p>
 <ul>
@@ -189,22 +213,22 @@
 <li><p>Channels中存储属性的默认值，但是ramp类型的不在这里设置 它的属性参数中有一项叫 get from  Parameter</p>
 </li>
 </ul>
-<h4 id="Node-Tabs-节点面板"><a href="#Node-Tabs-节点面板" class="headerlink" title="Node Tabs 节点面板"></a>Node Tabs 节点面板</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03.png" alt="Node"></p>
+<h4><span id="node-tabs-节点面板">Node Tabs 节点面板</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03.png" alt="Node"></p>
 <p>Enitble Nodes 是目前我最常用的，为了能编辑内部节点</p>
-<h4 id="Input-Output-tab"><a href="#Input-Output-tab" class="headerlink" title="Input/Output tab"></a>Input/Output tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04.png" alt="Input/Output"></p>
+<h4><span id="inputoutput-tab">Input/Output tab</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04.png" alt="Input/Output"></p>
 <p>输入输出 可以进行一些输入输出的信息描述</p>
-<h4 id="Help-Tabs"><a href="#Help-Tabs" class="headerlink" title="Help Tabs"></a>Help Tabs</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05.png" alt="Help"></p>
+<h4><span id="help-tabs">Help Tabs</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05.png" alt="Help"></p>
 <p>可以使用wiki 进行节点帮助的创建，我认为在大规模使用的情况下 是很有用的。</p>
-<h4 id="Code-Tabs"><a href="#Code-Tabs" class="headerlink" title="Code Tabs"></a>Code Tabs</h4><p>适用于其他类型的资产，现在不讨论。</p>
-<h4 id="Scripts-tab"><a href="#Scripts-tab" class="headerlink" title="Scripts tab"></a>Scripts tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06.png" alt="Scripts"></p>
+<h4><span id="code-tabs">Code Tabs</span></h4><p>适用于其他类型的资产，现在不讨论。</p>
+<h4><span id="scripts-tab">Scripts tab</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06.png" alt="Scripts"></p>
 <p>触发脚本的标签<br>当有一些自定义的触发操作，批处理之类就可以使用该标签进行创建。</p>
-<h4 id="Interactive-tab"><a href="#Interactive-tab" class="headerlink" title="Interactive tab"></a>Interactive tab</h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07.png" alt="Interactive"></p>
+<h4><span id="interactive-tab">Interactive tab</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07.png" alt="Interactive"></p>
 <p>交互标签 用于hda 和用户交互的操作<br>例如 hda的菜单位置，界面交互，热键之类</p>
 <p>菜单设置    在    shelf Tools-Context- NetWork Plane - TAB Submenu Path</p>
-<h4 id="IExtra-Files-tab"><a href="#IExtra-Files-tab" class="headerlink" title="IExtra Files tab"></a>IExtra Files tab</h4><p>内嵌文件标签</p>
+<h4><span id="iextra-files-tab">IExtra Files tab</span></h4><p>内嵌文件标签</p>
 <p>用于将一些纹理 bgeo文件嵌入hda 中,嵌入后使用opdef 在资产中进行调用。</p>
-<h4 id="Save-Tab"><a href="#Save-Tab" class="headerlink" title="Save Tab"></a>Save Tab</h4><p>保存 目前还未涉及到，感觉默认就行。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<h4><span id="save-tab">Save Tab</span></h4><p>保存 目前还未涉及到，感觉默认就行。</p>
+<h2><span id="其他">其他</span></h2><ol>
 <li>关于私有资产保护问题<ul>
 <li>可以创建黑盒，在你不想公开的情况下。</li>
 <li>方法：<ol>

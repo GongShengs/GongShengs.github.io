@@ -136,11 +136,21 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1 id="Post-Process-Glitch"><a href="#Post-Process-Glitch" class="headerlink" title="Post Process Glitch"></a>Post Process Glitch</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+        <h1><span id="post-process-glitch">Post Process Glitch</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#introduction"><strong>Introduction</strong></a></li>
+<li><a href="#pixellation"><strong>Pixellation</strong></a></li>
+<li><a href="#rgb-offset"><strong>RGB Offset</strong></a></li>
+<li><a href="#rgb-color-noise"><strong>RGB Color Noise</strong></a></li>
+</ul>
+<!-- tocstop -->
+
+<p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
 <p><img src="post15.gif" alt="post15.gif"></p>
 <p>This Post-Process effect came about after I saw this <a target="_blank" rel="noopener" href="https://twitter.com/klemen_lozar/status/1017116328539217920">Tweet</a> from Klemen Lozar, it was neat little glitch effect, So I decided to take it a little further and try and make a Post0Process Glitch shader.</p>
-<p><font color=red>Note: You can open the images in a new tab to view them at a higher resolution</font></p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><strong>Introduction</strong></h2><p>The Entire Shader is created procedurally and makes use of some of my Custom Noise Functions that I feature in my previous Glitch Effects breakdown, so be sure to read through that before following along with this one.</p>
+<p><font color="red">Note: You can open the images in a new tab to view them at a higher resolution</font></p>
+<h2><span id="introduction"><strong>Introduction</strong></span></h2><p>The Entire Shader is created procedurally and makes use of some of my Custom Noise Functions that I feature in my previous Glitch Effects breakdown, so be sure to read through that before following along with this one.</p>
 <p>The effect basically has three layers</p>
 <ol>
 <li><p>Pixellation</p>
@@ -153,7 +163,7 @@
 <p> <img src="colornoise.gif" alt="colornoise.gif"></p>
 </li>
 </ol>
-<h2 id="Pixellation"><a href="#Pixellation" class="headerlink" title="Pixellation"></a><strong>Pixellation</strong></h2><p>This is a pretty common effect, it’s basically a UV trick where we multiple the UV’s with a resolution amount, round the values down so that each cell determined by resolution value only samples a single pixel to create the pixellated look, the lower the “Resolution” the more low-res it looks. We add one extra step to this we multiple the Resolution value by a psuedorandom scalar value, so that the resolution value varies over time to feel more glitch like. We also create a Psuedorandom cell mask to mask out the glitch so that it only appears at certain times on certain parts of the screen.</p>
+<h2><span id="pixellation"><strong>Pixellation</strong></span></h2><p>This is a pretty common effect, it’s basically a UV trick where we multiple the UV’s with a resolution amount, round the values down so that each cell determined by resolution value only samples a single pixel to create the pixellated look, the lower the “Resolution” the more low-res it looks. We add one extra step to this we multiple the Resolution value by a psuedorandom scalar value, so that the resolution value varies over time to feel more glitch like. We also create a Psuedorandom cell mask to mask out the glitch so that it only appears at certain times on certain parts of the screen.</p>
 <p><img src="pixellation_Whole.png" alt="pixellation_Whole.png"></p>
 <p>Make sure the <strong>Scene Texture</strong> Node is set to use PostProcessInput0</p>
 <p><img src="scenetexturesettings.png" alt="scenetexturesettings.png"></p>
@@ -164,7 +174,7 @@
 <p>Note that you can control the tiling of the mask by multiplying a scalar value with the U and V of the screen Coordinates, in this case I jsut left a default value of 3 for both, but you can create a parameter to control that as well.</p>
 <p>We then use it to Interpolate between the Regular Screen UV’s and the Pixellated Screen Uv’s and feed that to the SceneTexture UV Input, for the Final Result:</p>
 <p><img src="pixellate02.gif" alt="pixellate02.gif"></p>
-<h2 id="RGB-Offset"><a href="#RGB-Offset" class="headerlink" title="RGB Offset"></a><strong>RGB Offset</strong></h2><p>The RGB offset is basically the same as what Klemen does in his shader, but instead of using a texture we use a psuedorandom cell noise function to drive the offset.</p>
+<h2><span id="rgb-offset"><strong>RGB Offset</strong></span></h2><p>The RGB offset is basically the same as what Klemen does in his shader, but instead of using a texture we use a psuedorandom cell noise function to drive the offset.</p>
 <p><img src="RGB_Offset.png" alt="RGB_Offset.png"></p>
 <p>The network of nodes under the section <strong>Offset Noise</strong> basically uses the Screen UV’s as input for the <strong>MF_Vec2Noise2D</strong> Function to generate some animated psuedorandom screenspace 2D CellNoise, we use this noise to offset the pixels of the screen, you can preview what this noise looks like by plugging in the result from <strong>MF_Vec2Noise2D</strong> into the emissive output:</p>
 <p><img src="cellnoise.gif" alt="cellnoise.gif"></p>
@@ -174,7 +184,7 @@
 <p><img src="offsetmask.gif" alt="offsetmask.gif"></p>
 <p>The last thing to do in this section is to just interpolate between the Pixellated Scene Texture Result and the Offset Scene Texture result using the PixelOffset Mask</p>
 <p><img src="pixeloffset.gif" alt="pixeloffset.gif"></p>
-<h2 id="RGB-Color-Noise"><a href="#RGB-Color-Noise" class="headerlink" title="RGB Color Noise"></a><strong>RGB Color Noise</strong></h2><p>This last section deals with adding some horizontal and vertical color streaks to try and mimic the glitchy effects you would see in old cable TV’s when the signal was messy. Here too we make use of our handy Custom Noise Functions</p>
+<h2><span id="rgb-color-noise"><strong>RGB Color Noise</strong></span></h2><p>This last section deals with adding some horizontal and vertical color streaks to try and mimic the glitchy effects you would see in old cable TV’s when the signal was messy. Here too we make use of our handy Custom Noise Functions</p>
 <p><img src="colornoise.png" alt="colornoise.png"></p>
 <p>The <strong>ColorGlitchMask</strong> section does the same thing as teh previous two sections it creates a black and white cell mask, that we will use later to mask out the areas where the RGB Color Streaks show.</p>
 <p><img src="mask03.gif" alt="mask03.gif"></p>

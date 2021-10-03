@@ -136,46 +136,64 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1 id="Procedural-Hologram-Shader"><a href="#Procedural-Hologram-Shader" class="headerlink" title="Procedural Hologram Shader"></a>Procedural Hologram Shader</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+        <h1><span id="procedural-hologram-shader">Procedural Hologram Shader</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#the-setup"><strong>The Setup</strong></a></li>
+<li><a href="#shader-setup"><strong>Shader Setup</strong></a></li>
+<li><a href="#generating-random-values-per-face"><strong>Generating Random Values Per Face</strong></a></li>
+<li><a href="#world-position-offset"><strong>World Position Offset</strong></a></li>
+<li><a href="#look-development"><strong>Look development</strong></a></li>
+<li><a href="#generate-procedural-grid-using-uv-coordinate"><strong>Generate Procedural Grid using UV Coordinate</strong></a></li>
+<li><a href="#horizontal-paning-bar"><strong>Horizontal Paning Bar</strong></a></li>
+<li><a href="#combining-grid-and-panning-bar"><strong>Combining grid and Panning Bar</strong></a></li>
+<li><a href="#random-opacity-curve"><strong>Random Opacity Curve</strong></a></li>
+<li><a href="#creating-an-opacity-curve-for-glow"><strong>Creating an Opacity Curve for glow</strong></a></li>
+<li><a href="#opacity"><strong>Opacity</strong></a></li>
+<li><a href="#emissive"><strong>Emissive</strong></a></li>
+</ul>
+<!-- tocstop -->
+
+<p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
 <p><img src="Post12.gif" alt="Post12.gif"></p>
 <p>This was a quick little effect I came up with, to try and test some ideas I had for some Procedural Vertex Animation and a hacky technique for generating psuedorandom Vectors per face in the Shader. This would probably be infinitely easier to do if Unreal gave us access to Triangle,Vertex and Poly data in the Material Editor. But here’s what I did.</p>
-<p><font color=red>Note: You can open the images in a new tab to view them at a higher resolution</font></p>
+<p><font color="red">Note: You can open the images in a new tab to view them at a higher resolution</font></p>
 <p><strong>The main goal with this effect was to try and make the shader fully procedural</strong>.It would probably be quite easy to recreate using textures.</p>
 <p><img src="HoloSphere_01.gif" alt="HoloSphere_01.gif"></p>
 <p><img src="HoloSphere_02.gif" alt="HoloSphere_02.gif"></p>
-<h2 id="The-Setup"><a href="#The-Setup" class="headerlink" title="The Setup"></a><strong>The Setup</strong></h2><p>This effect uses a simple sphere mesh with Split Edges as the base object. This is not really a reusable effect, as I was jsut experimenting.</p>
+<h2><span id="the-setup"><strong>The Setup</strong></span></h2><p>This effect uses a simple sphere mesh with Split Edges as the base object. This is not really a reusable effect, as I was jsut experimenting.</p>
 <p><img src="sphere.png" alt="sphere.png&quot;"></p>
 <p><img src="sphere.gif" alt="sphere.gif"></p>
-<h2 id="Shader-Setup"><a href="#Shader-Setup" class="headerlink" title="Shader Setup"></a><strong>Shader Setup</strong></h2><p>I n a nutshell, the shader basically displaces each face along it’s normal, and the animation is driven by some math in the Shader. We also procedurally generate some psuedorandom Vec2 values per face of the object, we then use these per face values to have each face have some randommness in how muc hthey displace.</p>
-<h2 id="Generating-Random-Values-Per-Face"><a href="#Generating-Random-Values-Per-Face" class="headerlink" title="Generating Random Values Per Face"></a><strong>Generating Random Values Per Face</strong></h2><p>The Network below uses the VertexNormal with the <strong>MF_Vec2Noise2D</strong> function to generate some psuedorandom vec2 values per face on the model, Time is used in the Seed value so that the vec2 values randomly change over time. This Technique only works on simple concave/convex shapes which is why the shader, is not reusable. Perhaps there is some way to access some kind of PolygonID value using the Custom Node in unreal but I’m not familiar enough with Unreal’s Rendering API to figure out how to do it.</p>
+<h2><span id="shader-setup"><strong>Shader Setup</strong></span></h2><p>I n a nutshell, the shader basically displaces each face along it’s normal, and the animation is driven by some math in the Shader. We also procedurally generate some psuedorandom Vec2 values per face of the object, we then use these per face values to have each face have some randommness in how muc hthey displace.</p>
+<h2><span id="generating-random-values-per-face"><strong>Generating Random Values Per Face</strong></span></h2><p>The Network below uses the VertexNormal with the <strong>MF_Vec2Noise2D</strong> function to generate some psuedorandom vec2 values per face on the model, Time is used in the Seed value so that the vec2 values randomly change over time. This Technique only works on simple concave/convex shapes which is why the shader, is not reusable. Perhaps there is some way to access some kind of PolygonID value using the Custom Node in unreal but I’m not familiar enough with Unreal’s Rendering API to figure out how to do it.</p>
 <p><img src="Randomperface.png" alt="Randomperface.png"></p>
 <p>The preview result looks like this</p>
 <p><img src="Randomperface.gif" alt="Randomperface.gif"></p>
 <p><strong>MF_Vec2Noise2D</strong> takes in a vec2 input and outputs a psuedorandom vec2 value from it. THe node network for the function can be seen below</p>
 <p><img src="MF_Vec2Noise2D.png" alt="MF_Vec2Noise2D.png"></p>
-<h2 id="World-Position-Offset"><a href="#World-Position-Offset" class="headerlink" title="World Position Offset"></a><strong>World Position Offset</strong></h2><p>The network below uses a sphere mask, to drive displacement alongthe Vertex normal, using the Red Channel from the psuedorandom value generated previosuly to create soem variation in the displacement. The SineWave is jsut being used to preview, in the end we can jsut replace it with a scalar Parameter.</p>
+<h2><span id="world-position-offset"><strong>World Position Offset</strong></span></h2><p>The network below uses a sphere mask, to drive displacement alongthe Vertex normal, using the Red Channel from the psuedorandom value generated previosuly to create soem variation in the displacement. The SineWave is jsut being used to preview, in the end we can jsut replace it with a scalar Parameter.</p>
 <p><img src="WPO.png" alt="WPO.png"></p>
 <p>If you wire the result from this into the world position output, you should see this result</p>
 <p><img src="WPO.gif" alt="WPO.gif"></p>
-<h2 id="Look-development"><a href="#Look-development" class="headerlink" title="Look development"></a><strong>Look development</strong></h2><h2 id="Generate-Procedural-Grid-using-UV-Coordinate"><a href="#Generate-Procedural-Grid-using-UV-Coordinate" class="headerlink" title="Generate Procedural Grid using UV Coordinate"></a><strong>Generate Procedural Grid using UV Coordinate</strong></h2><p>The tricky part here was getting the grid lines to line up perfectly with the edges on the mesh so that when each poly was dispalced outward they would have a perfect outline around them</p>
+<h2><span id="look-development"><strong>Look development</strong></span></h2><h2><span id="generate-procedural-grid-using-uv-coordinate"><strong>Generate Procedural Grid using UV Coordinate</strong></span></h2><p>The tricky part here was getting the grid lines to line up perfectly with the edges on the mesh so that when each poly was dispalced outward they would have a perfect outline around them</p>
 <p><img src="grid.png" alt="grid.png"></p>
 <p>Multiplying the R and G channels of the UV coords iwth the X and Y subdivision of the sphere mesh, makes the grid lines match the number of edges on the mesh.If you preview the result form this network you will see it does.</p>
 <p><img src="gridpre.png" alt="gridpre.png"></p>
-<h2 id="Horizontal-Paning-Bar"><a href="#Horizontal-Paning-Bar" class="headerlink" title="Horizontal Paning Bar"></a><strong>Horizontal Paning Bar</strong></h2><p>This is done in localized world Space, could have jsut as easily used a Texture or used UV Coords to generate it.</p>
+<h2><span id="horizontal-paning-bar"><strong>Horizontal Paning Bar</strong></span></h2><p>This is done in localized world Space, could have jsut as easily used a Texture or used UV Coords to generate it.</p>
 <p><img src="HorizontalPanningBar.png" alt="HorizontalPanningBar.png"></p>
 <p>The result from this network</p>
 <p><img src="panningbar.gif" alt="panningbar.gif"></p>
-<h2 id="Combining-grid-and-Panning-Bar"><a href="#Combining-grid-and-Panning-Bar" class="headerlink" title="Combining grid and Panning Bar"></a><strong>Combining grid and Panning Bar</strong></h2><p>Next the Panning bar and Grid Results are combine together, by doing the following little bit of math</p>
+<h2><span id="combining-grid-and-panning-bar"><strong>Combining grid and Panning Bar</strong></span></h2><p>Next the Panning bar and Grid Results are combine together, by doing the following little bit of math</p>
 <p><img src="combine.png" alt="combine.png"></p>
 <p>If you preview the result from the power node, you wil lsee this</p>
 <p><img src="grid.gif" alt="grid.gif"></p>
 <p>If you wire in the results from this network into their respective shader inputs, you will get something that looks like this.</p>
 <p><img src="gridresult.gif" alt="gridresult.gif"></p>
-<h2 id="Random-Opacity-Curve"><a href="#Random-Opacity-Curve" class="headerlink" title="Random Opacity Curve"></a><strong>Random Opacity Curve</strong></h2><p>This section of the shader creates the opacity curve so that the ppoly’s appear randomly as the form the sphere</p>
+<h2><span id="random-opacity-curve"><strong>Random Opacity Curve</strong></span></h2><p>This section of the shader creates the opacity curve so that the ppoly’s appear randomly as the form the sphere</p>
 <p><img src="baseopacity.png" alt="baseopacity.png"></p>
 <p>Wire this into the opacity and you’ll get this result</p>
 <p><img src="baseopacity.gif" alt="baseopacity.gif"></p>
-<h2 id="Creating-an-Opacity-Curve-for-glow"><a href="#Creating-an-Opacity-Curve-for-glow" class="headerlink" title="Creating an Opacity Curve for glow"></a><strong>Creating an Opacity Curve for glow</strong></h2><p>If you look at the effect, you’ll notice that the glow does something interesting, each face glows bright before it becomes fully visible</p>
+<h2><span id="creating-an-opacity-curve-for-glow"><strong>Creating an Opacity Curve for glow</strong></span></h2><p>If you look at the effect, you’ll notice that the glow does something interesting, each face glows bright before it becomes fully visible</p>
 <p><img src="HoloSphere_V2.gif" alt="HoloSphere_V2.gif"></p>
 <p>This is done by tweaking the opacity curve to have a quick bump as it almost reaches full value of 1.</p>
 <p>If we think of the opacity curve as a linear gradient over time, it’ll look something like this.</p>
@@ -190,8 +208,8 @@
 <p><img src="glowcurve.gif" alt="glowcurve.gif"></p>
 <p>As you can see it uses the result from the sinewave and the RandomFacevalue to isolate gradient curve as it hits a value of 0.85, and adds a quick bump to the curve</p>
 <p>The result from this network then gets added to the Opacity and Emissive sections as shown below to get teh final Effect.</p>
-<h2 id="Opacity"><a href="#Opacity" class="headerlink" title="Opacity"></a><strong>Opacity</strong></h2><p><img src="Opacity_Final.png" alt="Opacity_Final.png"></p>
-<h2 id="Emissive"><a href="#Emissive" class="headerlink" title="Emissive"></a><strong>Emissive</strong></h2><p><img src="Emissive_Final.png" alt="Emissive_Final.png"></p>
+<h2><span id="opacity"><strong>Opacity</strong></span></h2><p><img src="Opacity_Final.png" alt="Opacity_Final.png"></p>
+<h2><span id="emissive"><strong>Emissive</strong></span></h2><p><img src="Emissive_Final.png" alt="Emissive_Final.png"></p>
 <p>And that gives us the final Effect, we can replace the sinewave with a Scalar Parameter and now we have a single Scalar parameter that controls the entire effect, the glow,opacity etc all work automatically.</p>
 <p>To conclude here is a variation of the effect, in this one I force all the Random face values to go from 0-1 so that the sphere is fully formed and isn’t jsut partially formed.</p>
 <p><img src="HoloSphere_01.gif" alt="HoloSphere_01.gif"></p>
