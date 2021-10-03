@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>转载：Ice Shader in UE4 - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>October</span>
+            
+            
+            
+            <span>3,</span>
+            <span>2021</span>
+        </div>
+        
+
+        <h2 class="title">转载：Ice Shader in UE4</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1 id="Ice-Shader-in-UE4"><a href="#Ice-Shader-in-UE4" class="headerlink" title="Ice Shader in UE4"></a>Ice Shader in UE4</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+<p><img src="post01.jpg" alt="post01"></p>
+<p>So i’ve been meaning to do this for a while, but unfortunately finding time was tricky, but I’ve managed to sneak in some free time in-between assignments to make this write-up. Now, Full disclosure, I am no pro, this was a result of me researching/experimenting trying to get a result, lots of googling etc. So it may not be perfect, feel free to leave some feedback or any changes you may suggest. Anyway lets get started.</p>
+<h2 id="Material-Preview"><a href="#Material-Preview" class="headerlink" title="Material Preview"></a><strong>Material Preview</strong></h2><p>Here is a preview of what the material looks like along with the entire material graph, if you’d rather not read through all my ramblings/explanation</p>
+<p>My goal with this project was to create a “Genereal Purpose” ice material. Something that could be tweaked with parameters to work decently for any kind of use.</p>
+<p><img src="IceShowcase_Gif.gif" alt="IceShowcase_Gif"></p>
+<p><img src="Opaque_Ice.png" alt="Opaque_Ice"></p>
+<p><img src="ICe_Floor_Showcase.gif" alt="ICe_Floor_Showcase"></p>
+<p><img src="FullGraph.JPG" alt="FullGraph"></p>
+<h2 id="Textures"><a href="#Textures" class="headerlink" title="Textures"></a><strong>Textures</strong></h2><p>This material makes use of 4-5 textures depending on whether you choose to add a baked normal map for a mesh, 3 of them will contain patterns in each channel and one will be a general purpose noisy normal map. I used Substance designer to generate these patterns and I thin I also found one or two wit on gogle. The images below show you how the textures are set up.</p>
+<h2 id="BubbleMask-tga"><a href="#BubbleMask-tga" class="headerlink" title="BubbleMask.tga"></a><strong>BubbleMask.tga</strong></h2><p><img src="BubbleMask_BD.jpg" alt="BubbleMask_BD"></p>
+<h2 id="ColorMask-Crack-Roughness-tga"><a href="#ColorMask-Crack-Roughness-tga" class="headerlink" title="ColorMask-Crack-Roughness.tga"></a><strong>ColorMask-Crack-Roughness.tga</strong></h2><p><img src="ColorMask-Crack-Roughness_BD.jpg" alt="ColorMask-Crack-Roughness_BD"></p>
+<h2 id="Subsurface-Height-Speckle-tga"><a href="#Subsurface-Height-Speckle-tga" class="headerlink" title="Subsurface-Height-Speckle.tga"></a><strong>Subsurface-Height-Speckle.tga</strong></h2><p><img src="Subsurface-Height-Speckle.jpg" alt="Subsurface-Height-Speckle.jpg"></p>
+<h2 id="NormalMap"><a href="#NormalMap" class="headerlink" title="NormalMap"></a><strong>NormalMap</strong></h2><p><img src="Ice_Substance_BaseNormal.jpg" alt="Ice_Substance_BaseNormal"></p>
+<h2 id="BumpOffset-Node"><a href="#BumpOffset-Node" class="headerlink" title="BumpOffset Node:"></a><strong>BumpOffset Node:</strong></h2><p>This node in the UE4 Material Editor, basically helps us make use of parallax mapping, this is waht we use to fake the “depth” in this material. The basic explanation of how it works is this, you feed it a Coordinate value, a height value and a height ratio value. The Height Value determines the base or plane from which your heightratio is measured, so if you feed a height value 0 with a height ratio value of -1.0, pixels will appear as though they are “under” the surface, where as if you have a height value of 0 and a height ratio value of 1.0, pixels will appear to bulge above the surface (This can look very bad unless you use subtle values). <a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.27/en-US/RenderingAndGraphics/Materials/HowTo/BumpOffset/">Here’s</a> the documentation page for the node</p>
+<p><img src="BumpOffsetNode.JPG" alt="BumpOffsetNode"></p>
+<h2 id="Creating-Masks-for-Surface-Coloration"><a href="#Creating-Masks-for-Surface-Coloration" class="headerlink" title="Creating Masks for Surface Coloration"></a><strong>Creating Masks for Surface Coloration</strong></h2><p>In this step, we are going to mix and match some of the textures we made to create some masks that we will use to control the shader’s coloration and expose some useful variables as parameters so that we can use it to tweak the shader’s appearance with Instances. You can see the network below:</p>
+<p>First we create a scalar parameter, “Master Tiling”, we will use this to control the global tiling value for the entire material.</p>
+<p><img src="Master_Tiling_Parameter.JPG" alt="Master_Tiling_Parameter"></p>
+<p>1: Next we create the basic setup that will repeat for all the textures that we use in the shader, we set up a scalar parameter to control the tiling for each TextureSample and multiply it by the Global Tiling parameter , we also setup the bumpOffset Node and the values for it’s inputs to be use.</p>
+<p><img src="SurfaceColoration_Mask.JPG" alt="SurfaceColoration_Mask"></p>
+<p>We do some basic value adjustments to each texture sample with a power node, we do this to create some variation in the masks as we will be re-using the same textures many times in the shader. WIth this network set up we have 3 mask outputs ready to be used (labeled in the image). We will make use of these later.</p>
+<h2 id="Bubble-Cracks-Surface-Masks"><a href="#Bubble-Cracks-Surface-Masks" class="headerlink" title="Bubble,Cracks,Surface Masks"></a><strong>Bubble,Cracks,Surface Masks</strong></h2><p>This part of the graph creates surface masks to control areas where the bubbles are visible.</p>
+<p>![Crack and SurfaceMasks](Crack and SurfaceMasks.JPG)</p>
+<p>In this section we are going to set up the the masks for the bubbles and surface cracks, see the node Graph below:</p>
+<p><img src="BubbleMask.JPG" alt="BubbleMask"></p>
+<p>In the graph above we repeat the process of setting up tiling parameters for the textures for each texturesample.</p>
+<p>1.) This will be the upper most layer of bubbles,we will sue the Blue Channel of the texture as that is where we stored the blobby bubble pattern. We set a height ratio value of -0.2, so the bubbles appear just below the surface.</p>
+<p>2.) This section will be bubbles that are deeper inside the surface. FIrst we set up two scalar parameters and add it to the texture coordinate, this will let us add some offsets in the U and V directions to create some variation. Next we repeat the procedure for setting up tiling values,We set a higher tiling value to make the bubbles appear smaller, to help improve the fake depth effect, In the Bump offset node we set a heihgt ratio of -1.0.</p>
+<p>We multiply the end result of this network with the an the inverted result of Mask_01 from the previous section. This is done so the bubbles are not visible if they are under the Opaque sections of the ice surface. The gif below shows what the result of this network looks like.</p>
+<p><img src="BubbleMask_GIF.gif" alt="BubbleMask_GIF"></p>
+<h2 id="Material-Roughness"><a href="#Material-Roughness" class="headerlink" title="Material Roughness"></a><strong>Material Roughness</strong></h2><p>This section of the graph deals with how we set up the roughness input for the material, we do the same process as before and set up the tiling properties for the texture with the speckle pattern in the Blue channel, we use this as the mask to Lerp between a min an max roughness value. We expose these values as parameters so they can be tweaked. Finally we do a final lerp with the crack pattern mask from Mask_01, this is to give the cracked areas a different roughness than the rest of the surface.</p>
+<p><img src="Roughness_Graph.PNG" alt="Roughness_Graph"></p>
+<p>This will serve as the roughness output for the material, if we preview it, it will look something like this:</p>
+<p><img src="Roughness_Output.gif" alt="Roughness_Output"></p>
+<h2 id="Opacity-Subsurface-Masking"><a href="#Opacity-Subsurface-Masking" class="headerlink" title="Opacity/Subsurface Masking"></a><strong>Opacity/Subsurface Masking</strong></h2><h3 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1:"></a>Part 1:</h3><p>In the following sections we will set up the Opacity output for the material, this part of the graph affect the material in two ways.</p>
+<p>1.) It controls teh amount of subsurface scattering that occurs on the surfae of the mesh</p>
+<p>2.) With translucency enabled,it controls how opaque/Translucent the material is.</p>
+<p>So, this will affect how the Opacity output is used depending on whether we enable translucency or not</p>
+<p>(Note: The translucent version of the material is quite expensive, use carefully, ideally any objects that use this shader should mip out to a cheaper version of the material quickly)</p>
+<p>It is important to note that Opacity serves two purposes in this material, since our material uses a subsurface shading model, the opacity controls how much subsurface scattering happens on the surface of the object, in the opacity map, white areas = more scattering black areas= less scattering.</p>
+<p>With translucency on the other hand, white areas = opaque, black areas = completely transparent. We need to keep this in mind as we build the opacity graph, so that we adress both these needs correctly</p>
+<p>This first section just makes a basic mask using the texture we created earlier, but we also add some fresnel, so that the edges of the object do not become completely transparent as this can make the object feel floaty, and not very grounded in the world.</p>
+<p><img src="Opacity.PNG" alt="Opacity"></p>
+<p>If you preview the node commented as opacity, you’ll see something like this:</p>
+<p><img src="Opacity-SubsurfaceMaskGif.gif" alt="Opacity-SubsurfaceMaskGif"></p>
+<h3 id="Part-2-Camera-Distance-Mask"><a href="#Part-2-Camera-Distance-Mask" class="headerlink" title="Part 2: Camera Distance Mask"></a>Part 2: Camera Distance Mask</h3><p>Here we set up a camera distance based mask, so that the translucency becomes visible only when we are closer than a specified distance from the object (in thi s case 512 units). This was a personal choice for me, I didn’t like the way objects looked translucent from afar and wanted it to happend only when the viewer was close to the object.</p>
+<p><img src="Camera_Distance.PNG" alt="Camera_Distance"></p>
+<p>Here’s a gif showing what this network does, As you can see, the mask gets darker(i.e more transparent) the closer the camera is to the object.</p>
+<p><img src="CameraMask.gif" alt="CameraMask.gif"></p>
+<h2 id="Final-Opacity-Mask-Blending"><a href="#Final-Opacity-Mask-Blending" class="headerlink" title="Final Opacity Mask Blending"></a><strong>Final Opacity Mask Blending</strong></h2><p>In this part we bring together all the previous masks we made and blend them together to get the final output that goes into the Opacity Input of the material:</p>
+<p><img src="OpacityMask_Blending.PNG" alt="OpacityMask_Blending.PNG"></p>
+<p>If you preview the output of all these blends, it will look something like this.</p>
+<p><img src="Opacity_Mask_Gif.gif" alt="Opacity_Mask_Gif.gif"></p>
+<h2 id="BaseColor-Pass"><a href="#BaseColor-Pass" class="headerlink" title="BaseColor Pass"></a><strong>BaseColor Pass</strong></h2><p>The section below shows how we combine all the masks we have created in the previous sections to make the basecolor pass for the material. I used Adobe’ Kuler to pick an Analogous Color palette of light and deep blues, we expose all these colors as Texture Parameters so that it can be tweaked to any artists desires. I’ve commented which Mask goes to which lerp node.</p>
+<p><img src="ColorPalette.PNG" alt="ColorPalette.PNG"></p>
+<p>In the end we run everything through a Fuzzy shading Material Function, it works very similar to a fresnel but we are able to control the core darkness and the edge brightness, this function was commonly used when creating moss, cloth(before th release of the new shading model) and grass materials, but it provides an effect that I think works welll with Ice as well.</p>
+<p><img src="Final_Color_Comp.PNG" alt="Final_Color_Comp.PNG"></p>
+<p>If you preview the fuzzy shading node you will see something that looks like this. The output from this FuzzyShading Node will go into the BaseColor input of the material. This result will also be used to create the subsurface color in the next section.</p>
+<p><img src="FinalColorPreview.gif" alt="FinalColorPreview.gif"></p>
+<h2 id="Subsurface-Color"><a href="#Subsurface-Color" class="headerlink" title="Subsurface Color"></a><strong>Subsurface Color</strong></h2><p>The subsurface color output is generated by multiplying the Final Color Output with a parameterized color hue, and scaling factor to control how bright the color is. the output of this multiply node will go into the materials subsurface color input.</p>
+<p><img src="SubSurface_Color.PNG" alt="SubSurface_Color.PNG"></p>
+<h2 id="Normal-Map"><a href="#Normal-Map" class="headerlink" title="Normal Map"></a><strong>Normal Map</strong></h2><p>For the materials normal, the setup is simple, we use the normal texture, with uv coordinates from the Surface Masks section, we also add a static switch parameter to control whether we want to combine it with a baked object normal map. This option is made so that when we apply this material to an object with baked normal maps, we blend the ice normals with the objects baked normal map.</p>
+<p><img src="NormalMap.PNG" alt="NormalMap.PNG"></p>
+<h2 id="Performance-optimization-Final-Thoughts"><a href="#Performance-optimization-Final-Thoughts" class="headerlink" title="Performance, optimization/Final Thoughts"></a><strong>Performance, optimization/Final Thoughts</strong></h2><p>When you create an instance of this material, you will have the option, of using it as a either a translucent-Subsurface material or as an opaque subsurface material. Using the translucency is quite expensice and ideally you’d want to mip to a cheaper material pretty quickly. The opaque-subsurface version on the other hand is not as beefy and is quite performant.</p>
+<p>If you look at the shader complexity comparison between a <strong>transparent-subsurface</strong> and an <strong>Opaque-subsurface</strong> version of the material you will there is quite a big difference. For proper estimation of performance of course you want to use the GPU profiler to get accurate information on exactly what is going on in the scene.</p>
+<p><img src="Shader.jpg" alt="Shader.jpg"></p>
+<p><img src="ShaderComplexity.jpg" alt="ShaderComplexity.jpg"></p>
+<p><img src="Translucent_Subsurface.PN" alt="Translucent_Subsurface.PN"></p>
+<p><img src="Opaque_Subsurface.PNG" alt="Opaque_Subsurface.PNG"></p>
+<p>The image below shows all the parameters that are exposed to the material instance, these settings can be tweaked to achieve different looks with the same material.</p>
+<p><img src="Parameters.PNG" alt="Parameters.PNG"></p>
+<p><strong>Thank you for reading and I hope you find this useful!Cheers!</strong></p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2021 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

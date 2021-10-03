@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>转载：Procedural Hologram Shader - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>October</span>
+            
+            
+            
+            <span>3,</span>
+            <span>2021</span>
+        </div>
+        
+
+        <h2 class="title">转载：Procedural Hologram Shader</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1 id="Procedural-Hologram-Shader"><a href="#Procedural-Hologram-Shader" class="headerlink" title="Procedural Hologram Shader"></a>Procedural Hologram Shader</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+<p><img src="Post12.gif" alt="Post12.gif"></p>
+<p>This was a quick little effect I came up with, to try and test some ideas I had for some Procedural Vertex Animation and a hacky technique for generating psuedorandom Vectors per face in the Shader. This would probably be infinitely easier to do if Unreal gave us access to Triangle,Vertex and Poly data in the Material Editor. But here’s what I did.</p>
+<p><font color=red>Note: You can open the images in a new tab to view them at a higher resolution</font></p>
+<p><strong>The main goal with this effect was to try and make the shader fully procedural</strong>.It would probably be quite easy to recreate using textures.</p>
+<p><img src="HoloSphere_01.gif" alt="HoloSphere_01.gif"></p>
+<p><img src="HoloSphere_02.gif" alt="HoloSphere_02.gif"></p>
+<h2 id="The-Setup"><a href="#The-Setup" class="headerlink" title="The Setup"></a><strong>The Setup</strong></h2><p>This effect uses a simple sphere mesh with Split Edges as the base object. This is not really a reusable effect, as I was jsut experimenting.</p>
+<p><img src="sphere.png" alt="sphere.png&quot;"></p>
+<p><img src="sphere.gif" alt="sphere.gif"></p>
+<h2 id="Shader-Setup"><a href="#Shader-Setup" class="headerlink" title="Shader Setup"></a><strong>Shader Setup</strong></h2><p>I n a nutshell, the shader basically displaces each face along it’s normal, and the animation is driven by some math in the Shader. We also procedurally generate some psuedorandom Vec2 values per face of the object, we then use these per face values to have each face have some randommness in how muc hthey displace.</p>
+<h2 id="Generating-Random-Values-Per-Face"><a href="#Generating-Random-Values-Per-Face" class="headerlink" title="Generating Random Values Per Face"></a><strong>Generating Random Values Per Face</strong></h2><p>The Network below uses the VertexNormal with the <strong>MF_Vec2Noise2D</strong> function to generate some psuedorandom vec2 values per face on the model, Time is used in the Seed value so that the vec2 values randomly change over time. This Technique only works on simple concave/convex shapes which is why the shader, is not reusable. Perhaps there is some way to access some kind of PolygonID value using the Custom Node in unreal but I’m not familiar enough with Unreal’s Rendering API to figure out how to do it.</p>
+<p><img src="Randomperface.png" alt="Randomperface.png"></p>
+<p>The preview result looks like this</p>
+<p><img src="Randomperface.gif" alt="Randomperface.gif"></p>
+<p><strong>MF_Vec2Noise2D</strong> takes in a vec2 input and outputs a psuedorandom vec2 value from it. THe node network for the function can be seen below</p>
+<p><img src="MF_Vec2Noise2D.png" alt="MF_Vec2Noise2D.png"></p>
+<h2 id="World-Position-Offset"><a href="#World-Position-Offset" class="headerlink" title="World Position Offset"></a><strong>World Position Offset</strong></h2><p>The network below uses a sphere mask, to drive displacement alongthe Vertex normal, using the Red Channel from the psuedorandom value generated previosuly to create soem variation in the displacement. The SineWave is jsut being used to preview, in the end we can jsut replace it with a scalar Parameter.</p>
+<p><img src="WPO.png" alt="WPO.png"></p>
+<p>If you wire the result from this into the world position output, you should see this result</p>
+<p><img src="WPO.gif" alt="WPO.gif"></p>
+<h2 id="Look-development"><a href="#Look-development" class="headerlink" title="Look development"></a><strong>Look development</strong></h2><h2 id="Generate-Procedural-Grid-using-UV-Coordinate"><a href="#Generate-Procedural-Grid-using-UV-Coordinate" class="headerlink" title="Generate Procedural Grid using UV Coordinate"></a><strong>Generate Procedural Grid using UV Coordinate</strong></h2><p>The tricky part here was getting the grid lines to line up perfectly with the edges on the mesh so that when each poly was dispalced outward they would have a perfect outline around them</p>
+<p><img src="grid.png" alt="grid.png"></p>
+<p>Multiplying the R and G channels of the UV coords iwth the X and Y subdivision of the sphere mesh, makes the grid lines match the number of edges on the mesh.If you preview the result form this network you will see it does.</p>
+<p><img src="gridpre.png" alt="gridpre.png"></p>
+<h2 id="Horizontal-Paning-Bar"><a href="#Horizontal-Paning-Bar" class="headerlink" title="Horizontal Paning Bar"></a><strong>Horizontal Paning Bar</strong></h2><p>This is done in localized world Space, could have jsut as easily used a Texture or used UV Coords to generate it.</p>
+<p><img src="HorizontalPanningBar.png" alt="HorizontalPanningBar.png"></p>
+<p>The result from this network</p>
+<p><img src="panningbar.gif" alt="panningbar.gif"></p>
+<h2 id="Combining-grid-and-Panning-Bar"><a href="#Combining-grid-and-Panning-Bar" class="headerlink" title="Combining grid and Panning Bar"></a><strong>Combining grid and Panning Bar</strong></h2><p>Next the Panning bar and Grid Results are combine together, by doing the following little bit of math</p>
+<p><img src="combine.png" alt="combine.png"></p>
+<p>If you preview the result from the power node, you wil lsee this</p>
+<p><img src="grid.gif" alt="grid.gif"></p>
+<p>If you wire in the results from this network into their respective shader inputs, you will get something that looks like this.</p>
+<p><img src="gridresult.gif" alt="gridresult.gif"></p>
+<h2 id="Random-Opacity-Curve"><a href="#Random-Opacity-Curve" class="headerlink" title="Random Opacity Curve"></a><strong>Random Opacity Curve</strong></h2><p>This section of the shader creates the opacity curve so that the ppoly’s appear randomly as the form the sphere</p>
+<p><img src="baseopacity.png" alt="baseopacity.png"></p>
+<p>Wire this into the opacity and you’ll get this result</p>
+<p><img src="baseopacity.gif" alt="baseopacity.gif"></p>
+<h2 id="Creating-an-Opacity-Curve-for-glow"><a href="#Creating-an-Opacity-Curve-for-glow" class="headerlink" title="Creating an Opacity Curve for glow"></a><strong>Creating an Opacity Curve for glow</strong></h2><p>If you look at the effect, you’ll notice that the glow does something interesting, each face glows bright before it becomes fully visible</p>
+<p><img src="HoloSphere_V2.gif" alt="HoloSphere_V2.gif"></p>
+<p>This is done by tweaking the opacity curve to have a quick bump as it almost reaches full value of 1.</p>
+<p>If we think of the opacity curve as a linear gradient over time, it’ll look something like this.</p>
+<p><img src="grad_01.png" alt="grad_01.png"></p>
+<p>So what I we do is add a small bump around the 0.75 area where the value quickly climbs to 1</p>
+<p><img src="grad_02.png" alt="grad_02.png"></p>
+<p>Now if we add these two curves together we will get a gradient that has a bump right before it hits a value of one</p>
+<p><img src="grad_03.png" alt="grad_03.png"></p>
+<p>so here’s how we achieve that</p>
+<p><img src="glowcurve.png" alt="glowcurve.png"></p>
+<p>If you preview the result from this network you will see this.</p>
+<p><img src="glowcurve.gif" alt="glowcurve.gif"></p>
+<p>As you can see it uses the result from the sinewave and the RandomFacevalue to isolate gradient curve as it hits a value of 0.85, and adds a quick bump to the curve</p>
+<p>The result from this network then gets added to the Opacity and Emissive sections as shown below to get teh final Effect.</p>
+<h2 id="Opacity"><a href="#Opacity" class="headerlink" title="Opacity"></a><strong>Opacity</strong></h2><p><img src="Opacity_Final.png" alt="Opacity_Final.png"></p>
+<h2 id="Emissive"><a href="#Emissive" class="headerlink" title="Emissive"></a><strong>Emissive</strong></h2><p><img src="Emissive_Final.png" alt="Emissive_Final.png"></p>
+<p>And that gives us the final Effect, we can replace the sinewave with a Scalar Parameter and now we have a single Scalar parameter that controls the entire effect, the glow,opacity etc all work automatically.</p>
+<p>To conclude here is a variation of the effect, in this one I force all the Random face values to go from 0-1 so that the sphere is fully formed and isn’t jsut partially formed.</p>
+<p><img src="HoloSphere_01.gif" alt="HoloSphere_01.gif"></p>
+<p><img src="HoloSphere_02.gif" alt="HoloSphere_02.gif"></p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2021 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

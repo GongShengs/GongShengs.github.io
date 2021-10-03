@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>转载：Post Process Scan Effect - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>October</span>
+            
+            
+            
+            <span>3,</span>
+            <span>2021</span>
+        </div>
+        
+
+        <h2 class="title">转载：Post Process Scan Effect</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1 id="Post-Process-Scan-Effect"><a href="#Post-Process-Scan-Effect" class="headerlink" title="Post Process Scan Effect"></a>Post Process Scan Effect</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+<p><img src="post04.gif" alt="post04.gif"></p>
+<p>I got some free time this weekend in between school-work, and I decided to go back to doing some shader doodles, I came up with the Post-Process Scan Effect. I imagine it being used in a game as some sort distance based scan Effect.And we also use some simple noise distortion to make the scan effect look a little more interesting</p>
+<p><font color=red>Note:If any of the images are not clear you can right-click and open in a new tab to view a Higher Resolution Version</font></p>
+<p>In this section I’m going to breakdown how this effect was made in UE4, now there are multiple ways you could approach creating an effect like this, this jsut happens to be the method that I chose</p>
+<h2 id="High-Level-Components"><a href="#High-Level-Components" class="headerlink" title="High Level Components"></a><strong>High Level Components</strong></h2><p>The basic idea behind this effect is to create a sobel-edge/modified version of the scene render and then blend it between the regular scene render based on a World-Space Sphere mask, and this mask is animated to create the scanning effect.</p>
+<p>This effect is primarily a combination of 3 main pieces</p>
+<ul>
+<li><p>A Scaling Distance Field Sphere Mask</p>
+</li>
+<li><p>Sobel-Edge Post PRocess Function(I wont be expalining how this function works as it is a topic of its own, but I shall link the code I referenced)</p>
+</li>
+<li><p>World Projected Grid Texture Overlay</p>
+</li>
+</ul>
+<h2 id="Scaling-Distance-Field-Sphere"><a href="#Scaling-Distance-Field-Sphere" class="headerlink" title="Scaling Distance Field Sphere"></a><strong>Scaling Distance Field Sphere</strong></h2><p>This deals with how we create the scaling sphere mask, we make use of a simple distance Field equation to create a sphere, here’s how it works.  </p>
+<p><img src="DF_01_Nodes.JPG" alt="DF_01_Nodes.JPG"></p>
+<p>Plug in the result of the clamp into the emissive output of your Post-Process Material, and u will see something like this in your viewport. </p>
+<p><img src="DF_01.JPG" alt="DF_01.JPG"></p>
+<p>“TexLoc” is a vector3 that defines the location of the origin of the sphere, in my case I have it being read from a Parameter Collection, so that it can be read from gmeplay to use for eg the Player Position, but this value basically represents the location of the center of the sphere mask.</p>
+<p>The bbove bit of “Node-Code” basically defines a Distance Field Sphere with a radius of 1024 units, I used the clamp jsut to show the result in the viewport as the actualy values go muc hHigher than 1. If you would like a deepdive on distance Fields and their uses I highly reccomend checking out <a target="_blank" rel="noopener" href="http://www.iquilezles.org/www/articles/distfunctions/distfunctions.htm">Inigo Quillez’s website</a></p>
+<p>Now we are going to use a Time Variable to Scale this Sphere Over Times</p>
+<p><img src="DF_Scaling_Nodes" alt="DF_Scaling_Nodes"></p>
+<p>This will result in something like this</p>
+<p><img src="DF_Scaling.gif" alt="DF_Scaling.gif"></p>
+<p>Frac(time) basically gives us a constant period that keeps going 0-1,0-1,0-1. We multiply time by a small number 0.25 to control the scaling speed and then we multiple ply the Fraction result with the radius of the sphere, this makes the radius go from 0-1024, tus giving us an animated sphere mask.</p>
+<p>This is good progress, but this does not work for out effect, we need a scaling ring. This can be easily accomplished with a little bit of math on our current result.</p>
+<p><img src="Edge_Mask.png" alt="Edge_Mask.png"></p>
+<p>This will give us what we want, basically a growing ring, with a nice gradient falloff which can be controlled. </p>
+<p><img src="Edge_Mask.gif" alt="Edge_Mask.gif"></p>
+<p>The bit of math under “Edge Mask” basically samples a positon in the gradient of the distance Field, in this case 0.5 and defines an edge mask from that position with a specified width, this is what gives us a nice scaling ring. I will not go into too much detail aboutthis technique of edge masking, maybe I’ll cover it in mroe detail in another post.</p>
+<p>As you can see whe have complete control over how wide the ring is with out scalar parameter, and if we wantedwe could even control the falloff with a power node, but that is not required forthis effect</p>
+<p>The nest step is to use some noise, to create some interesting variation to the ring</p>
+<p>For this we make use of UE4’s “Vector Noise Node”, you can read more about it <a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.27/en-US/RenderingAndGraphics/Materials/ExpressionReference/Vector/#vectornoise">here</a>, you could alternatively just use a custom noise texture that has WorldALigned UV COordinates</p>
+<p>In my Shader I set the Vector Noise Node to use “CellNoise”, feel free to experiment with other nosie types to get you own unique effect</p>
+<p><img src="DF_Noise.png" alt="DF_Noise.png"></p>
+<p>The result will look something like this </p>
+<p><img src="DF_Noise.gif" alt="DF_Noise.gif"></p>
+<p>This concludes the First Step of our shader, next we will look at the Implementing the Sobel-Edge Function</p>
+<h2 id="Sobel-Edge-Function"><a href="#Sobel-Edge-Function" class="headerlink" title="Sobel Edge Function"></a><strong>Sobel Edge Function</strong></h2><p>There are many different variations of this function, some more optimized than others, I am not explain this function as it is a topic of it’s own, but a simple google search should give you an abundance of resources</p>
+<p>The basic idea behind Sobel-Edge Detection is this, we take the scene RenderTarget(Imagine this as a texture that holds what you currently see in your viewport)and compare each pixel with all the neighbouring pixels around it, and we compare the difference in brightness, if the brightness difference is above a certain threshold, we mark it as an edge, and in this process we get a black and white mask texture of the scene rendertarget, that has the edges masked out.</p>
+<p>The code below is a simple example of a sobelEdge Function made in Shadertoy by <a target="_blank" rel="noopener" href="https://www.shadertoy.com/view/4t3XDM">RebelMoogle</a>(I think this one isn’t fully optimized, maybe try another one), we will recreate it in UE4 with the Material Nodes</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> mainImage( <span class="keyword">out</span> <span class="type">vec4</span> fragColor, <span class="keyword">in</span> <span class="type">vec2</span> fragCoord )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">vec2</span> uv = fragCoord.xy / iResolution.xy;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//fragColor = 4.*abs(fwidth(texture(iChannel0, uv)));</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">vec3</span> TL = <span class="built_in">texture</span>(iChannel0, uv + <span class="type">vec2</span>(<span class="number">-1</span>, <span class="number">1</span>)/ iResolution.xy).rgb;</span><br><span class="line">    <span class="type">vec3</span> TM = <span class="built_in">texture</span>(iChannel0, uv + <span class="type">vec2</span>(<span class="number">0</span>, <span class="number">1</span>)/ iResolution.xy).rgb;</span><br><span class="line">    <span class="type">vec3</span> TR = <span class="built_in">texture</span>(iChannel0, uv + <span class="type">vec2</span>(<span class="number">1</span>, <span class="number">1</span>)/ iResolution.xy).rgb;</span><br><span class="line">    </span><br><span class="line">    <span class="type">vec3</span> ML = <span class="built_in">texture</span>(iChannel0, uv + <span class="type">vec2</span>(<span class="number">-1</span>, <span class="number">0</span>)/ iResolution.xy).rgb;</span><br><span class="line">    <span class="type">vec3</span> MR = <span class="built_in">texture</span>(iChannel0, uv + <span class="type">vec2</span>(<span class="number">1</span>, <span class="number">0</span>)/ iResolution.xy).rgb;</span><br><span class="line">    </span><br><span class="line">    <span class="type">vec3</span> BL = <span class="built_in">texture</span>(iChannel0, uv + <span class="type">vec2</span>(<span class="number">-1</span>, <span class="number">-1</span>)/ iResolution.xy).rgb;</span><br><span class="line">    <span class="type">vec3</span> BM = <span class="built_in">texture</span>(iChannel0, uv + <span class="type">vec2</span>(<span class="number">0</span>, <span class="number">-1</span>)/ iResolution.xy).rgb;</span><br><span class="line">    <span class="type">vec3</span> BR = <span class="built_in">texture</span>(iChannel0, uv + <span class="type">vec2</span>(<span class="number">1</span>, <span class="number">-1</span>)/ iResolution.xy).rgb;</span><br><span class="line">                         </span><br><span class="line">    <span class="type">vec3</span> GradX = -TL + TR - <span class="number">2.0</span> * ML + <span class="number">2.0</span> * MR - BL + BR;</span><br><span class="line">    <span class="type">vec3</span> GradY = TL + <span class="number">2.0</span> * TM + TR - BL - <span class="number">2.0</span> * BM - BR;</span><br><span class="line">   	</span><br><span class="line">    </span><br><span class="line">   <span class="comment">/* vec2 gradCombo = vec2(GradX.r, GradY.r) + vec2(GradX.g, GradY.g) + vec2(GradX.b, GradY.b);</span></span><br><span class="line"><span class="comment">    </span></span><br><span class="line"><span class="comment">    fragColor = vec4(gradCombo.r, gradCombo.g, 0, 1);*/</span></span><br><span class="line">    </span><br><span class="line">    fragColor.r = <span class="built_in">length</span>(<span class="type">vec2</span>(GradX.r, GradY.r));</span><br><span class="line">    fragColor.g = <span class="built_in">length</span>(<span class="type">vec2</span>(GradX.g, GradY.g));</span><br><span class="line">    fragColor.b = <span class="built_in">length</span>(<span class="type">vec2</span>(GradX.b, GradY.b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>In UE4 it looks like this:</p>
+<p><img src="SobelEdge_Nodes.png" alt="SobelEdge_Nodes.png"></p>
+<p>A few notes about this setup make sure that your “SceneTexture” nodes are set to use “PostProcessInput0”</p>
+<p><img src="SceneTexture_Settings.png" alt="SceneTexture_Settings.png"></p>
+<p>The two Custom Nodes GradX and Grady, use the following:</p>
+<p><img src="Sobel_Edge_Custom.png" alt="Sobel_Edge_Custom.png"></p>
+<ul>
+<li>GradX:</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> -TL + TR - <span class="number">2.0</span> * ML + <span class="number">2.0</span> * MR - BL + BR;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>GradY:</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> TL + <span class="number">2.0</span> * TM + TR - BL - <span class="number">2.0</span> * BM - BR;</span><br></pre></td></tr></table></figure>
+
+<p>This does not necessarily have to be done with a custom node, i used it merely for convenience sake, as otherwise it would have been too much node spaghetti.</p>
+<p>If you plug in the end result of this Node Network to the emissive channel, you will see somthing like this in your Viewport</p>
+<p><img src="SobelEdge.png" alt="SobelEdge.png"></p>
+<p><img src="EdgeTinted.jpg" alt="EdgeTinted.jpg"></p>
+<p>We also multiply this result with a simple Vector3 so that we can tint the edges whatever color we want</p>
+<p><img src="EdgeTint.png" alt="EdgeTint.png"></p>
+<h2 id="World-Aligned-Grid-Texture"><a href="#World-Aligned-Grid-Texture" class="headerlink" title="World-Aligned Grid Texture"></a><strong>World-Aligned Grid Texture</strong></h2><p>This part is easy we just use a simple grid texture and make it world aligned, and later combine it with the sobel-edge fucntion to get a cool BluePrint graph type effect</p>
+<p><img src="WorldAlignedGrid.png" alt="WorldAlignedGrid.png"></p>
+<p>If you plug this into the emissive, it looks like this</p>
+<p><img src="WorldGrid.png" alt="WorldGrid.png"></p>
+<h2 id="Bringing-it-All-Together"><a href="#Bringing-it-All-Together" class="headerlink" title="Bringing it All Together!"></a><strong>Bringing it All Together!</strong></h2><p>Now we will bring all three parts together, for the final Effect!</p>
+<p>First we will combine the Sobel-Edge function and the World-Aligned Grid Function by adding them together</p>
+<p><img src="SW.png" alt="SW.png"></p>
+<p>Next we create a sceneTexture Node and add the result from the sobeledge and World Grid to it</p>
+<p>Then we Interpolate between the regular sceneTexture and the Added one, using the result of the scaling ring mask we created in the first part</p>
+<p><img src="FinalCombine.png" alt="FinalCombine.png"></p>
+<p>And voila we are done, The end result will look something like this. You can of course tweak the parameters and try changing some values to get different results</p>
+<p><img src="FinalResult.gif" alt="FinalResult.gif"></p>
+<p>I hope you found this informative, cheers</p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2021 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

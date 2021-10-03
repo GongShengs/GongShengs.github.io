@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>转载：Star Wars Inspired Hologram Shader and Blueprint System - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>October</span>
+            
+            
+            
+            <span>3,</span>
+            <span>2021</span>
+        </div>
+        
+
+        <h2 class="title">转载：Star Wars Inspired Hologram Shader and Blueprint System</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1 id="Star-Wars-Inspired-Hologram-Shader-and-Blueprint-System"><a href="#Star-Wars-Inspired-Hologram-Shader-and-Blueprint-System" class="headerlink" title="Star Wars Inspired Hologram Shader and Blueprint System"></a>Star Wars Inspired Hologram Shader and Blueprint System</h1><p>源地址：<a target="_blank" rel="noopener" href="https://deepspacebanana.github.io/deepspacebanana.github.io/">https://deepspacebanana.github.io/deepspacebanana.github.io/</a></p>
+<p><img src="post11.gif" alt="post11.gif"></p>
+<p>I wanted to do this little shader because I had been watching a lot of the <strong>The Clone Wars</strong> animated show lately, and I wanted to recreate the holograms from the show, I really like the iconic star wars hologram effect, it’s very simple yet effective.</p>
+<p>I decided to try and make my system easily re-usable within a game development context, so I created a blueprint system to encapsulate the hologram system, which lets you assign any asset you want to be shown as a hologram. The Majority of the effect is handled by two shaders, and the blueprint setup is a convenient way to make the system re-usable as a game object.</p>
+<p><font color=red>Note: You can open the images in a new tab to view them at a higher resolution</font></p>
+<p><img src="post11_V2.gif" alt="post11_V2.gif"></p>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a><strong>Setup</strong></h2><p>The system makes use of two meshes:</p>
+<h2 id="Base-Cylinder"><a href="#Base-Cylinder" class="headerlink" title="Base Cylinder"></a><strong>Base Cylinder</strong></h2><p><img src="cylinder.gif" alt="cylinder.gif"></p>
+<p>The base cylinder is jsut a cylinder with no caps, and the pivot aligned to the bottom center(This is important). We use this as the hologram base projection, using a shader we will reshape it an animate it.</p>
+<h2 id="Hologram-Asset"><a href="#Hologram-Asset" class="headerlink" title="Hologram Asset"></a><strong>Hologram Asset</strong></h2><p><img src="scope.png" alt="scope.png"></p>
+<p>This can be any asset, in my case I’m using a scope I modelled a while back as my asset.</p>
+<p>Each of these objects will get a unique shader with similar look-dev and some shared parameters so that they work together.</p>
+<h2 id="Setting-up-the-Parameter-Collection"><a href="#Setting-up-the-Parameter-Collection" class="headerlink" title="Setting up the Parameter Collection"></a><strong>Setting up the Parameter Collection</strong></h2><p>First we setup an MPC for the shared parameters</p>
+<p><img src="MPC.png" alt="MPC.png"></p>
+<ul>
+<li><strong>Activation</strong>:Scalar parameter that controls the hologram’s on/off status.</li>
+<li><strong>Turbulance_Amt</strong>:Scalar parameter that controls how much turbulance/distortion affects the hologram.</li>
+<li><strong>Turbulance_Displacement</strong>:Scalar parameter that controls the amount of dispalcement in the turbulance.</li>
+</ul>
+<h2 id="Hologram-Shader-1-Assigned-to-Cylinder-Mesh"><a href="#Hologram-Shader-1-Assigned-to-Cylinder-Mesh" class="headerlink" title="Hologram Shader 1: Assigned to Cylinder Mesh"></a><strong>Hologram Shader 1: Assigned to Cylinder Mesh</strong></h2><p>Generate Z-Gradient to drive Scaling of the mesh in the shader, for activation/deactivation.</p>
+<h2 id="Node-Network-to-generate-z-gradient"><a href="#Node-Network-to-generate-z-gradient" class="headerlink" title="Node Network to generate z-gradient"></a><strong>Node Network to generate z-gradient</strong></h2><p><img src="zgradient_nodes.png" alt="zgradient_nodes.png"></p>
+<h2 id="Node-Network-to-control-scaling-Expansion"><a href="#Node-Network-to-control-scaling-Expansion" class="headerlink" title="Node Network to control scaling/Expansion"></a><strong>Node Network to control scaling/Expansion</strong></h2><p><img src="dimensionscaling_nodes.png" alt="dimensionscaling_nodes.png"></p>
+<p>The result from the z-gradient is used to drive the WorldPosition offset logic that controls the height and expansion of the cylinder.</p>
+<p>The <strong>Activation</strong> parameter is a scalar value that controls the height of the cylinder (0 = squished, 1 = fully expanded height)</p>
+<p>The <strong>spreadfactor</strong> parameter is a scalar value that controls the radius spread of the top part of the cylinder(Ths is in world units)</p>
+<p>You can see the result from tweaking these two parameters below</p>
+<p><img src="gradientscaling.gif" alt="gradientscaling.gif"></p>
+<h2 id="Adding-Turbulance-to-WorldPosition-Offset-for-Glitchiness"><a href="#Adding-Turbulance-to-WorldPosition-Offset-for-Glitchiness" class="headerlink" title="Adding Turbulance to WorldPosition Offset for Glitchiness"></a><strong>Adding Turbulance to WorldPosition Offset for Glitchiness</strong></h2><p>Next we generate psuedorandom noise in screen space and use it to add some Turbulance to the WorldPosition Offset to create some glitchiness. The setup is shown below</p>
+<p><img src="turbulance_nodes.png" alt="turbulance_nodes.png"></p>
+<p><strong>TurbulanceAmt</strong> is a scalar parameter that controls how much turbulance is present(0=no turbulance, 1 = full turbulance)</p>
+<p><strong>Turbulance_Dispalcement</strong> controls how extreme the dispalcement is.(This value is in world units)</p>
+<p>The result from this gets added to the resut from Scaling/Expansion and that creates teh final output for the WorldPositionOffset of the Shader.</p>
+<h2 id="ScreenSpace-2D-Noise-Visualized"><a href="#ScreenSpace-2D-Noise-Visualized" class="headerlink" title="ScreenSpace 2D Noise Visualized"></a><strong>ScreenSpace 2D Noise Visualized</strong></h2><p><img src="2DNoiseVisualize.gif" alt="2DNoiseVisualize.gif"></p>
+<h2 id="Final-WorldPositionOffset-Result"><a href="#Final-WorldPositionOffset-Result" class="headerlink" title="Final WorldPositionOffset Result"></a><strong>Final WorldPositionOffset Result</strong></h2><p><img src="WPO.gif" alt="WPO.gif"></p>
+<p>It looks weird now, but once we add the look-dev, it works quite well</p>
+<h2 id="Look-Development"><a href="#Look-Development" class="headerlink" title="Look Development"></a><strong>Look Development</strong></h2><h2 id="Screen-Space-Parallel-Bars"><a href="#Screen-Space-Parallel-Bars" class="headerlink" title="Screen Space Parallel Bars"></a><strong>Screen Space Parallel Bars</strong></h2><p>We use a little bit of UV math to create screen space panning parallel bars, we also do some math with the camera position and object position to make sure that the screen space bar’s continue tiling consistently regardless of distance from the screen</p>
+<p><img src="ScreenSpaceBars.png" alt="ScreenSpaceBars.png"></p>
+<p>If you preview the result from this network, it will look like this(I preview it by wiring it into the basecolor,opacity and emissive)</p>
+<p><img src="bars.gif" alt="bars.gif"></p>
+<h2 id="Fresnel-and-CameraFade"><a href="#Fresnel-and-CameraFade" class="headerlink" title="Fresnel and CameraFade"></a><strong>Fresnel and CameraFade</strong></h2><p>Next we setup a fresnel and CameraFade that will later be used to drive the opacity.</p>
+<p><img src="fresnelcamerafade.png" alt="fresnelcamerafade.png"></p>
+<h2 id="Fresnel-Result"><a href="#Fresnel-Result" class="headerlink" title="Fresnel Result"></a><strong>Fresnel Result</strong></h2><p><img src="fresnel.gif" alt="fresnel.gif"></p>
+<h2 id="CameraFade-Result"><a href="#CameraFade-Result" class="headerlink" title="CameraFade Result"></a><strong>CameraFade Result</strong></h2><p><img src="camerafade.gif" alt="camerafade.gif"></p>
+<h2 id="Color-and-Opacity"><a href="#Color-and-Opacity" class="headerlink" title="Color and Opacity"></a><strong>Color and Opacity</strong></h2><p>Next we create the main graph network for the color, Emissive and Opacity, this is driven primarily by the result from the z-gradient and Activation Parameter, I combine it with the results from <strong>ScreenSpace bars, Fresnel and CameraFade</strong> for the final color,Emissive and Opacity.</p>
+<p><img src="coloropacity.png" alt="coloropacity.png"></p>
+<p>The result from the DepthFade(DepthFade is to prevent hard clips through geometry) node goes into Opacity, and the result from the color multiply drives the emissive and the base color.</p>
+<p>The end result is this, with parameters to control activation,turbulance and spread.</p>
+<p><img src="cylinderresult.gif" alt="cylinderresult.gif"></p>
+<h2 id="Hologram-Shader-2-Assigned-to-Game-Mesh"><a href="#Hologram-Shader-2-Assigned-to-Game-Mesh" class="headerlink" title="Hologram Shader 2: Assigned to Game Mesh"></a><strong>Hologram Shader 2: Assigned to Game Mesh</strong></h2><p>This shader will be pretty identical to the previous one assigned to the cylinder but with a few changes so that it works with complex meshes</p>
+<h2 id="WorldPosition-Offset-Setup-for-Activation"><a href="#WorldPosition-Offset-Setup-for-Activation" class="headerlink" title="WorldPosition Offset Setup for Activation"></a><strong>WorldPosition Offset Setup for Activation</strong></h2><p>The setup below controls the scaling and Opacity</p>
+<p><img src="WPO_scope.png" alt="WPO_scope.png"></p>
+<p>The result from the z-gradient drives the opacity and the result from the WorldPosition Math drives the scaling of the Mesh.</p>
+<p>In this case when I generate the z-gradient I add 160(Height of the cylinder mesh) to the z-channel, this is so that the scaling happens within the scale of the base cylinder.</p>
+<p>by sliding the value of <strong>Activation</strong> from 0 - 2 you will see the following result.</p>
+<p><img src="WPO_scope.gif" alt="WPO_scope.gif"></p>
+<h2 id="Turbulance"><a href="#Turbulance" class="headerlink" title="Turbulance"></a><strong>Turbulance</strong></h2><p><font color=red>Note: The Rotation is handled in the BLueprint and is covered in the last section, doing the rotation in the shader resulted in some errors when doing the look development,because vertex normals weren’t recalculated for the fresnel. More on that later.</font></p>
+<p>Next I add some math to create some turbulance.</p>
+<p>The turbulance section is very similar to what was done in the previous shader, we generate some screen space noise, and use it to distort the WorldPosition of the mesh.</p>
+<p><img src="turbulancerotation.png" alt="turbulancerotation.png"></p>
+<p>The Function <strong>MF_FloatNoise2D</strong> takes a vec2 and returns a psuedorandom float as the result.The node network for it is shown below.</p>
+<p><img src="MF_FloatNoise2D.png" alt="MF_FloatNoise2D.png"></p>
+<h2 id="Screen-Space-Noise-Visualized"><a href="#Screen-Space-Noise-Visualized" class="headerlink" title="Screen Space Noise Visualized"></a><strong>Screen Space Noise Visualized</strong></h2><p><img src="turbulancevisualize.gif" alt="turbulancevisualize.gif"></p>
+<p>Wiring the result from this network into the WorldPositionoffset, will look like this, we also have the <strong>Turbulance_Amt</strong> parameter which can be used to animate/control the turbulance as shown below</p>
+<p><img src="turbulancerotate.gif" alt="turbulancerotate.gif"></p>
+<p>The result from the <strong>Turbulance</strong>section and the initial <strong>z-gradient WorldPositonOffset</strong> result gets added together to give us the final output that get’s wired into the WorldPositionOffset input for the shader.</p>
+<p>Now, we have a setup with parameters to control activation as well as turbulance</p>
+<p><img src="finalwpo.gif" alt="finalwpo.gif"></p>
+<h2 id="Look-Development-1"><a href="#Look-Development-1" class="headerlink" title="Look Development"></a><strong>Look Development</strong></h2><p>This part is identical to what we did in the previous shader.</p>
+<p>One thing we could have done here, is used the <strong>object’s baked Normal Map</strong> and used that to calculate the fresnel,this is nice because the baked normal gives us more surface details to work with, and thus results in a much more detailed fresnel, but I have avoided this here because I found it difficult to make this work with a re-usable Blueprint System, especially when sometimes meshes have multiple material ID’s with multiple normal maps. So for now we just stick to using the <strong>Vertex Normals</strong>.</p>
+<p><img src="lookdev.png" alt="lookdev.png"><br><img src="//lookdev.png" width="1024"></p>
+<p>The results from these networks gives us our Emissive Color and our opacity outputs.Now we have a shader with parameters to control <strong>activation,turbulance and color.</strong>&gt;As you can see below.</p>
+<p><img src="lookdevscope.gif" alt="lookdevscope.gif"></p>
+<p><img src="lookdevactivation.gif" alt="lookdevactivation.gif"></p>
+<p><img src="lookdevturbulance.gif" alt="lookdevturbulance.gif"></p>
+<p><img src="lookdevcolor.gif" alt="lookdevcolor.gif"></p>
+<p>Put both meshes together in the scene and try tweaking the activation parameter in the MPC.</p>
+<p><img src="comp1.gif" alt="comp1.gif"></p>
+<h2 id="Encapsulating-into-a-Blueprint"><a href="#Encapsulating-into-a-Blueprint" class="headerlink" title="Encapsulating into a Blueprint"></a><strong>Encapsulating into a Blueprint</strong></h2><p>Now i just set up a simple blueprint for ease of use.</p>
+<p>The BP has two parts, the <strong>construction script</strong> which handles bulk of the work, choosing meshes,materials,postioning etc and the Event Graph which will handle rotation during runtime.</p>
+<h4 id="Components-and-Variables"><a href="#Components-and-Variables" class="headerlink" title="Components and Variables"></a><strong>Components and Variables</strong></h4><p>I expose certain variables, so that they can be tweaked in the editor</p>
+<p><img src="viewport.png" alt="viewport.png"></p>
+<h2 id="Construction-Script"><a href="#Construction-Script" class="headerlink" title="Construction Script"></a><strong>Construction Script</strong></h2><p>The first part of the construction script creates the Dynamic Material Instances and assigns the material to the Cylinder Mesh</p>
+<p><img src="cs_p1.png" alt="cs_p1.png"></p>
+<p>I wanted the BP to have the ability to pick between using a skeletal mesh with animation or a regular static mesh, the following sections set up the Mesh part</p>
+<p><img src="cs_p2.png" alt="cs_p2.png"></p>
+<p>Continueing from the last section, sometimes meshes have multiple material id’s, so we use a For Loop to cycle through all the Material Indexes and assign the Hologram Material to Each Part</p>
+<p><img src="cs_p3.png" alt="cs_p3.png"></p>
+<p>Objects tend to have pivot inconsistant pivot locations, so we have a parameter available so that we can compensate for any offsets manually. We also use the objectbounds to calculate the <strong>SpreadFactor</strong> that is fed into the cylinder’s Hologram Shader</p>
+<p><img src="cs_p4.png" alt="cs_p4.png"></p>
+<h2 id="Event-Graph"><a href="#Event-Graph" class="headerlink" title="Event Graph"></a><strong>Event Graph</strong></h2><p>The event graph is only used if we enable mesh rotation, it is used to rotation the object at runtime.</p>
+<p><img src="eventgraph.png" alt="eventgraph.png"></p>
+<p>Now if we drop the Blueprint into the level and select it it should have all these parameters</p>
+<p><img src="parameters.png" alt="parameters.png"></p>
+<p>Now we have a blueprint that we can use to assign any mesh we have to use in the hologram system, we can choose to use a skeletal mesh with animations or just a regular StaticMesh. As well as parameters to control activation,turbulance etc.</p>
+<p><img src="SkelHolo_opt.gif" alt="SkelHolo_opt.gif"></p>
+<p><img src="holoskull.gif" alt="holoskull.gif"></p>
+<p><img src="SM_Holo1_opt.gif" alt="SM_Holo1_opt.gif&quot;"></p>
+<p><img src="SM_Holo2_opt.gif" alt="SM_Holo2_opt.gif"></p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2021 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>
