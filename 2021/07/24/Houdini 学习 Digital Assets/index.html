@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>Houdini 学习 Digital Assets - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            
+            
+            
+            
+            <span>July</span>
+            
+            
+            
+            
+            
+            
+            <span>24,</span>
+            <span>2021</span>
+        </div>
+        
+
+        <h2 class="title">Houdini 学习 Digital Assets</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1><span id="houdini-学习-digital-assets">Houdini 学习 Digital Assets</span></h1><p>Digital assets let you create reusable nodes and tools from existing networks.</p>
+<p>可以创建复用的节点和工具。 </p>
+<p>存储格式：.hda(.otl是旧版本)</p>
+<h2><span id="创建的方法">创建的方法</span></h2><ol>
+<li>Subnetwork 右键  Create digital asset    </li>
+<li>资产命名<ul>
+<li>Operator Name 命名空间的名字</li>
+<li>Operator Label tab管理器的名称</li>
+<li>Save to library 存储位置，建议制作自己的资产库，便于个人管理。</li>
+</ul>
+</li>
+<li>编辑面板属性，脚本等细节</li>
+<li>4.完成创建</li>
+</ol>
+<h2><span id="面板参数介绍">面板参数介绍</span></h2><h3><span id="operator-type-window-资产的编辑窗口">Operator Type window 资产的编辑窗口</span></h3><p>此窗口可以编辑资产除子节点之外的所有数据（参数面板，label and icon，嵌入文件，自定义脚本）</p>
+<p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B00.png" alt="资产的编辑窗口"></p>
+<ul>
+<li>Operator Type 就是上文提到的Operator Name，此时的状态是不可更改的。</li>
+<li>Save to Library 存储位置。</li>
+<li>Install Library to 安装到哪，统一适用packages管理，我觉得更好些。</li>
+<li>Switch to Definition 切换定义</li>
+</ul>
+<h4><span id="basic-tab基础标签">Basic tab基础标签</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01.png" alt="Basic"></p>
+<ul>
+<li>Label 标签名 显示在tab</li>
+<li>Icon 图标 建议使用houdini内置的图标，其他处理方式请查看帮助。</li>
+<li>Version 版本 版本号提醒</li>
+<li>Minimum Inputs 最小输入端口数量</li>
+<li>Maximum Inputs 最大输入端口数量</li>
+<li>Maximum Outputs 最大输出端口数量</li>
+</ul>
+<h4><span id="parameters-tab-参数标签">Parameters tab 参数标签</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02.png" alt="Parameters"></p>
+<ul>
+<li><p>创建参数</p>
+<ul>
+<li>将子节点属性直接拖入Existing Parameters</li>
+<li>从create Parameters 中拖入Existing Parameters，然后进行和子节点的关联</li>
+</ul>
+</li>
+<li><p>create Parameters 创建属性</p>
+</li>
+<li><p>Existing Parameters 已有的参数</p>
+</li>
+<li><p>Parameter Description参数说明</p>
+<ul>
+<li>Name 是 参数的名称，当脚本或者其他方式调用时使用此名称， Label 是面板上显示的名称。</li>
+<li>Callback Script 回调脚本 当参数有所变化就会触发，经常用于button</li>
+<li>Tags 标签 可以存储一些参数属性，例如opengl实时显示材质之类。</li>
+</ul>
+</li>
+<li><p>Channels中存储属性的默认值，但是ramp类型的不在这里设置 它的属性参数中有一项叫 get from  Parameter</p>
+</li>
+</ul>
+<h4><span id="node-tabs-节点面板">Node Tabs 节点面板</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03.png" alt="Node"></p>
+<p>Enitble Nodes 是目前我最常用的，为了能编辑内部节点</p>
+<h4><span id="inputoutput-tab">Input/Output tab</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04.png" alt="Input/Output"></p>
+<p>输入输出 可以进行一些输入输出的信息描述</p>
+<h4><span id="help-tabs">Help Tabs</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05.png" alt="Help"></p>
+<p>可以使用wiki 进行节点帮助的创建，我认为在大规模使用的情况下 是很有用的。</p>
+<h4><span id="code-tabs">Code Tabs</span></h4><p>适用于其他类型的资产，现在不讨论。</p>
+<h4><span id="scripts-tab">Scripts tab</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06.png" alt="Scripts"></p>
+<p>触发脚本的标签<br>当有一些自定义的触发操作，批处理之类就可以使用该标签进行创建。</p>
+<h4><span id="interactive-tab">Interactive tab</span></h4><p><img src="Houdini_Digital_Assets_%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07.png" alt="Interactive"></p>
+<p>交互标签 用于hda 和用户交互的操作<br>例如 hda的菜单位置，界面交互，热键之类</p>
+<p>菜单设置    在    shelf Tools-Context- NetWork Plane - TAB Submenu Path</p>
+<h4><span id="iextra-files-tab">IExtra Files tab</span></h4><p>内嵌文件标签</p>
+<p>用于将一些纹理 bgeo文件嵌入hda 中,嵌入后使用opdef 在资产中进行调用。</p>
+<h4><span id="save-tab">Save Tab</span></h4><p>保存 目前还未涉及到，感觉默认就行。</p>
+<h2><span id="其他">其他</span></h2><ol>
+<li>关于私有资产保护问题<ul>
+<li>可以创建黑盒，在你不想公开的情况下。</li>
+<li>方法：<ol>
+<li>选择需要创建黑盒的hda</li>
+<li>Assets - Create Black Boxed Asset from Selection </li>
+<li>选择存储位置，完成创建。    </li>
+</ol>
+</li>
+</ul>
+</li>
+<li>当想修改官方的资产但不想影响资产的默认的问题<ol>
+<li>打开资产管理面板，右键资产 show in Asset Manager </li>
+<li>右键点击资产中的hda 选择duplicate 进行修改创建。</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2022 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

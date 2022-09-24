@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>October</span>
+            
+            
+            
+            <span>25,</span>
+            <span>2021</span>
+        </div>
+        
+
+        <h2 class="title"></h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <!--
+ * @Author: your name
+ * @Date: 2021-10-25 11:47:26
+ * @LastEditTime: 2021-10-25 11:58:44
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinedd:\Private_文档资料\编写中\编写 20211025\Unity C# API 学习 ImageConversion\Unity C# API 学习 ImageConversion.md
+-->
+<h1><span id="unity-c-api-学习-imageconversion">Unity C# API 学习 ImageConversion</span></h1><h2><span id="简介">简介</span></h2><p>ImageConversion 提供的方法是将图像数据从 PNG、EXR、TGA 和 JPEG 格式转换或转换为 PNG、EXR、TGA 和 JPEG 格式。</p>
+<h2><span id="方法">方法</span></h2><ul>
+<li>EncodeArrayToEXR    Encodes this array into the EXR format.</li>
+<li>EncodeArrayToJPG    Encodes this array into JPG format.</li>
+<li>EncodeArrayToPNG    Encodes this array into PNG format.</li>
+<li>EncodeArrayToTGA    Encodes this array into TGA format.</li>
+<li>EncodeNativeArrayToEXR    Encodes this native array into the EXR format.</li>
+<li>EncodeNativeArrayToJPG    Encodes this native array into JPG format.</li>
+<li>EncodeNativeArrayToPNG    Encodes this native array into PNG format.</li>
+<li>EncodeNativeArrayToTGA    Encodes this native array into TGA format.</li>
+<li>EncodeToEXR    Encodes this texture into the EXR format.</li>
+<li>EncodeToJPG    Encodes this texture into JPG format.</li>
+<li>EncodeToPNG    Encodes this texture into PNG format.</li>
+<li>EncodeToTGA    Encodes the specified texture in TGA format.</li>
+<li>LoadImage    Loads PNG/JPG (or supported format) image byte array into a texture.</li>
+</ul>
+<h2><span id="图像格式说明">图像格式说明</span></h2><ul>
+<li>EXR<ul>
+<li>数据格式<ul>
+<li>16-bit floating-point ( half)</li>
+<li>32-bit floating-point</li>
+<li>32-bit unsigned integer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>JPG</li>
+<li>PNG</li>
+<li>TGA</li>
+</ul>
+<h2><span id="参考">参考</span></h2><p>[1] <a target="_blank" rel="noopener" href="https://docs.unity3d.com/ScriptReference/ImageConversion.html">ImageConversion - Unity Documentation</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/OpenEXR">OpenEXR - Wikipedia</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/JPEG">JPEG - Wikipedia</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Portable_Network_Graphics">Portable Network Graphics - Wikipedia</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Truevision_TGA">Truevision TGA - Wikipedia</a></p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2022 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

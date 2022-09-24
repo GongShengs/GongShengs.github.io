@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>October</span>
+            
+            
+            
+            <span>20,</span>
+            <span>2021</span>
+        </div>
+        
+
+        <h2 class="title"></h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1><span id="unity-shader-学习-texture-mapping">Unity Shader 学习 Texture Mapping</span></h1><h2><span id="简介">简介</span></h2><p>Texture Mapping是一种在计算机生成的图形或3D 模型上定义高频细节、表面纹理或颜色信息的方法<sup>[1]</sup>.</p>
+<h2><span id="unity中的关于纹理贴图的知识点">Unity中的关于纹理贴图的知识点</span></h2><ul>
+<li><p>纹理声明</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">sampler2D</span> _MainTex;</span><br><span class="line">float4 _MainTex_ST</span><br><span class="line"><span class="comment">// 纹理名_ST 声明的是纹理的缩放和平移，分别存储在 纹理名_ST.xy 和 纹理名_ST.zw</span></span><br></pre></td></tr></table></figure></li>
+<li><p>纹理缩放和平移的应用</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">o.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;</span><br></pre></td></tr></table></figure></li>
+<li><p>纹理属性</p>
+<ol>
+<li><p>Warp Mode </p>
+<ul>
+<li>Repeat 重复平铺</li>
+<li>Clamp 截取</li>
+</ul>
+</li>
+<li><p>Filter Mode </p>
+<ul>
+<li>Point</li>
+<li>Bilinear</li>
+<li>Trilinear</li>
+</ul>
+<p> 滤波效果依次提升，但消耗依次增大。</p>
+</li>
+<li><p>mipmapping(多级渐远纹理)</p>
+<p> 预先计算的的图像序列，目的时为了提高渲染速度，代价时需要额外的存储空间，每个纹理的内存增加33%<sup>[3]</sup>。</p>
+</li>
+<li><p>纹理长宽需要时二次幂</p>
+<p> 如果使用了非二次幂的纹理(NPOT Texture)<sup>[4]</sup>,可能会占用更多的内存空间，GPU读取速度也会有所下降。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2><span id="参考">参考</span></h2><p>[1] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Texture_mapping">Texture mapping - wikipedia</a></p>
+<p>[2] <a href>Unity Shader 入门精要 - 基础纹理 - 139</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Mipmap">Mipmap - wikipedia</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://www.khronos.org/opengl/wiki/NPOT_Texture">NPOT Texture - wikipedia</a></p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2022 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

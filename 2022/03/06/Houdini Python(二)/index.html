@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            <span>March</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>6,</span>
+            <span>2022</span>
+        </div>
+        
+
+        <h2 class="title"></h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p>阅读本篇的前提，是了解了python的语法结构，如果有什么不清楚的请阅读我的上一篇文章。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109349860">https://zhuanlan.zhihu.com/p/109349860</a></p>
+<p>之后的文章将只讲述Hpython。</p>
+<p>这次我先总结一些关于如何使用的小的Tips，仅我个人观点。</p>
+<ol>
+<li>关于查询对应的属性调用，请把鼠标光标放在你想查询的属性面板上，根据提示就可以知道对应属性。</li>
+</ol>
+<p><img src="%E5%9B%BE%E7%89%871.png"></p>
+<p>Parameter即是属性的真名（这让我想起了神话的真名设定）</p>
+<ol start="2">
+<li>节点创建的名称查询的提示<br>创建一个节点可以使用create系列的创建函数，然后写入你想要创建的节点即可。节点的名字一般的情况下是他的名称去除末尾的数字例如下图。</li>
+</ol>
+<p><img src="%E5%9B%BE%E7%89%872.png"></p>
+<p>但是是有例外的，例如mantra节点，如果直接使用mantra无法创建该节点，这时候需要使用node.type().name() 来获取到你需求的节点的名字。然后就获得了mantra其实名字叫”ifd”.</p>
+<ol start="3">
+<li>关于功能上的查询，比如你想实现一个快捷操作的功能，最快的方法就是抄轮子了，但是如果没有轮子的情况下怎么办，由于houdini我目前没有发现和maya，max的操作代码返回的功能，所以我的解决办法就是看库。<br><img src="%E5%9B%BE%E7%89%873.png"><br>如下图所示，houdini 已经将库的类分门别类的整理好，并且有一句话概括，这样就可以根据个人需求去对应的类型里查找需要的功能。<br><img src="%E5%9B%BE%E7%89%874.png"><br>我个人认为最快捷有效的学习方法就是查阅对应的帮助文档和对应的官方教程。</li>
+</ol>
+<p>还有就是查阅帮助，我认为并不是需求要背会，或者百分百掌握，而是会使用它完成个人需求，所以不要对帮助的查阅产生恐惧心理。</p>
+<p>4.请学会看错误提示<br>很多时候，但你写完你的需求运行时，会出现错误，导致无法获得想要的结果，这时对应的ide会返回错误提示信息，这里说下python shell<br><img src="%E5%9B%BE%E7%89%875.png"></p>
+<p>例如上图，请看最后一行，提示名称错误，然后对细节进行了解释。</p>
+<p><img src="%E5%9B%BE%E7%89%876.png"></p>
+<p>上图爆出了一大段错误提示，看不懂的部分没事，只要获取我们有效的信息就行，一般就在最后一行， 提示节点的类型名称错误。</p>
+<p>其他的错误也同理。    </p>
+<p>最后，如果你想验证自己到底会不会用了，那么请去实践，如果没有想法，可以去实现一个abc文件导入搭建初始场景的功能，我相信当你实现了这个功能就会对hpython 有个初步的认知。</p>
+<p>对了，我要简要描述下如何将你的功能放到工具架上使用，可以在工具架上选择“+”号添加你的个人工具架，然后再工具架上右键 “New Tool…” 然后将你写好的功能拷贝到“Script”中，然后保存就可以使用了，关于更加细节的如何自定义包体，icon，导入库，之后我会新文章中进行阐述。</p>
+<p>下面是我个人的abc文件导入的代码，可以给你少许参考。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#__version__ = &quot;2.0&quot;</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">&#x27;Gong Sheng&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> hou</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findFile</span>(<span class="params">filePath,fileType</span>):</span></span><br><span class="line">    flieList = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> dirpath,dirnames,filenames <span class="keyword">in</span> os.walk(filePath):</span><br><span class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">            <span class="keyword">if</span> os.path.splitext(filename)[<span class="number">1</span>] <span class="keyword">in</span>  fileType:</span><br><span class="line">                value=dirpath[<span class="built_in">len</span>(filePath)+<span class="number">1</span>:]</span><br><span class="line">                value=value.replace(<span class="string">&#x27;\\&#x27;</span>,<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">                flieList[filename] = value</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">return</span> flieList </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cs</span>():</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> hou.hipFile.basename() == <span class="string">&#x27;untitled.hip&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;Please create a project&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        fileType=[<span class="string">&#x27;.abc&#x27;</span>,<span class="string">&#x27;.fbx&#x27;</span>,<span class="string">&#x27;.obj&#x27;</span>]</span><br><span class="line">        filePath = os.path.dirname(hou.hipFile.path())    </span><br><span class="line">        fileList= findFile(filePath,fileType)</span><br><span class="line">        </span><br><span class="line">        nodeplane = hou.node(<span class="string">&#x27;/obj&#x27;</span>)</span><br><span class="line">        Word_Xfrom = nodeplane.createNode(<span class="string">&#x27;null&#x27;</span>,<span class="string">&#x27;Word_Xfrom&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        EditNode =nodeplane.createNode(<span class="string">&#x27;geo&#x27;</span>,<span class="string">&#x27;Edit&#x27;</span>)</span><br><span class="line">        EditNode.setColor(hou.Color((<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>)))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> details <span class="keyword">in</span> fileList.items():</span><br><span class="line">            <span class="comment">#houdini hip path</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(details[<span class="number">1</span>]) != <span class="number">0</span>:          </span><br><span class="line">                filePath = <span class="string">&#x27;$HIP/&#x27;</span>+details[<span class="number">1</span>]+<span class="string">&#x27;/&#x27;</span>+details[<span class="number">0</span>]        </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                filePath = <span class="string">&#x27;$HIP/&#x27;</span>+details[<span class="number">0</span>]</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;abc&#x27;</span> <span class="keyword">in</span> details[<span class="number">0</span>].rsplit(<span class="string">&quot;.&quot;</span>)[-<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">if</span> <span class="string">&#x27;cam&#x27;</span> <span class="keyword">in</span> details[<span class="number">0</span>].rsplit(<span class="string">&quot;.&quot;</span>)[<span class="number">0</span>][<span class="number">0</span>:<span class="number">3</span>].lower():</span><br><span class="line">                    abcNode = Word_Xfrom.createOutputNode(<span class="string">&#x27;alembicarchive&#x27;</span>,<span class="string">&#x27;Abc_&#x27;</span>+details[<span class="number">0</span>][:-<span class="number">4</span>])</span><br><span class="line">                    abcNode.setParms(&#123;<span class="string">&quot;fileName&quot;</span>:filePath&#125;)</span><br><span class="line">                    abcNode.parm(<span class="string">&#x27;buildHierarchy&#x27;</span>).pressButton()</span><br><span class="line">                    camshape=abcNode.children()[<span class="number">0</span>].children()[<span class="number">0</span>]</span><br><span class="line">                    camshape.setParms(&#123;<span class="string">&#x27;resx&#x27;</span>:<span class="number">1920</span>,<span class="string">&#x27;resy&#x27;</span>:<span class="number">1080</span>&#125;)</span><br><span class="line">                    camshape.setParmExpressions(&#123;<span class="string">&#x27;near&#x27;</span>:<span class="string">&#x27;0.001&#x27;</span>&#125;)</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    abcNode = Word_Xfrom.createOutputNode(<span class="string">&#x27;geo&#x27;</span>,<span class="string">&#x27;Abc_&#x27;</span>+details[<span class="number">0</span>][:-<span class="number">4</span>])</span><br><span class="line">                    importAbcNode=abcNode.createNode(<span class="string">&#x27;alembic&#x27;</span>,<span class="string">&#x27;ABC_&#x27;</span>+details[<span class="number">0</span>][:-<span class="number">4</span>])</span><br><span class="line">                    importAbcNode.setParms(&#123;<span class="string">&#x27;fileName&#x27;</span>:filePath&#125;)</span><br><span class="line">                    </span><br><span class="line">                             </span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&#x27;fbx&#x27;</span> <span class="keyword">in</span> details[<span class="number">0</span>].rsplit(<span class="string">&quot;.&quot;</span>)[-<span class="number">1</span>]:</span><br><span class="line">            </span><br><span class="line">                fbxNodes=hou.hipFile.importFBX(filePath) </span><br><span class="line">                fbxNode=<span class="built_in">list</span>(fbxNodes)[<span class="number">0</span>]</span><br><span class="line">                fbxNode.setColor(hou.Color((<span class="number">0.976</span>,<span class="number">0.78</span>,<span class="number">0.263</span>)))</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&#x27;obj&#x27;</span> <span class="keyword">in</span> details[<span class="number">0</span>].rsplit(<span class="string">&quot;.&quot;</span>)[-<span class="number">1</span>]:</span><br><span class="line">                objNode = Word_Xfrom.createOutputNode(<span class="string">&#x27;geo&#x27;</span>,<span class="string">&#x27;Obj_&#x27;</span>+details[<span class="number">0</span>][:-<span class="number">4</span>])</span><br><span class="line">                importObjNode=objNode.createNode(<span class="string">&#x27;file&#x27;</span>,<span class="string">&#x27;ABC_&#x27;</span>+details[<span class="number">0</span>][:-<span class="number">4</span>])</span><br><span class="line">                importObjNode.setParms(&#123;<span class="string">&#x27;file&#x27;</span>:filePath&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> geoNode <span class="keyword">in</span> Word_Xfrom.outputs():</span><br><span class="line">            geoNode.setColor(hou.Color((<span class="number">0.976</span>,<span class="number">0.78</span>,<span class="number">0.263</span>)))</span><br><span class="line">            <span class="keyword">if</span> geoNode.<span class="built_in">type</span>().name() == <span class="string">&#x27;geo&#x27;</span>:</span><br><span class="line">                OmNode=EditNode.createNode(<span class="string">&#x27;object_merge&#x27;</span>)</span><br><span class="line">                OmNode.setParms(&#123;<span class="string">&#x27;objpath1&#x27;</span>:<span class="built_in">list</span>(geoNode.children())[<span class="number">0</span>].path()&#125;)</span><br><span class="line">                </span><br><span class="line">                </span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> hou.node(<span class="string">&#x27;/obj&#x27;</span>).children():</span><br><span class="line">            node.setDisplayFlag(<span class="number">0</span>) </span><br><span class="line">                </span><br><span class="line">        hou.node(<span class="string">&#x27;/obj&#x27;</span>).layoutChildren()</span><br><span class="line">        EditNode.layoutChildren()</span><br><span class="line">        hou.setFps(<span class="number">25</span>)</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2022 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            <span>March</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>6,</span>
+            <span>2022</span>
+        </div>
+        
+
+        <h2 class="title"></h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1><span id="houdini-python一">Houdini Python(一)</span></h1><p>还在为重复操作而流失的时间而苦恼么？来吧，使用python进行批处理。<br>我写这些的目的呢很简单，逐步复习之前获得的技能点，顺便水一水，嘿嘿。<br>需求导向学习，只有知道了要什么，然后带着需求去学习，才是最快的。</p>
+<p>我接触Hpython（就是houdini中的python）是因为项目中的操作很多过于繁琐，而且很多时候想对文件进行规范化是一件很重要，但是又十分苦恼的事情。那时候，我看了很多大佬的分享，发现了，哦，我们可以使用hpython 进行一些处理。比如：快速搭建初始场景，将abc，摄像机之类快速加入houdini文件，对一些目的性的节点进行自动区分，还有hda的控制之类都是由python操作的。</p>
+<p>虽然工具架很多还是由houdini脚本语言进行写的，但python同样也可以写。</p>
+<p>关于python的基础语法，推荐大家去看一下廖雪峰大神的免费python博客，虽然那个是3.X的python，而houdini 默认的是2.7，但这不妨碍学习。<br>Python教程​<a target="_blank" rel="noopener" href="http://www.liaoxuefeng.com/">www.liaoxuefeng.com</a><br>大概看到正则表达式，就可以愉快的使用了，毕竟我们不是程序员，只是为了让自己的工作更愉快，嘿嘿。</p>
+<p>或许你就会有一个疑惑python和Hpython 有啥区别呢？</p>
+<p>Hpython 就是 python 在houdini里的库 “hou”</p>
+<p>关于Hpython 的最快捷学习方法 就是 看官方帮助。<br><a target="_blank" rel="noopener" href="http://www.sidefx.com/docs/houdini/hom/index.html%E2%80%8Bwww.sidefx.com">http://www.sidefx.com/docs/houdini/hom/index.html​www.sidefx.com</a><br>为了更加方便，请在对应版本的houdini文档的环境变量中添加以下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HOUDINI_EXTERNAL_HELP_BROWSER = 1</span><br></pre></td></tr></table></figure>
+<p>当你在houdini环境下按F1时，用默认浏览器打开houdini的帮助，这样就能很快捷的进行查找你想要的，还可以偷懒使用谷歌翻译，嘿嘿嘿。</p>
+<p>实践是检验真理的唯一标准。<br>Windows-Python Shell 这个调试框将是最常用的面板，可以快速调试，支持自动补足。</p>
+<p><img src="%E5%9B%BE%E7%89%871.png"></p>
+<p>从上图可知houdini使用的是2.7.15版本的python 引入了H18.0.348的hou模块。还有一些简单的提示信息<br>所以先来个 hello world吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">geoNode =hou.node(<span class="string">&quot;/obj&quot;</span>).createNode(<span class="string">&quot;geo&quot;</span>,<span class="string">&quot;hello_world&quot;</span>)</span><br><span class="line">fontNode = geoNode.createNode(<span class="string">&quot;font&quot;</span>)</span><br><span class="line">fontNode.parm(<span class="string">&quot;text&quot;</span>).<span class="built_in">set</span>(<span class="string">&quot;Hello World&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后就获得了下图效果。</p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2022 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

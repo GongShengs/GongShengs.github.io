@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>October</span>
+            
+            
+            
+            <span>21,</span>
+            <span>2021</span>
+        </div>
+        
+
+        <h2 class="title"></h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <!--
+ * @Author: your name
+ * @Date: 2021-10-21 12:55:55
+ * @LastEditTime: 2021-10-21 13:16:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinedd:\Private_文档资料\编写中\Unity Shader 学习 Bump Mapping\Unity Shader 学习 Bump Mapping.md
+-->
+<h1><span id="unity-shader-学习-bump-mapping">Unity Shader 学习 Bump Mapping</span></h1><h2><span id="简介">简介</span></h2><p>Bump Mapping（凹凸映射） 是计算机图形学中的一种纹理映射技术，用于模拟物体表面的凹凸和皱纹<sup>[1]</sup>。目前有2中方法：</p>
+<ul>
+<li><p>height map (高度纹理) 通过模拟置换获得修改后的法线值，又名高度映射(height mapping)</p>
+</li>
+<li><p>noraml map (法线纹理) 通过存储在纹理中的法线信息来实现的，又名法线映射(noraml mapping)</p>
+<p>  记录pixel shading过程中每个pixel的法线信息，用来描述像素级的法线信息，而不是直接使用顶点和面法线插值得到的pixel法线，从而得到更好的细节表现<sup>[3]</sup>。</p>
+</li>
+</ul>
+<h2><span id="实现逻辑">实现逻辑</span></h2><ul>
+<li><p>noraml map</p>
+<ul>
+<li><p>实现逻辑<br>  有2种方法：1.在切线空间下计算，2.在世界空间下计算。但是由于通用性问题第二种要优于第一种，例如使用CubeMap我们要在世界空间下进行采样。</p>
+<ul>
+<li><p>在世界空间下计算</p>
+<ul>
+<li>在顶点着色器计算从切线空间到世界空间的变换矩阵 TBN矩阵 T切线 B副切线 N法线 B可以由TN叉乘获得  <div align="center">
+  <img src="TBN.png" height="330" width="495">
+  </div></li>
+<li>获得切线空间下的法线纹理数据</li>
+<li>将法线纹理数据从切线空间转换到世界空间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Coding</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Unlit/NoramlShader&quot;</span><br><span class="line">&#123;</span><br><span class="line">Properties</span><br><span class="line">&#123;</span><br><span class="line">    _MainTex (&quot;Texture&quot;, <span class="number">2</span>D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">    [Normal]_NormalMap(&quot;Normal Map&quot;,<span class="number">2</span>D) = &quot;bump&quot;&#123;&#125;</span><br><span class="line">    _NormalScale(&quot;NormalScale&quot;,Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">SubShader</span><br><span class="line">&#123;</span><br><span class="line">    Tags &#123; &quot;RenderType&quot;=&quot;Opaque&quot; &#125;</span><br><span class="line">    Pass</span><br><span class="line">    &#123;</span><br><span class="line">        HLSLPROGRAM</span><br><span class="line">        <span class="meta">#pragma vertex vert</span></span><br><span class="line">        <span class="meta">#pragma fragment frag</span></span><br><span class="line">        <span class="meta">#pragma multi_compile_fog</span></span><br><span class="line"></span><br><span class="line">        <span class="meta">#include &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&quot;</span></span><br><span class="line">        <span class="meta">#include &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl&quot; </span></span><br><span class="line"></span><br><span class="line">        struct appdata</span><br><span class="line">        &#123;</span><br><span class="line">            float4 vertex       : POSITION;</span><br><span class="line">            float2 uv           : TEXCOORD0;</span><br><span class="line">            float3 normal       : NORMAL;</span><br><span class="line">            float4 tangent      : TANGENT;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        struct v2f</span><br><span class="line">        &#123;</span><br><span class="line">            float4 pos          : SV_POSITION;</span><br><span class="line">            float2 uv           : TEXCOORD0;</span><br><span class="line">            float3 posWS        : TEXCOORD1;</span><br><span class="line">            float3 nDirWS       : TEXCOORD2;</span><br><span class="line">            float3 tDirWS       : TEXCOORD3;</span><br><span class="line">            float3 bDirWS       : TEXCOORD4;</span><br><span class="line">            </span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        CBUFFER_START(UnityPerMaterial)</span><br><span class="line">            real4 _MainTex_ST;</span><br><span class="line">            real _NormalScale;</span><br><span class="line">        CBUFFER_END</span><br><span class="line"></span><br><span class="line">        TEXTURE2D(_MainTex);</span><br><span class="line">        SAMPLER(sampler_MainTex);</span><br><span class="line">        TEXTURE2D(_NormalMap);</span><br><span class="line">        SAMPLER(sampler_NormalMap);</span><br><span class="line"></span><br><span class="line">        v2f vert (appdata v)</span><br><span class="line">        &#123;</span><br><span class="line">            v2f o;</span><br><span class="line">            o.posWS = TransformObjectToWorld(v.vertex.xyz);</span><br><span class="line">            o.pos = TransformWorldToHClip(o.posWS);</span><br><span class="line">            o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">            o.nDirWS = TransformObjectToWorldNormal(v.normal);</span><br><span class="line">            o.tDirWS = <span class="built_in">normalize</span>(TransformObjectToWorldDir(v.tangent.xyz));</span><br><span class="line">            o.bDirWS = <span class="built_in">normalize</span>(<span class="built_in">cross</span>(o.nDirWS,o.tDirWS)*v.tangent.w);</span><br><span class="line">            <span class="keyword">return</span> o;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        half4 frag (v2f i) : SV_Target</span><br><span class="line">        &#123;</span><br><span class="line">            float3x3 TBN = float3x3(i.tDirWS,i.bDirWS,i.nDirWS);</span><br><span class="line">            float3 nDirWS = <span class="built_in">normalize</span>(i.nDirWS);</span><br><span class="line">            float4 normalMap = SAMPLE_TEXTURE2D(_NormalMap,sampler_NormalMap,i.uv); </span><br><span class="line">            float3 normal = UnpackNormal(normalMap);</span><br><span class="line">            normal.z = <span class="built_in">sqrt</span>(<span class="number">1.0</span> - saturate(<span class="built_in">dot</span>(normal.xy,normal.xy)));</span><br><span class="line">            normal = TransformTangentToWorld(normal,TBN);</span><br><span class="line">            normal = <span class="built_in">normalize</span>(normal);</span><br><span class="line">            <span class="comment">// 混合法线</span></span><br><span class="line">            nDirWS = lerp(nDirWS,normal,_NormalScale);</span><br><span class="line"></span><br><span class="line">            Light mainLight = GetMainLight();</span><br><span class="line">            real4 lightColor = real4(mainLight.color, <span class="number">1</span>);</span><br><span class="line">            float3 lightDir = mainLight.direction;</span><br><span class="line"></span><br><span class="line">            <span class="type">float</span> nDotL = <span class="built_in">dot</span>(nDirWS, lightDir);</span><br><span class="line">            <span class="type">float</span> lambert = <span class="built_in">max</span>(<span class="number">0.0</span>,nDotL);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> lambert.rrrr;</span><br><span class="line">        &#125;</span><br><span class="line">        ENDHLSL</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2><span id="问题和思考">问题和思考</span></h2><ol>
+<li><p>法线贴图为什么是蓝色的？<br> 模型空间下的法线纹理看起来是“五颜六色”的。这是因为所有法线所在的坐标空间是同一个坐标空间，即模型空间，而每个点存储的法线方向是各异的，有的是(0,1, 0), 经过映射后存储到纹理中就对应了 RGB(0.5, 1, 0.5) 浅绿色，有的是(0, -1, 0), 经过映射后存储到纹理中就对应了 0.5, 0, 0.5)紫色。而切线空间下的法线纹理看起来几乎全部是浅蓝色的这是因为，每个法线方向所在的坐标空间是不一样的，即是表面每点各自的切线空间。这种法线纹理其实就是存储了每个点在各自的切线空间中的法线扰动方向。也就是说，如果一个点的法线方向不变，那么在它的切线空间中 ，新的法线方向就是 轴方向，即值为(0,0, 1), 经过映射后存储在纹理中就对应了 RGB(0.5, 0.5, 1) 浅蓝色 。而这个颜色就是法线纹理中大片的蓝色。</p>
+</li>
+<li><p>为什么法线贴图一般使用的是切线空间而非模型空间？</p>
+<ul>
+<li>自由度高</li>
+<li>可进行UV动画</li>
+<li>可重用法线纹理</li>
+<li>可压缩</li>
+</ul>
+</li>
+<li><p>什么是切线空间（Tangent space）？</p>
+<p> Tangent space是一个三维空间。对3D空间中的一个顶点来说，切空间的三条座标轴分别对应该点的法线N，切线T，和副法线（binormal）B，显然，对不同的顶点来说，切空间是不同的。</p>
+ <div align="center">
+ <img src="NTBFromUVs.png">
+ </div>
+
+<p> T = normalize(dx/du, dy/du, dz/du)</p>
+<p> N = T × normalize(dx/dv, dy/dv, dz/dv)</p>
+<p> B = N × T</p>
+</li>
+<li><p>法线贴图的设置细节。</p>
+<ul>
+<li>法线贴图的属性 Bump</li>
+<li>贴图属性 TextureType-Noraml Map</li>
+</ul>
+</li>
+<li><p>法线贴图的优化方案。</p>
+<ol>
+<li>使用双通道进行法线数据的处理</li>
+</ol>
+</li>
+</ol>
+<h2><span id="参考">参考</span></h2><p>[1] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bump_mapping">Bump mapping - wikipedia</a></p>
+<p>[2] <a href>Unity Shader 入门精要 - 凹凸映射 - 146</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ub4y1Z765?spm_id_from=333.999.0.0">图形 2.5 BUMP图改进</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ut4y1m776?spm_id_from=333.999.0.0">庄懂的技术美术入门课(美术向)-直播录屏-第8课</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/">Tutorial 13 : Normal Mapping</a></p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2022 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>
