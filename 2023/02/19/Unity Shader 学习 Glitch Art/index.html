@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>Unity Shader 学习 Glitch Art - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            <span>February</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>19,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h2 class="title">Unity Shader 学习 Glitch Art</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1><span id="unity-shader-学习-glitch-art">Unity Shader 学习 Glitch Art</span></h1><div align="center">
+<img src="giphy.gif" height="330" width="495">
+<center>图 《赛博朋克 2077》 带有强烈故障艺术风格的Logo @ CD Projekt @2019 E3展</center>
+</div>
+
+<h2><span id="简介">简介</span></h2><p>Glitch Art(故障艺术)是通过破坏数字数据或物理操作电子设备，将数字或模拟错误用于美学目的的做法<a href="#refer-anchor"><sup>[1]</sup></a>。<br>近年来，故障艺术已经成为了赛博朋克风格的电影和游戏作品中主要的艺术风格之一。</p>
+<h2><span id="故障艺术的实现">故障艺术的实现：</span></h2><p>源自毛星云大佬的十种故障艺术(Glitch Art)算法的总结与实现<a href="#refer-anchor"><sup>[2]</sup></a></p>
+<ol>
+<li><h3><span id="rgb颜色分离故障rgb-split-glitch">RGB颜色分离故障（RGB Split Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="gpxc8u8fv2a2cwfgvo02.png" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  通过不同UV对图形进行三次采样的进行RGB通道重新混合。</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> randomNoise(<span class="type">float</span> x, <span class="type">float</span> y)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> frac(<span class="built_in">sin</span>(<span class="built_in">dot</span>(float2(x, y), float2(<span class="number">12.9898</span>, <span class="number">78.233</span>))) * <span class="number">43758.5453</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">half4 Frag_Horizontal(VaryingsDefault i) : SV_Target</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">float</span> splitAmount = _Indensity * randomNoise(_TimeX, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    half4 ColorR = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, float2(i.texcoord.x + splitAmount, i.texcoord.y));</span><br><span class="line">    half4 ColorG = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);</span><br><span class="line">    half4 ColorB = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, float2(i.texcoord.x - splitAmount, i.texcoord.y));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> half4(ColorR.r, ColorG.g, ColorB.b, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h3><span id="错位图块故障image-block-glitch">错位图块故障（Image Block Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="Image Block Glitch.gif" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  基于uv和噪声函数生成方格块，然后将方块强度随机，然后剔除部分。最后与UV进行混合再对图形进行采样。</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">inline <span class="type">float</span> randomNoise(float2 seed)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> frac(<span class="built_in">sin</span>(<span class="built_in">dot</span>(seed * <span class="built_in">floor</span>(_Time.y * _Speed), float2(<span class="number">17.13</span>, <span class="number">3.71</span>))) * <span class="number">43758.5453123</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">inline <span class="type">float</span> randomNoise(<span class="type">float</span> seed)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> randomNoise(float2(seed, <span class="number">1.0</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">half4 Frag(VaryingsDefault i) : SV_Target</span><br><span class="line">&#123;</span><br><span class="line">    half2 block = randomNoise(<span class="built_in">floor</span>(i.texcoord * _BlockSize));</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> displaceNoise = <span class="built_in">pow</span>(block.x, <span class="number">8.0</span>) * <span class="built_in">pow</span>(block.x, <span class="number">3.0</span>);</span><br><span class="line">    <span class="type">float</span> splitRGBNoise = <span class="built_in">pow</span>(randomNoise(<span class="number">7.2341</span>), <span class="number">17.0</span>);</span><br><span class="line">    <span class="type">float</span> offsetX = displaceNoise - splitRGBNoise * _MaxRGBSplitX;</span><br><span class="line">    <span class="type">float</span> offsetY = displaceNoise - splitRGBNoise * _MaxRGBSplitY;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> noiseX = <span class="number">0.05</span> * randomNoise(<span class="number">13.0</span>);</span><br><span class="line">    <span class="type">float</span> noiseY = <span class="number">0.05</span> * randomNoise(<span class="number">7.0</span>);</span><br><span class="line">    float2 <span class="keyword">offset</span> = float2(offsetX * noiseX, offsetY* noiseY);</span><br><span class="line"></span><br><span class="line">    half4 colorR = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);</span><br><span class="line">    half4 colorG = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord + <span class="keyword">offset</span>);</span><br><span class="line">    half4 colorB = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord - <span class="keyword">offset</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> half4(colorR.r , colorG.g, colorB.z, (colorR.a + colorG.a + colorB.a));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h3><span id="错位线条故障line-block-glitch">错位线条故障（Line Block Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="6400.gif" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  通过生成随机宽度的线条，再进行随机扰动以及剔除部分，然后和UV混合，最后进行采样。</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> <span class="built_in">trunc</span>(<span class="type">float</span> x, <span class="type">float</span> num_levels)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">floor</span>(x * num_levels) / num_levels;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//生成随机强度梯度线条</span></span><br><span class="line"><span class="type">float</span> truncTime = <span class="built_in">trunc</span>(_TimeX, <span class="number">4.0</span>);       </span><br><span class="line"><span class="type">float</span> uv_trunc = randomNoise(<span class="built_in">trunc</span>(uv.yy, float2(<span class="number">8</span>, <span class="number">8</span>)) + <span class="number">100.0</span> * truncTime);</span><br><span class="line"><span class="type">float</span> uv_randomTrunc = <span class="number">6.0</span> * <span class="built_in">trunc</span>(_TimeX, <span class="number">24.0</span> * uv_trunc);</span><br><span class="line"><span class="comment">//生成随机梯度的非等宽线条</span></span><br><span class="line"><span class="type">float</span> blockLine_random = <span class="number">0.5</span> * randomNoise(<span class="built_in">trunc</span>(uv.yy + uv_randomTrunc, float2(<span class="number">8</span> * _LinesWidth, <span class="number">8</span> * _LinesWidth)));</span><br><span class="line">blockLine_random += <span class="number">0.5</span> * randomNoise(<span class="built_in">trunc</span>(uv.yy + uv_randomTrunc, float2(<span class="number">7</span>, <span class="number">7</span>)));</span><br><span class="line">blockLine_random = blockLine_random * <span class="number">2.0</span> - <span class="number">1.0</span>;    </span><br><span class="line">blockLine_random = <span class="built_in">sign</span>(blockLine_random) * saturate((<span class="built_in">abs</span>(blockLine_random) - _Amount) / (<span class="number">0.4</span>));</span><br><span class="line">blockLine_random = lerp(<span class="number">0</span>, blockLine_random, _Offset);</span><br><span class="line">/ 生成源色调的blockLine Glitch</span><br><span class="line">float2 uv_blockLine = uv;</span><br><span class="line">uv_blockLine = saturate(uv_blockLine + float2(<span class="number">0.1</span> * blockLine_random, <span class="number">0</span>));</span><br><span class="line">float4 blockLineColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, <span class="built_in">abs</span>(uv_blockLine));</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li><h3><span id="图块抖动故障tile-jitter-glitch">图块抖动故障（Tile Jitter Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="v2-644ae2ffbaa0684a5c281c4b99493a0e_b.gif" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  通过余数的形式（fmod(x,y)方法可返回x/y的余数）来对uv进行分层，且对于层内的uv数值，进行三角函数形式的抖动。</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#if USING_FREQUENCY_INFINITE</span></span><br><span class="line">    strength = <span class="number">1</span>;</span><br><span class="line"><span class="meta">#else</span></span><br><span class="line">    strength = <span class="number">0.5</span> + <span class="number">0.5</span> * <span class="built_in">cos</span>(_Time.y * _Frequency);</span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"><span class="keyword">if</span>(fmod(uv.y * _SplittingNumber, <span class="number">2</span>) &lt; <span class="number">1.0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">#if JITTER_DIRECTION_HORIZONTAL</span></span><br><span class="line">        uv.x += pixelSizeX * <span class="built_in">cos</span>(_Time.y * _JitterSpeed) * _JitterAmount * strength;</span><br><span class="line">    <span class="meta">#else</span></span><br><span class="line">        uv.y += pixelSizeX * <span class="built_in">cos</span>(_Time.y * _JitterSpeed) * _JitterAmount * strength;</span><br><span class="line">    <span class="meta">#endif</span></span><br><span class="line">&#125;</span><br><span class="line">half4 sceneColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h3><span id="扫描线抖动故障scan-line-jitter-glitch">扫描线抖动故障（Scan Line Jitter Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="tumblr_nqwxq8Kw8a1qio469o2_400.gif" height="330" width="330">
+  </div></li>
+<li><p>思路</p>
+<p>  通过对uv的一个方向进行噪波抖动，再进行图像的采样。</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> randomNoise(<span class="type">float</span> x, <span class="type">float</span> y)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> frac(<span class="built_in">sin</span>(<span class="built_in">dot</span>(float2(x, y), float2(<span class="number">12.9898</span>, <span class="number">78.233</span>))) * <span class="number">43758.5453</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">half4 Frag_Horizontal(VaryingsDefault i): SV_Target</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> jitter = randomNoise(i.texcoord.y, _Time.x) * <span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">    jitter *= <span class="built_in">step</span>(_ScanLineJitter.y, <span class="built_in">abs</span>(jitter)) * _ScanLineJitter.x;</span><br><span class="line"></span><br><span class="line">    half4 sceneColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, frac(i.texcoord + float2(jitter, <span class="number">0</span>)));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sceneColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h3><span id="数字条纹故障digital-stripe-glitch">数字条纹故障（Digital Stripe Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="640.gif" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  基于随机数进行随机颜色条纹贴图的生成</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> y = <span class="number">0</span>; y &lt; _noiseTexture.height; y++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> x = <span class="number">0</span>; x &lt; _noiseTexture.width; x++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//随机值若大于给定strip随机阈值，重新随机颜色</span></span><br><span class="line">        <span class="keyword">if</span> (UnityEngine.Random.value &gt; stripLength)</span><br><span class="line">        &#123;</span><br><span class="line">            color = XPostProcessingUtility.RandomColor();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//设置贴图像素值</span></span><br><span class="line">        _noiseTexture.SetPixel(x, y, color);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">half4 Frag(VaryingsDefault i): SV_Target</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 基础数据准备</span></span><br><span class="line">    half4 stripNoise = SAMPLE_TEXTURE2D(_NoiseTex, sampler_NoiseTex, i.texcoord);</span><br><span class="line">    half threshold = <span class="number">1.001</span> - _Indensity * <span class="number">1.001</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// uv偏移</span></span><br><span class="line">    half uvShift = <span class="built_in">step</span>(threshold, <span class="built_in">pow</span>(<span class="built_in">abs</span>(stripNoise.x), <span class="number">3</span>));</span><br><span class="line">    float2 uv = frac(i.texcoord + stripNoise.yz * uvShift);</span><br><span class="line">    half4 source = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv);</span><br><span class="line"></span><br><span class="line">    <span class="meta">#ifndef NEED_TRASH_FRAME</span></span><br><span class="line">        <span class="keyword">return</span> source;</span><br><span class="line">    <span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 基于废弃帧插值</span></span><br><span class="line">    half stripIndensity = <span class="built_in">step</span>(threshold, <span class="built_in">pow</span>(<span class="built_in">abs</span>(stripNoise.w), <span class="number">3</span>)) * _StripColorAdjustIndensity;</span><br><span class="line">    half3 color = lerp(source, _StripColorAdjustColor, stripIndensity).rgb;</span><br><span class="line">    <span class="keyword">return</span> float4(color, source.a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h3><span id="模拟噪点故障analog-noise-glitch">模拟噪点故障（Analog Noise Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="S6vq.gif" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  通过噪波函数混合贴图颜色。</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> noiseX = randomNoise(_TimeX * _Speed + i.texcoord / float2(<span class="number">-213</span>, <span class="number">5.53</span>));</span><br><span class="line"><span class="type">float</span> noiseY = randomNoise(_TimeX * _Speed - i.texcoord / float2(<span class="number">213</span>, <span class="number">-5.53</span>));</span><br><span class="line"><span class="type">float</span> noiseZ = randomNoise(_TimeX * _Speed + i.texcoord / float2(<span class="number">213</span>, <span class="number">5.53</span>));</span><br><span class="line"></span><br><span class="line">sceneColor.rgb += <span class="number">0.25</span> * float3(noiseX,noiseY,noiseZ) - <span class="number">0.125</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h3><span id="屏幕跳跃故障screen-jump-glitch">屏幕跳跃故障（Screen Jump Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="I3uP.gif" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  通过对UV值进行均匀梯度式扰动再进行采样。</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">half4 Frag_Vertical(VaryingsDefault i): SV_Target</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> jump = lerp(i.texcoord.y, frac(i.texcoord.y + _JumpTime), _JumpIndensity);        </span><br><span class="line">    half4 sceneColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, frac(float2(i.texcoord.x, jump)));   </span><br><span class="line">    <span class="keyword">return</span> sceneColor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h3><span id="屏幕抖动故障screen-shake-glitch">屏幕抖动故障（Screen Shake Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="64d0.gif" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  基本和Screen Jump类似，不过抖动不是均匀梯度式。</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">half4 Frag_Horizontal(VaryingsDefault i): SV_Target</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">float</span> shake = (randomNoise(_Time.x, <span class="number">2</span>) - <span class="number">0.5</span>) * _ScreenShake;</span><br><span class="line"></span><br><span class="line">    half4 sceneColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, frac(float2(i.texcoord.x + shake, i.texcoord.y)));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sceneColor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><h3><span id="波动抖动故障wave-jitter-glitch">波动抖动故障（Wave Jitter Glitch）</span></h3><ul>
+<li><p>表现</p>
+  <div align="center">
+  <img src="4A3a.gif" height="330" width="495">
+  </div></li>
+<li><p>思路</p>
+<p>  利用多重的noise进行实现</p>
+</li>
+<li><p>代码实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">float4 Frag_Horizontal(VaryingsDefault i): SV_Target</span><br><span class="line">&#123;</span><br><span class="line">    half strength = <span class="number">0.0</span>;</span><br><span class="line">    <span class="meta">#if USING_FREQUENCY_INFINITE</span></span><br><span class="line">        strength = <span class="number">1</span>;</span><br><span class="line">    <span class="meta">#else</span></span><br><span class="line">        strength = <span class="number">0.5</span> + <span class="number">0.5</span> *<span class="built_in">cos</span>(_Time.y * _Frequency);</span><br><span class="line">    <span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Prepare UV</span></span><br><span class="line">    <span class="type">float</span> uv_y = i.texcoord.y * _Resolution.y;</span><br><span class="line">    <span class="type">float</span> noise_wave_1 = snoise(float2(uv_y * <span class="number">0.01</span>, _Time.y * _Speed * <span class="number">20</span>)) * (strength * _Amount * <span class="number">32.0</span>);</span><br><span class="line">    <span class="type">float</span> noise_wave_2 = snoise(float2(uv_y * <span class="number">0.02</span>, _Time.y * _Speed * <span class="number">10</span>)) * (strength * _Amount * <span class="number">4.0</span>);</span><br><span class="line">    <span class="type">float</span> noise_wave_x = noise_wave_1 * noise_wave_2 / _Resolution.x;</span><br><span class="line">    <span class="type">float</span> uv_x = i.texcoord.x + noise_wave_x;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> rgbSplit_uv_x = (_RGBSplit * <span class="number">50</span> + (<span class="number">20.0</span> * strength + <span class="number">1.0</span>)) * noise_wave_x / _Resolution.x;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Sample RGB Color</span></span><br><span class="line">    half4 colorG = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, float2(uv_x, i.texcoord.y));</span><br><span class="line">    half4 colorRB = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, float2(uv_x + rgbSplit_uv_x, i.texcoord.y));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>  half4(colorRB.r, colorG.g, colorRB.b, colorRB.a + colorG.a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2><span id="总结">总结</span></h2><h3><span id="故障表现的要点">故障表现的要点</span></h3><ul>
+<li>噪声函数的选择：噪声函数是生成各式的干扰信号的源头。</li>
+<li>uv抖动方式的选择：将噪声函数作用于屏幕空间uv后，基于新的uv进行采样，以产生故障的抖动表现。</li>
+<li>采样通道的选择：对RGB分别采样，或者选取特定通道进行采样，以实现多种风格的故障表现。</li>
+<li>颜色空间的转换：善用YUV、CMY、HSV、YIQ、YCbCr 、YC1C2等空间与RGB空间之间的转换，以实现多种风格的故障表现。</li>
+</ul>
+<h2><span id="参考">参考</span></h2><dir id="refer-anchor">
+
+<p>[1] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Glitch_art">维基百科</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://www.shadertoy.com/view/ldjGzV#">shadertoy</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://awesomeopensource.com/project/keijiro/KinoGlitch">Video glitch effects for Unity - Kinoglitch</a></p>
+</dir>
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2023 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

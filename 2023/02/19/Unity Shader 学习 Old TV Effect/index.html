@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>Unity Shader 学习 Old TV Effect - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            <span>February</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>19,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h2 class="title">Unity Shader 学习 Old TV Effect</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1><span id="unity-shader-学习-old-tv-effect">Unity Shader 学习 Old TV Effect</span></h1><h2><span id="简介">简介</span></h2><p>Old TV Effect 即模拟CRT显示器的显示表现，具体表现如下图：</p>
+<div align="center">
+<img src="crt.gif" height="330" width="495">
+</div>
+
+<p>CRT显示器学名为“阴极射线显像管”,是一种使用阴极射线管（Cathode Ray Tube）的显示器。具体显像原理请看<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cathode-ray_tube">维基百科</a>。</p>
+<h2><span id="表现分析">表现分析</span></h2><p>通过各种资料的比对可以将表现分为几大类</p>
+<ol>
+<li>播放表现</li>
+<li>故障表现(另见Unity Shader 学习 Glitch Art)</li>
+<li>拍摄表现</li>
+</ol>
+<h2><span id="实现">实现</span></h2><h3><span id="渐晕效果">渐晕效果</span></h3><ul>
+<li><p>实现</p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> Vignette(float2 uv,<span class="type">float</span> time)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">float</span> vigAmt = <span class="number">3.0</span> + <span class="number">0.3</span> * <span class="built_in">sin</span>(time + <span class="number">5.0</span> * <span class="built_in">cos</span>(t * <span class="number">5.0</span>));</span><br><span class="line">    <span class="type">float</span> vignette = (<span class="number">1.0</span> - vigAmt * (uv.y - <span class="number">0.5</span>) * (uv.y - <span class="number">0.5</span>)) * (<span class="number">1.0</span> - vigAmt * (uv.x - <span class="number">0.5</span>) * (uv.x - <span class="number">0.5</span>));</span><br><span class="line">    <span class="keyword">return</span> vignette;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  <div align="center">
+  <img src="Vignette.gif" height="330" width="495">
+  </div></li>
+</ul>
+<h3><span id="畸变">畸变</span></h3><ul>
+<li><p>实现</p>
+ <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">float2 ScreenDistort(float2 uv)</span><br><span class="line">&#123;</span><br><span class="line">    uv -= float2(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    uv = uv * <span class="number">1.2</span> * (<span class="number">1.0</span> / <span class="number">1.2</span> + <span class="number">2.0</span> * uv.x * uv.x * uv.y * uv.y);</span><br><span class="line">    uv += float2(<span class="number">0.5</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="keyword">return</span> uv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ <div align="center">
+ <img src="ScreenDistort 0.png" height="330" width="495">
+ </div></li>
+</ul>
+<h3><span id="像素锯齿">像素锯齿</span></h3><pre><code>- 实现
+</code></pre>
+<h3><span id="边缘的rgb分离">边缘的RGB分离</span></h3><pre><code>- 实现
+</code></pre>
+<h3><span id="晶体管结构">晶体管结构</span></h3><pre><code>- 实现
+</code></pre>
+<h3><span id="线扫描">线扫描</span></h3><ul>
+<li><p>实现 </p>
+  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> ScanLine(float2 uv,<span class="type">float</span> freq ,<span class="type">float</span> time)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> frac(uv.y * freq + time);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  <div align="center">
+  <img src="ScanLine.gif" height="330" width="495">
+  </div></li>
+</ul>
+<h2><span id="参考">参考</span></h2><p>[1] <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jcNJbR85gK0">Old TV Effect in Unity 3D </a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://www.shadertoy.com/view/ldjGzV#">VCR distortion </a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cathode-ray_tube">Cathode-ray tube - Wikipedia</a></p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2023 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

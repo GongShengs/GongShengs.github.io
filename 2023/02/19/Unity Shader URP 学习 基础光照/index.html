@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>Unity Shader URP 学习 基础光照 - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            <span>February</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>19,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h2 class="title">Unity Shader URP 学习 基础光照</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1><span id="unity-shader-urp-学习-基础光照">Unity Shader URP 学习 基础光照</span></h1><p>首先是几种常见的基础光照模型的简单说明</p>
+<h2><span id="关于lambert兰伯特光照模型">关于Lambert（兰伯特）光照模型</span></h2><ul>
+<li><h3><span id="简介">简介</span></h3><p>  用于模拟漫反射的光照模型，相关的<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lambertian_reflectance">维基百科</a></p>
+</li>
+<li><h3><span id="光照公式">光照公式</span></h3><p>  Diffuse = max(0，dot(nDir, LightDir))</p>
+</li>
+</ul>
+<h2><span id="关于halflambert半兰伯特光照模型">关于HalfLambert（半兰伯特）光照模型</span></h2><ul>
+<li><h3><span id="简介">简介</span></h3><p>  Half Lambert光照模型是Valve公司在制作”半条命“游戏时发明的，用来给在比较暗的区域显示物体。总体来说，该光照模型提高了物体表面的漫反射光.下图是Alyx对于Lambert和Half Lambert的对比示意图</p>
+<p>  <img src="Alyx_lambert_half_lambert.jpg" alt="Alyx_lambert_half_lambert.jpg"></p>
+<p>  参考：<a target="_blank" rel="noopener" href="https://developer.valvesoftware.com/wiki/Half_Lambert">https://developer.valvesoftware.com/wiki/Half_Lambert</a></p>
+</li>
+<li><h3><span id="光照公式">光照公式</span></h3><p>  Diffuse = dot(nDir, LightDir)*0.5+0.5</p>
+</li>
+</ul>
+<h2><span id="关于phong冯氏光照模型">关于Phong（冯氏）光照模型</span></h2><ul>
+<li><h3><span id="简介">简介</span></h3><p>  冯氏光照模型的主要结构由3个分量组成：环境(Ambient)、漫反射 (Diffuse)和镜面(Specular)光照</p>
+<ul>
+<li>环境光照(Ambient Lighting)：物体几乎永远不会是完全黑暗的。所以环境光照一般是个常量</li>
+<li>漫反射光照(Diffuse Lighting)：模拟光源对物体的方向性影响,物体的某一部分越是正对着光源，它就会越亮。</li>
+<li>镜面光照(Specular Lighting)：模拟有光泽物体上面出现的亮点。镜面光照的颜色相比于物体的颜色会更倾向于光的颜色。</li>
+</ul>
+</li>
+<li><h3><span id="光照公式">光照公式</span></h3><p>  最终片段颜色：环境颜色+漫反射颜色+镜面反射颜色</p>
+<ul>
+<li><p>环境颜色 = 光源的环境光颜色 × 物体的环境材质颜色 </p>
+</li>
+<li><p>漫反射颜色 = 光源的漫反射光颜色 × 物体的漫反射材质颜色 × 漫反射因子</p>
+</li>
+<li><p>镜面反射颜色 = 光源的镜面光颜色 × 物体的镜面材质颜色 × 镜面反射因子 </p>
+</li>
+</ul>
+<p>  镜面反射最终颜色 = 直射光颜色 * 反射光颜色 * pow(max(0, dot(反射光方向, 视野方向)), 光泽度(gloss)) + 漫反射颜色 + 环境光颜色</p>
+<p>  <img src="Phong_components_version_4.png" alt="Phong_components_version_4.png"></p>
+<p>  参考： <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Phong_reflection_model">https://en.wikipedia.org/wiki/Phong_reflection_model</a></p>
+</li>
+</ul>
+<h2><span id="关于blinnphong光照模型">关于BlinnPhong光照模型</span></h2><ul>
+<li><h3><span id="简介">简介</span></h3><p>  BlinnPhong光照模型是一种改良的高光模型，采用了半角向量(half-angle vector)，和Phong的对比如下图：z</p>
+<p>  <img src="400px-Blinn_phong_comparison.png" alt="400px-Blinn_phong_comparison.png"></p>
+<p>  参考：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://seblagarde.wordpress.com/2012/03/29/relationship-between-phong-and-blinn-lighting-model/">https://seblagarde.wordpress.com/2012/03/29/relationship-between-phong-and-blinn-lighting-model/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model">https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model</a></p>
+</li>
+</ul>
+</li>
+<li><h3><span id="光照公式">光照公式</span></h3><p>  最终颜色 = 直射光颜色 * 反射光颜色 * pow(max(0, dot(法线方向, 视野与光线中间向量)), 光泽度(gloss)) + 漫反射颜色 + 环境光颜色</p>
+</li>
+</ul>
+<h2><span id="关于fresnel-reflectionterm">关于Fresnel Reflection/Term</span></h2><ul>
+<li><h3><span id="简介">简介</span></h3><p>  菲涅尔反射描述的是以不同的视角观察物体得到的反射光比例不同的现象</p>
+<p>  参考：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel">https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/394178688">https://zhuanlan.zhihu.com/p/394178688</a></p>
+</li>
+</ul>
+</li>
+<li><h3><span id="光照公式">光照公式</span></h3><p>  Fresnel = pow((1-dot(法线方向, 视方向)),系数);</p>
+</li>
+</ul>
+<h2><span id="关于urp">关于URP</span></h2><ul>
+<li><h3><span id="简介">简介</span></h3><p>  URP是一种SRP（可编程渲染管线），全称为Universal Render Pipeline。具体请看<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@11.0/manual/index.html">官方关于URP的文档</a></p>
+</li>
+<li><h3><span id="urp下的基础光照模型shader">URP下的基础光照模型Shader</span></h3>  <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Costom/StandardBlinnPhong&quot;</span><br><span class="line"> &#123;</span><br><span class="line"> Properties&#123;</span><br><span class="line">     </span><br><span class="line">     [MainColor]_DiffuseColor(&quot;Diffuse&quot;, Color) = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>) </span><br><span class="line">     [MainTexture]_MainTex(&quot;Main Tex&quot;, <span class="number">2</span>D) = &quot;white&quot;&#123;&#125;</span><br><span class="line">     </span><br><span class="line">     [Normal]_NormalMap(&quot;Normal Map&quot;,<span class="number">2</span>D) = &quot;bump&quot;&#123;&#125;</span><br><span class="line">     _NormalScale(&quot;NormalScale&quot;,Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0</span></span><br><span class="line">     </span><br><span class="line">     [Toggle] _UseCubMap(&quot;Use Cub Map&quot;, Int) = <span class="number">0</span></span><br><span class="line">     _CubMap(&quot;Env Map&quot;,CUBE) = &quot;&quot;&#123;&#125;</span><br><span class="line">     </span><br><span class="line">     _Metallic(&quot;Metallic&quot;,Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0</span></span><br><span class="line">     _Smoothness(&quot;Smoothness&quot;,Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">0</span></span><br><span class="line">     _Fresnel(&quot;Fresnel&quot;,Range(<span class="number">0</span>,<span class="number">100</span>)) = <span class="number">4</span></span><br><span class="line"> &#125;</span><br><span class="line"> SubShader</span><br><span class="line"> &#123;</span><br><span class="line">     Tags&#123;&quot;RenderType&quot; = &quot;Opaque&quot; &quot;RenderPipeline&quot; = &quot;UniversalPipeline&quot;&#125;</span><br><span class="line">     </span><br><span class="line">     HLSLINCLUDE</span><br><span class="line">     </span><br><span class="line">         <span class="meta">#include &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl&quot;</span></span><br><span class="line">         <span class="meta">#include &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl&quot; </span></span><br><span class="line">         <span class="meta">#include &quot;Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl&quot;</span></span><br><span class="line">     </span><br><span class="line">         struct a2v</span><br><span class="line">         &#123;</span><br><span class="line">             float4 vertex       : POSITION;</span><br><span class="line">             float2 uv           : TEXCOORD0;</span><br><span class="line">             float3 normal       : NORMAL;</span><br><span class="line">             float4 tangent      : TANGENT;</span><br><span class="line">         &#125;;</span><br><span class="line">     </span><br><span class="line">         struct v2f</span><br><span class="line">         &#123;</span><br><span class="line">             float4 pos          : SV_POSITION;</span><br><span class="line">             float2 uv           : TEXCOORD0;</span><br><span class="line">             float3 posWS        : TEXCOORD1;</span><br><span class="line">             float3 nDirWS       : TEXCOORD2;</span><br><span class="line">             float3 tDirWS       : TEXCOORD3;</span><br><span class="line">             float3 bDirWS       : TEXCOORD4;</span><br><span class="line">             <span class="meta">#ifdef _MAIN_LIGHT_SHADOWS</span></span><br><span class="line">                 float4 shadowCoord  : TEXCOORD5;</span><br><span class="line">             <span class="meta">#endif</span></span><br><span class="line">         &#125;;</span><br><span class="line">     </span><br><span class="line">         CBUFFER_START(UnityPerMaterial)</span><br><span class="line">             float4 _DiffuseColor;</span><br><span class="line">             real4 _MainTex_ST;</span><br><span class="line">             real _NormalScale;</span><br><span class="line">             <span class="type">float</span> _Metallic;</span><br><span class="line">             <span class="type">float</span> _Smoothness;</span><br><span class="line">             <span class="type">float</span> _Fresnel;</span><br><span class="line">         CBUFFER_END</span><br><span class="line"></span><br><span class="line">         TEXTURE2D(_MainTex);</span><br><span class="line">         SAMPLER(sampler_MainTex);</span><br><span class="line">         TEXTURE2D(_NormalMap);</span><br><span class="line">         SAMPLER(sampler_NormalMap);</span><br><span class="line">         TEXTURECUBE(_CubMap);</span><br><span class="line">         SAMPLER(sampler_CubMap);</span><br><span class="line">     </span><br><span class="line">     ENDHLSL</span><br><span class="line">     </span><br><span class="line">     Pass</span><br><span class="line">     &#123;</span><br><span class="line">         Tags&#123;&quot;LightMode&quot; = &quot;UniversalForward&quot;&#125;</span><br><span class="line">         </span><br><span class="line">         HLSLPROGRAM</span><br><span class="line">         </span><br><span class="line">         <span class="meta">#pragma vertex vert</span></span><br><span class="line">         <span class="meta">#pragma fragment frag</span></span><br><span class="line">         </span><br><span class="line">         <span class="meta">#pragma multi_compile _ _MAIN_LIGHT_SHADOWS         </span></span><br><span class="line">         <span class="meta">#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE </span></span><br><span class="line">         <span class="meta">#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS</span></span><br><span class="line">         <span class="meta">#pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS   </span></span><br><span class="line">         <span class="meta">#pragma multi_compile _ _SHADOWS_SOFT            </span></span><br><span class="line"></span><br><span class="line">         <span class="meta">#pragma shader_feature _USECUBMAP_ON</span></span><br><span class="line">         </span><br><span class="line">         v2f vert(a2v i)</span><br><span class="line">         &#123;</span><br><span class="line">             v2f o;</span><br><span class="line">             o.posWS = TransformObjectToWorld(i.vertex.xyz);</span><br><span class="line">             o.pos = TransformWorldToHClip(o.posWS);</span><br><span class="line">             o.uv = TRANSFORM_TEX(i.uv, _MainTex);</span><br><span class="line">             o.nDirWS = TransformObjectToWorldNormal(i.normal);</span><br><span class="line">             o.tDirWS = <span class="built_in">normalize</span>(TransformObjectToWorldDir(i.tangent.xyz));</span><br><span class="line">             o.bDirWS = <span class="built_in">normalize</span>(<span class="built_in">cross</span>(o.nDirWS,o.tDirWS)*i.tangent.w);</span><br><span class="line">             <span class="meta">#ifdef _MAIN_LIGHT_SHADOWS</span></span><br><span class="line">                 o.shadowCoord = TransformWorldToShadowCoord(o.posWS);</span><br><span class="line">             <span class="meta">#endif</span></span><br><span class="line">             <span class="keyword">return</span> o;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         half4 frag(v2f i) : SV_Target</span><br><span class="line">         &#123;</span><br><span class="line">             float3x3 TBN = float3x3(i.tDirWS,i.bDirWS,i.nDirWS);</span><br><span class="line">             float3 nDirWS = <span class="built_in">normalize</span>(i.nDirWS);</span><br><span class="line">             float4 normalMap = SAMPLE_TEXTURE2D(_NormalMap,sampler_NormalMap,i.uv); </span><br><span class="line">             float3 normal = UnpackNormal(normalMap);</span><br><span class="line">             normal.z = <span class="built_in">sqrt</span>(<span class="number">1.0</span> - saturate(<span class="built_in">dot</span>(normal.xy,normal.xy)));</span><br><span class="line">             normal = TransformTangentToWorld(normal,TBN);</span><br><span class="line">             normal = <span class="built_in">normalize</span>(normal);</span><br><span class="line">             nDirWS = lerp(nDirWS,normal,_NormalScale);</span><br><span class="line">             </span><br><span class="line">             <span class="meta">#ifdef _MAIN_LIGHT_SHADOWS</span></span><br><span class="line">                 Light mainLight = GetMainLight(TransformWorldToShadowCoord(i.posWS));</span><br><span class="line">             <span class="meta">#else</span></span><br><span class="line">                 Light mainLight = GetMainLight();</span><br><span class="line">             <span class="meta">#endif</span></span><br><span class="line">             real4 lightColor = real4(mainLight.color, <span class="number">1</span>);</span><br><span class="line">             float3 lightDir = mainLight.direction;</span><br><span class="line">             </span><br><span class="line">             half shadow = mainLight.shadowAttenuation;</span><br><span class="line">             </span><br><span class="line">             half3 vDirWS = <span class="built_in">normalize</span>(_WorldSpaceCameraPos.xyz - i.posWS);</span><br><span class="line">             float3 refWS = <span class="built_in">normalize</span>(<span class="built_in">reflect</span>(-vDirWS,nDirWS));</span><br><span class="line">             </span><br><span class="line">             <span class="type">float</span> nDotL = <span class="built_in">dot</span>(nDirWS, lightDir);</span><br><span class="line">             <span class="type">float</span> nDotV = <span class="built_in">dot</span>(nDirWS, vDirWS);</span><br><span class="line">             </span><br><span class="line">             <span class="type">float</span> lambert = <span class="built_in">max</span>(<span class="number">0.0</span>,nDotL);</span><br><span class="line">             <span class="type">float</span> fresnel = <span class="built_in">pow</span>((<span class="number">1</span>-nDotV),_Fresnel);</span><br><span class="line">             </span><br><span class="line">             float3 halfVec = <span class="built_in">normalize</span>(lightDir+vDirWS);</span><br><span class="line">             <span class="type">float</span> blinnPhong = saturate(<span class="built_in">dot</span>(nDirWS, halfVec));</span><br><span class="line">             float3 reflectDir = <span class="built_in">normalize</span>(<span class="built_in">reflect</span>(-lightDir,nDirWS));</span><br><span class="line">             <span class="type">float</span> phong = <span class="built_in">max</span>(<span class="number">0.0</span>,<span class="built_in">dot</span>(reflectDir,vDirWS));</span><br><span class="line">             </span><br><span class="line">             half4 ambientLight = half4(SampleSH(nDirWS),<span class="number">1</span>);</span><br><span class="line">             <span class="meta">#ifdef _USECUBMAP_ON</span></span><br><span class="line">                 ambientLight = SAMPLE_TEXTURECUBE_LOD(_CubMap,sampler_CubMap,refWS,(<span class="number">255</span>-_Smoothness*<span class="number">255</span>)*<span class="number">8</span>/<span class="number">255</span>);</span><br><span class="line">             <span class="meta">#endif</span></span><br><span class="line">             </span><br><span class="line">             _DiffuseColor = <span class="built_in">pow</span>(<span class="built_in">max</span>(<span class="number">0.02</span>,_DiffuseColor),<span class="number">1.1</span>);</span><br><span class="line">             half4 mainColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);</span><br><span class="line">             </span><br><span class="line">             float4 ambient  = ambientLight*_DiffuseColor*_Metallic;</span><br><span class="line">             float4 diffuse = ((lightColor*lambert*shadow+half4(SampleSH(nDirWS),<span class="number">1</span>))*mainColor*_DiffuseColor)*(<span class="number">1</span>-(_Metallic+_Smoothness)*<span class="number">0.5</span>);</span><br><span class="line">             float4 specular = lightColor*lerp(<span class="built_in">smoothstep</span>(<span class="number">0</span>,<span class="number">0.9</span>,<span class="built_in">pow</span>(blinnPhong,_Smoothness*<span class="number">255</span>)),float4(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>),(<span class="number">1</span>-_Smoothness))*shadow;</span><br><span class="line">             specular = lerp(specular,_DiffuseColor*specular,_Metallic)+fresnel*ambientLight*_Smoothness;</span><br><span class="line"></span><br><span class="line">             float4 result= (ambient+diffuse+specular);</span><br><span class="line">             <span class="keyword">return</span>  result;</span><br><span class="line">         &#125;</span><br><span class="line">         ENDHLSL</span><br><span class="line">     &#125;</span><br><span class="line">     pass</span><br><span class="line">     &#123;</span><br><span class="line">         Tags</span><br><span class="line">         &#123;</span><br><span class="line">             &quot;LightMode&quot;=&quot;ShadowCaster&quot;</span><br><span class="line">         &#125;</span><br><span class="line">         HLSLPROGRAM</span><br><span class="line">         <span class="meta">#pragma vertex vertshadow</span></span><br><span class="line">         <span class="meta">#pragma fragment fragshadow</span></span><br><span class="line">         v2f vertshadow(a2v i)</span><br><span class="line">         &#123;</span><br><span class="line">             v2f o;</span><br><span class="line">             Light MainLight=GetMainLight();</span><br><span class="line">             float3 posWS=TransformObjectToWorld(i.vertex.xyz);</span><br><span class="line">             float3 nDirWS=TransformObjectToWorldNormal(i.normal.xyz);</span><br><span class="line">             o.pos=TransformWorldToHClip(ApplyShadowBias(posWS,nDirWS,MainLight.direction));</span><br><span class="line">         </span><br><span class="line">             <span class="meta">#if UNITY_REVERSED_Z</span></span><br><span class="line">                 o.pos.z=<span class="built_in">min</span>(o.pos.z,o.pos.w*UNITY_NEAR_CLIP_VALUE);</span><br><span class="line">             <span class="meta">#else</span></span><br><span class="line">                 o.pos.z=<span class="built_in">max</span>(o.pos.z,o.pos.w*UNITY_NEAR_CLIP_VALUE);</span><br><span class="line">             <span class="meta">#endif</span></span><br><span class="line">             <span class="keyword">return</span> o;</span><br><span class="line">         &#125;</span><br><span class="line">         half4 fragshadow(v2f i):SV_TARGET&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         ENDHLSL</span><br><span class="line">     &#125;</span><br><span class="line">    </span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2023 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

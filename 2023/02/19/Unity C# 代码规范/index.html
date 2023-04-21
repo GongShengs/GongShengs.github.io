@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>Unity C# 代码规范 - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            <span>February</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>19,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h2 class="title">Unity C# 代码规范</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p>\page code_specification 项目编码规范使用文档</p>
+<h4><span id="前言">前言</span></h4><p>程序是给人看的，这个人包括团队的其他成员和一段时间后的自己（隔几天自己可能都忘了），所以请慎重命名，根据以下规范命名。</p>
+<h4><span id="命名原则">命名原则</span></h4><ul>
+<li>名称应该说明“什么”而不是“如何”。小技巧是把需求里面的名词提取出来考察。通常避免使用公开基础实现（它们会发生改变）的名称，可以保留简化复杂性的抽象层。例如，可以使用 GetNextStudent()，而不是GetNextArrayElement()。不要使用拼音进行命名，特别是公共函数。</li>
+<li>选择正确名称时的困难可能表明需要进一步分析或定义项的目的。使名称足够长以便有一定的意义，并且足够短以避免冗长。唯一名称在编程上仅用于将各项区分开。表现力强的名称是为了帮助人们阅读；因此，提供人们可以理解的名称是有意义的。不过，请确保选择的名称符合适用语言的规则和标准。</li>
+<li>Pascal Case：所有单词第一个字母大写，其他字母小写，例如MyClassName。</li>
+<li>Camel Case：除了第一个单词，所有单词第一个字母大写，其他字母小写，例如myMemberName。</li>
+<li><strong>不在任何地方使用匈牙利命名法，现代IDE的提示功能已经足够强大，匈牙利命名法已没有意义（匈牙利命名指的是在变量名前面加不同的字母表示类型例如g_s_b_walk）。</strong></li>
+</ul>
+<h4><span id="namespace-命名">Namespace 命名</span></h4><ul>
+<li>使用“公司名.产品名.模块名”这样的格式。</li>
+<li>Namespace中类的依赖关系应该体现在命名上，比如System.Web.UI.Design中的类依赖于System.Web.UI。使用 Pascal Case。</li>
+<li>当商标（产品名）的命名风格和Pascal风格不符时，以商标（产品名）为准。</li>
+<li>在语意合适的情况下使用复数，比如System.Collections。例外是缩写和商标的情况。</li>
+<li>Namespace的名字不一定和Assembly一一对应。</li>
+</ul>
+<h4><span id="class-命名">Class 命名</span></h4><ul>
+<li>使用名词或者名词性词组命名class。</li>
+<li>使用 Pascal Case。</li>
+<li>保守地使用缩写。项目类众所周知的缩写直接使用，其他缩写需要保守点。</li>
+<li>不使用type前缀，例如C来标识Class。比如，使用FileStream而不是CFileStream。</li>
+<li>除Partial 类外不使用下划线。</li>
+<li>Partial类使用原类名+名词，例如Actor_State</li>
+<li>偶尔的在Class名称组成中需要使用I开头的时候，比如IdentityStore，避免和Interface发生歧义。</li>
+<li>在合适的时候，使用单词复合来标识从某个基类继承而来。比如xxxException。</li>
+</ul>
+<h4><span id="interface-的命名">Interface 的命名</span></h4><ul>
+<li>使用名词或者名词性词组命名Interface。</li>
+<li>使用 Pascal case。</li>
+<li>保守地使用缩写。</li>
+<li>在interface 名称前加上字母I来表示type是interface。</li>
+<li>不要使用下划线。</li>
+</ul>
+<h4><span id="enumeration-type-命名">Enumeration Type 命名</span></h4><ul>
+<li>对Enum类型和值使用Pascal case。</li>
+<li>不要在Enum类型名称后面加上Enum后缀。</li>
+</ul>
+<h4><span id="static-field-命名">Static Field 命名</span></h4><ul>
+<li>使用名词、名词性词组或者名词地缩写来命名static fields。</li>
+<li>使用Pascal case。</li>
+<li>在任何可能的情况下推荐你使用静态properties而不是public static fields。</li>
+</ul>
+<h4><span id="private-field-命名">Private Field 命名</span></h4><ul>
+<li>使用名词、名词性词组或者名词地缩写来命名。</li>
+<li>使用Camel Case。</li>
+<li>变量名中不使用下划线 (_)。</li>
+<li>只要合适，在变量名的末尾追加计算限定符（Avg、Sum、Min、Max、Index）。</li>
+<li>在变量名中使用互补对，如 min/max、begin/end 和 open/close。</li>
+<li>布尔变量包含 Is，这意味着 Yes/No 或 True/False 值，如 fileIsFound。</li>
+<li>状态变量命名时，避免使用诸如 Flag 的术语。状态变量不同于布尔变量的地方是它可以具有两个以上的可能值。不是使用 documentFlag，而是使用更具描述性的名称，如 documentFormatType。</li>
+</ul>
+<h4><span id="局部变量命名">局部变量命名</span></h4><ul>
+<li>遵循Private Field 命名规范。</li>
+<li>除去for循环,不要轻易使用单字母变量i,j,k等。</li>
+</ul>
+<h4><span id="parameter-命名">Parameter 命名</span></h4><ul>
+<li>使用Camel Case。</li>
+<li>使用描述参数的意义的名字而不是描述参数类型的名字。开发工具应该提供有关参数类型的有意义的信息，因而参数的名字可以用于更好的描述意义。</li>
+<li>保守地使用基于类型的参数名字，仅仅在它们是合适的场合下使用, 例如intValue。</li>
+</ul>
+<h4><span id="method-命名">Method 命名</span></h4><ul>
+<li>使用动词或者动词性词组命名。</li>
+<li>使用Pascal case。</li>
+</ul>
+<h4><span id="property-命名">Property 命名</span></h4><p>1.使用名词或者名词性词组命名。<br>2.使用Pascal case。<br>3.考虑使用和property type名字相同的名字作为property name。</p>
+<h4><span id="event-命名">Event 命名</span></h4><ul>
+<li>使用Pascal case。</li>
+<li>在event handler名字中使用EventHandler后缀。</li>
+<li>使用EventArgs后缀命名事件参数class。</li>
+<li>考虑使用动词命名事件。使用进行时态来标识事件正在进行之中，使用完成时态标识事件已经完成。</li>
+<li>一般应同时提供一个名字为OnXxx的protected method供派生类来改写。</li>
+</ul>
+<h4><span id="数据库表命名">数据库表命名</span></h4><ul>
+<li>用单数形式表示名称。例如，使用 Employee，而不是 Employees。</li>
+<li>在命名表的列时，不要重复表的名称；例如，在名为 Employee 的表中避免使用名为 EmployeeLastName 的字段。</li>
+<li>列的名称中不要包含数据类型。如果后来有必要更改数据类型，这将减少工作量。</li>
+</ul>
+<h4><span id="缩进和间隔">缩进和间隔</span></h4><ul>
+<li><p>使用vs.net的格式来格式化代码，位置为“编辑”-&gt;“高级”-&gt;“格式化选定内容。</p>
+</li>
+<li><p>建议缩进用 TAB，不用 SPACES。</p>
+</li>
+<li><p>串联运算符(+)放在行尾而不是开头，清楚地表示没有后面的行是不完整的。</p>
+</li>
+<li><p>注释需和代码对齐。</p>
+</li>
+<li><p>花括弧 ( {} .需和括号外的代码对齐。</p>
+</li>
+<li><p>用一个空行来分开代码的逻辑分组（视情况使用）。</p>
+</li>
+<li><p>在一个类中，各个方法需用一空行，也只能是一行分开。</p>
+</li>
+<li><p>花括弧需独立一行，而不象if, for 等可以跟括号在同一行。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">好</span><br><span class="line"><span class="keyword">if</span> ( ... )</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// Do something</span></span><br><span class="line">&#125;</span><br><span class="line">不好（不是说这个风格不好，只是为了统一风格，决定采用上面的形式，故摒弃）：</span><br><span class="line"><span class="keyword">if</span> ( ... ) &#123;</span><br><span class="line"><span class="comment">// Do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在每个运算符前后都空一格。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">好：</span><br><span class="line"><span class="keyword">if</span> (showResult == <span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">不好：</span><br><span class="line"><span class="keyword">if</span>(showResult == <span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4><span id="编程方法">编程方法</span></h4><ul>
+<li>避免使用大文件。如果一个文件里的代码超过300～400行，必须考虑将代码分开到不同类中。</li>
+<li>避免写太长的方法。一个典型的方法代码在1～25行之间。如果一个方法发代码超过25行，应该考虑将其分解为不同的方法。</li>
+<li>方法名需能看出它作什么。别使用会引起误解的名字。如果名字一目了然，就无需用文档来解释方法的功能了。</li>
+<li>方法名需能看出它作什么。别使用会引起误解的名字。如果名字一目了然，就无需用文档来解释方法的功能了。<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">好：</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SavePhoneNumber</span>(<span class="params"><span class="built_in">string</span> phoneNumber</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// Save the phone number.</span></span><br><span class="line">&#125;</span><br><span class="line">不好：</span><br><span class="line"><span class="comment">// This method will save the phone number.</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SaveData</span>(<span class="params"><span class="built_in">string</span> phoneNumber</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// Save the phone number.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>一个方法只完成一个任务。不要把多个任务组合到一个方法中，即使那些任务非常小。<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">好：</span><br><span class="line"><span class="comment">// Save the address.</span></span><br><span class="line">SaveAddress(address);</span><br><span class="line"><span class="comment">// Send an email to the supervisor to inform the address is // updated.</span></span><br><span class="line">SendEmail(address, email);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SaveAddress</span>(<span class="params"><span class="built_in">string</span> address</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// Save the address.</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SendEmail</span>(<span class="params"><span class="built_in">string</span> address, <span class="built_in">string</span> email</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// Send an email to inform the supervisor that the address //is changed.</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line">不好：</span><br><span class="line"><span class="comment">// Save address and send an email to the supervisor to inform //that the address is updated.</span></span><br><span class="line">SaveAddress(address, email);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SaveAddress</span> (<span class="params"><span class="built_in">string</span> address, <span class="built_in">string</span> email</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// Job</span></span><br><span class="line"><span class="comment">// Save the address.</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// Job 2.</span></span><br><span class="line"><span class="comment">// Send an email to inform the supervisor that the address is changed.</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4><span id="变量的使用">变量的使用</span></h4><ul>
+<li>使用C# 特有类型，而不是System命名空间中定义的别名类型。<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">好：</span><br><span class="line"><span class="built_in">int</span> age;</span><br><span class="line"><span class="built_in">string</span> name;</span><br><span class="line"><span class="built_in">object</span> contactInfo;</span><br><span class="line">不好：</span><br><span class="line">Int16 age;</span><br><span class="line">String name;</span><br><span class="line">Object contactInfo;</span><br></pre></td></tr></table></figure></li>
+<li>程序中不要使用固定数值，用常量代替。</li>
+<li>程序中不要使用字符串常数，用资源文件。</li>
+<li>避免使用很多成员变量。声明局部变量，并传递给方法。不要在方法间共享成员变量。如果在几个方法间共享一个成员变量，那就很难知道是哪个方法在什么时候修改了它的值。</li>
+<li>必要时使用enum 。别用数字或字符串来指示离散值。<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">好：</span><br><span class="line"><span class="built_in">enum</span> MailType</span><br><span class="line">&#123;</span><br><span class="line">    Html,</span><br><span class="line">    PlainText,</span><br><span class="line">    Attachment</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SendMail</span>(<span class="params"><span class="built_in">string</span> message, MailType mailType</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span>(mailType)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> MailType.Html:</span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> MailType.PlainText:</span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> MailType.Attachment:</span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="literal">default</span>:</span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">不好：</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SendMail</span>(<span class="params"><span class="built_in">string</span> message, <span class="built_in">string</span> mailType</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span> (mailType)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;Html&quot;</span>:</span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;PlainText&quot;</span>:</span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;Attachment&quot;</span>:</span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="literal">default</span>:</span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>别把成员变量声明为 public 或 protected。都声明为 private 而使用 public/protected 的Properties。</li>
+</ul>
+<h4><span id="配置文件">配置文件</span></h4><ul>
+<li>使用相对路径，代码中不要使用绝对路径，并使路径可编程。</li>
+<li>应用程序启动时作些“自检”并确保所需文件和附件在指定的位置。必要时检查数据库连接。出现任何问题给用户一个友好的提示。</li>
+<li>如果在配置文件中发现错误值，应用程序要抛出错误，给出提示消息告诉用户正确值。</li>
+</ul>
+<h4><span id="错误提示">错误提示</span></h4><ul>
+<li>错误消息需能帮助用户解决问题。永远别用象”应用程序出错”, “发现一个错误” 等错误消息。而应给出象 “更新数据库失败。请确保登陆id和密码正确。” 的具体消息。</li>
+<li>显示错误消息时，除了说哪里错了，还应提示用户如何解决问题。不要用 象 “更新数据库失败。”这样的，要提示用户怎么做：”更新数据库失败。请确保登陆id和密码正确。”</li>
+<li>显示给用户的消息要简短而友好。但要把所有可能的信息都记录下来，以助诊断问题。</li>
+</ul>
+<h4><span id="注释">注释</span></h4><ul>
+<li><p>软件文档以两种形式存在：外部的和内部的。外部文档（如规范、帮助文件和设计文档）在源代码的外部维护。内部文档由开发人员在开发时在源代码中编写的注释组成。</p>
+</li>
+<li><p>不考虑外部文档的可用性，由于硬拷贝文档可能会放错地方，源代码清单应该能够独立存在。外部文档应该由规范、设计文档、更改请求、错误历史记录和使用的编码标准组成。</p>
+</li>
+<li><p>内部软件文档的一个难题是确保注释的维护与更新与源代码同时进行。尽管正确注释源代码在运行时没有任何用途，但这对于必须维护特别复杂或麻烦的软件片段的开发人员来说却是无价的。</p>
+</li>
+<li><p>使用vs.net中的“///”添加注释。</p>
+</li>
+<li><p>语句注释避免在代码行的末尾添加注释。</p>
+</li>
+<li><p>对一个数值变量采用不是0,-1等的数值初始化，给出选择该值的理由。</p>
+</li>
+<li><p>如果应为某种原因使用了复杂艰涩的原理，为程序配备良好的文档和充分的注释。</p>
+</li>
+<li><p>在需要的地方注释。可读性强的代码需要很少的注释。如果所有的变量和方法的命名都很有意义，会使代码可读性很强并无需太多注释。</p>
+</li>
+</ul>
+<h4><span id="异常处理">异常处理</span></h4><ul>
+<li>不要”捕捉了异常却什么也不做”。如果隐藏了一个异常，你将永远不知道异常到底发生了没有。<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">好：</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReadFromFile</span>(<span class="params"><span class="built_in">string</span> fileName</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="comment">// read from file.</span></span><br><span class="line">    &#125;</span><br><span class="line">    catch (FileIOException ex)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="comment">// log error.</span></span><br><span class="line">    <span class="comment">//  re-throw exception depending on your case.</span></span><br><span class="line">    <span class="keyword">throw</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">不好:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReadFromFile</span>(<span class="params"><span class="built_in">string</span> fileName</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="comment">// read from file.</span></span><br><span class="line">    &#125;</span><br><span class="line">    catch(Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="comment">// Catching general exception is bad... we will never know whether it was a file error or some other error.</span></span><br><span class="line">    <span class="comment">// Here you are hiding an exception.</span></span><br><span class="line">    <span class="comment">// In this case no one will ever know that an exception happened.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>发生异常时，给出友好的消息给用户，但要精确记录错误的所有可能细节，包括发生的时间，和相关方法，类名等。</li>
+<li>只捕捉特定的异常，而不是一般的异常。</li>
+<li>不必在所有方法中捕捉一般异常。不管它，让程序崩溃。这将帮助你在开发周期发现大多数的错误。</li>
+<li>你可以用应用程序级（线程级）错误处理器处理所有一般的异常。遇到一般性错误时，此错误处理器应该捕捉异常，给用户提示消息，在应用程序关闭或 用户选择”忽略并继续“之前记录错误信息。</li>
+<li>不必每个方法都用try-catch。当特定的异常可能发生时才使用。比如，当你写文件时，处理异常FileIOException。</li>
+<li>别写太大的 try-catch 模块。如果需要，为每个执行的任务编写单独的 try-catch 模块。 这将帮你找出哪一段代码产生异常，并给用户发出特定的错误消息。</li>
+<li>如果应用程序需要，可以编写自己的异常类。自定义异常不应从基类SystemException派生，而要继承于IApplicationException。</li>
+<li>抛出了异常的方法应该在方法名注释中添加该异常，以方便在代码时直观显示并处理，如图：7 代码自动规范</li>
+<li>在Visual studio中，使用快捷键Ctrl + K, Ctrl + F，可以快速格式化代码。</li>
+<li>使用CodeMaid插件。</li>
+</ul>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2023 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>

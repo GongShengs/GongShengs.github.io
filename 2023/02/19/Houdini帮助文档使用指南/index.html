@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  
+  <title>Houdini 帮助文档使用指南 - 宫湦 - Technical Art</title>
+  
+    <link rel="shortcut icon" href="/friends/icon.jpg">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+<link rel="stylesheet" href="/css/waline.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+    <body style="background-image: url(theme-img/background.jpg) ;
+        background-attachment: fixed;
+        background-size: cover;">
+
+
+
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">主页</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">主页</a>
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item" href="/archives">文档</a>
+            
+            
+            
+            <a class="nav-item" href="/demo">Demo</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">友链</a>
+            
+            
+            
+            <a class="nav-item" href="/about">关于我</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">简历</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        <article class="post">
+    <div class="meta">
+        
+        <div class="date" id="date">
+            
+            
+            <span>February</span>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <span>19,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h2 class="title">Houdini 帮助文档使用指南</h2>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1><span id="houdini-帮助文档使用指南">Houdini 帮助文档使用指南</span></h1><p>越来越多的小伙伴知道了houdini这款成年人乐高软件，纷纷下载，然后很多人被houdini不一样的操作界面和逻辑给虎住了。很多人纷纷疑惑，该看什么教程啊？怎么入门啊？怎么系统化学习啊？这个教程那个教程好不好啊？</p>
+<p>就我个人观点来说，一个软件想获得更多的用户群体，首先他们官方肯定会写一份帮助文档来帮助用户快速的学习自家的软件，还有houdini官方会有相关功能的大师班或者一些其他免费的教程。</p>
+<p>Tutorials | SideFX​<a target="_blank" rel="noopener" href="http://www.sidefx.com/">www.sidefx.com</a></p>
+<p>关于官方教程可以自行了解上面是链接。</p>
+<p>下面我来说官方的帮助的一些我的个人使用心得吧，或许其实大家都知道。</p>
+<p>首先如何打开帮助</p>
+<p>方法一：官方在线帮助</p>
+<p><a target="_blank" rel="noopener" href="http://www.sidefx.com/docs/houdini/%E2%80%8Bwww.sidefx.com">http://www.sidefx.com/docs/houdini/​www.sidefx.com</a></p>
+<p>方法二：在打开houdini的情况下，本地帮助F1开启</p>
+<p>这里我强烈推荐修改环境变量，使用默认浏览器开启帮助</p>
+<p>HOUDINI_EXTERNAL_HELP_BROWSER = 1</p>
+<p>方法三：在不打开houdini的情况下直接开启本地帮助文档</p>
+<p>关于如何使用帮助文档的个人经验：</p>
+<ol>
+<li><p>萌新请直接看基础模块</p>
+<p> <img src="%E5%9B%BE%E7%89%871.png"></p>
+<p> 快速的了解基础的操作逻辑。</p>
+</li>
+<li><p>很多人说新版本改了，不知道怎么用，如果你开过文档，就知道有个what’s new in houdiniXX</p>
+<p> <img src="%E5%9B%BE%E7%89%872.png"></p>
+<p> 点开就会有当前的版本相较于上个版本的新功能功能介绍，并且包含了之前的版本的what new </p>
+</li>
+<li><p>请看官方的目录结构是非常的明显的</p>
+<p> <img src="%E5%9B%BE%E7%89%872.png"></p>
+<p> 获得开始，一切的开端</p>
+<p> <img src="%E5%9B%BE%E7%89%873.png"></p>
+<p> 简单的使用介绍</p>
+<p> <img src="%E5%9B%BE%E7%89%874.png"></p>
+<p> 动力学，houdini最强的模块的介绍</p>
+<p> <img src="%E5%9B%BE%E7%89%875.png"></p>
+<p> 关于houdini节点的功能介绍</p>
+<p> <img src="%E5%9B%BE%E7%89%876.png"></p>
+<p> 灯光，渲染和合成的介绍</p>
+<p> <img src="%E5%9B%BE%E7%89%877.png"></p>
+<p> 参考，这里可以找到脚本相关的介绍</p>
+</li>
+<li><p>可能太多了，看不过来怎么办</p>
+<p> 我的建议是萌新了解一下第一个模块和第二个模块，剩下的在实践的过程中遇到了问题再依据你的需求进行单独的查阅。<br> 每一个地方都会有一个问号的标签，点击就可以直接找到对应的帮助，而vex相关的你可以直接光标浮在对应的函数上按F1 进行查看。</p>
+<p> <img src="%E5%9B%BE%E7%89%878.png"></p>
+<p> 并且还附带一句话攻略</p>
+</li>
+<li><p>一些脚本在节点上使用时的快速帮助查询方法<br> 你写一半会自动弹出一个黑底的帮助提示</p>
+<p> <img src="%E5%9B%BE%E7%89%879.png"></p>
+<p> 如图，会用用法，含义，例子还有对应python的提示</p>
+</li>
+<li><p>帮助文档的每个帮助页面的末尾也是很有用的，会提示你相关的内容，这样就可以获得相关的应有办法</p>
+<p> <img src="%E5%9B%BE%E7%89%8710.png"></p>
+</li>
+<li><p>犹豫不决请，请引入官方例子</p>
+<p> <img src="%E5%9B%BE%E7%89%8711.png"></p>
+<p> 当你了解的你想要的，但又不明白怎么应有啊，有什么骚操作啊，这时候建议看看末尾有没有EXAMPLES，当有你就可以load到文件里进行查看。</p>
+<p> 如图会有简单的例子说明<br> houdini18版本新增，新的例子调用功能，在节点上右键，同样会有EXAMPLES选项</p>
+<p> <img src="%E5%9B%BE%E7%89%8712.png"></p>
+<p> 有一些节点会有，还有些节点可以支持自己创建例子</p>
+<p> <img src="%E5%9B%BE%E7%89%8713.png"></p>
+</li>
+<li><p>未完待续。。（想起来再写）</p>
+</li>
+</ol>
+<p>如有错误或者建议请指出，谢谢啦！</p>
+
+    </div>
+
+    <div class="about">
+        <h1>关于本文</h1>
+        <p>本文作者 Master Gong Sheng, 许可由 <a
+                target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+    </div>
+
+    
+        
+    
+</article>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+        </div>
+        &copy; 2023 Master Gong Sheng<br />
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+</footer>
+
+        
+<script src="/js/main.js"></script>
+
+        
+    </body>
+</html>
