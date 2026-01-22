@@ -5,16 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>简历 - 宫湦 - 技术美术</title>
     <link rel="shortcut icon" href="/friends/icon.jpg">
-    <script>
-        // 新标签页打开PDF，然后返回上一页
-        window.open('/resume/简历-胡武强-技术美术.pdf', '_blank');
-        // 返回上一页，如果没有历史记录则跳转到主页
-        if (window.history.length > 1) {
-            window.history.back();
-        } else {
-            window.location.href = '/';
-        }
-    </script>
+    <link rel="stylesheet" href="/css/var.css">
     <style>
         body {
             margin: 0;
@@ -22,30 +13,74 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f5f5f7;
+            background-color: var(--body-bg, #f5f5f7);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
-        .loading {
+        .resume-container {
             text-align: center;
-            color: #666;
+            padding: 40px;
+            background: var(--card-bg, #fff);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 16px;
         }
-        .loading p {
-            margin: 16px 0;
+        .resume-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
         }
-        .loading a {
-            color: #0071e3;
+        h1 {
+            font-size: 24px;
+            color: var(--card-title, #1d1d1f);
+            margin: 0 0 8px 0;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: var(--card-time, #86868b);
+            margin: 0 0 24px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 10px;
             text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            margin: 8px;
         }
-        .loading a:hover {
-            text-decoration: underline;
+        .btn-primary {
+            background-color: var(--blue, #0071e3);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: var(--link, #0077ed);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,113,227,0.3);
+        }
+        .btn-secondary {
+            background-color: var(--body-bg, #f5f5f7);
+            color: var(--card-title, #1d1d1f);
+        }
+        .btn-secondary:hover {
+            background-color: var(--border-color, #d2d2d7);
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
     </style>
 </head>
 <body>
-    <div class="loading">
-        <p>正在打开简历...</p>
-        <p>如果没有自动打开，<a href="/resume/简历-胡武强-技术美术.pdf" target="_blank">请点击这里</a></p>
-        <p><a href="/">返回主页</a></p>
+    <div class="resume-container">
+        <div class="resume-icon">📄</div>
+        <h1>胡武强</h1>
+        <p class="subtitle">技术美术 / Technical Artist</p>
+        <div class="buttons">
+            <a href="/resume/简历-胡武强-技术美术.pdf" target="_blank" class="btn btn-primary">查看简历 PDF</a>
+            <a href="/" class="btn btn-secondary">返回主页</a>
+        </div>
     </div>
 </body>
 </html>
