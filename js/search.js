@@ -265,7 +265,7 @@
     // 初始化：绑定搜索按钮
     function init() {
         // 将搜索按钮的链接行为改为打开弹窗
-        document.querySelectorAll('a[href="/search"], a.nav-item-search').forEach(link => {
+        document.querySelectorAll('a[href="/search"], a[href="/search/"], a.nav-item-search').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 openSearch();
@@ -283,6 +283,12 @@
                 closeSearch();
             }
         });
+
+        // 检查是否从 /search 页面跳转过来，自动打开搜索弹窗
+        if (sessionStorage.getItem('openSearch') === 'true') {
+            sessionStorage.removeItem('openSearch');
+            setTimeout(openSearch, 100);
+        }
     }
 
     // DOM 加载完成后初始化
