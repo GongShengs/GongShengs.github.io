@@ -1,15 +1,18 @@
 .post-list {
     user-select: none;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    max-width: 980px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    max-width: 1200px;
     margin: auto;
+    gap: 16px;
+    padding: 0 16px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 680px) {
     .post-list {
-        display: block;
-        max-width: 366px;
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        padding: 0 12px;
     }
 }
 
@@ -17,24 +20,16 @@
     overflow: hidden;
     border-radius: 7px;
     background-color: var(--card-bg);
-    margin-bottom: 21px;
     transition: all 200ms ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.post-list-item:nth-child(2n-1) {
-    margin-right: 8px;
+.post-list-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
 
-.post-list-item:nth-child(2n) {
-    margin-left: 8px;
-}
-
-@media screen and (max-width: 600px) {
-    .post-list-item:nth-child(n) {
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
+/* 使用 gap 替代 margin，自动处理间距 */
 
 .post-list-item .cover-img {
     overflow: hidden;

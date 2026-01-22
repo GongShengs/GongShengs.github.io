@@ -1,119 +1,228 @@
 <!DOCTYPE html>
-<!-- saved from url=(0036)https://mrwillcom.vercel.app/friends -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-  
-  <title>Demo - 宫湦</title>
-  
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Demo - 宫湦 - Technical Art</title>
     <link rel="shortcut icon" href="/friends/icon.jpg">
-  
-  
-    <link rel="manifest" href="https://mrwillcom.vercel.app/manifest.json">
-  
-
-  
-<link rel="stylesheet" href="/css/var.css">
-
-  
-<link rel="stylesheet" href="/css/main.css">
-
-  
-<link rel="stylesheet" href="/css/typography.css">
-
-  
-<link rel="stylesheet" href="/css/code-highlighting.css">
-
-  
-<link rel="stylesheet" href="/css/components.css">
-
-  
-<link rel="stylesheet" href="/css/nav.css">
-
-  
-<link rel="stylesheet" href="/css/paginator.css">
-
-  
-<link rel="stylesheet" href="/css/footer.css">
-
-  
-<link rel="stylesheet" href="/css/post-list.css">
-
-  
-<link rel="stylesheet" href="/css/waline.css">
-
-  
-  
-  
-<link rel="stylesheet" href="/css/post.css">
-
-  
-
-  
-
-  
-<meta name="generator" content="Hexo 5.0.2"><link rel="alternate" href="https://mrwillcom.vercel.app/atom.xml" title="Mr. Will" type="application/atom+xml">
+    
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/demo.css">
 </head>
-    <body>
-        <nav id="theme-nav">
-    <div class="inner">
-        <a class="title" href="/">主页</a>
-        <div class="nav-arrow"></div>
-        <div class="nav-items">
-            <a class="nav-item nav-item-home" href="/">主页</a>
+<body>
+    <nav id="theme-nav">
+        <div class="inner">
+            <a class="title" href="/">主页</a>
+            <div class="nav-arrow"></div>
+            <div class="nav-items">
+                <a class="nav-item nav-item-home" href="/">主页</a>
+                <a class="nav-item nav-item-search nav-item-icon" href="/search">&nbsp;</a>
+                <a class="nav-item" href="/archives">文档</a>
+                <a class="nav-item" href="/demo">Demo</a>
+                <a class="nav-item" href="/friends">友链</a>
+                <a class="nav-item" href="/about">关于我</a>
+                <a class="nav-item" href="/resume">简历</a>
+                <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
+                <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
+                <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/_gongsheng" target="_blank">&nbsp;</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="demo-header">
+        <h1>Demo 作品展示</h1>
+        <p>技术美术相关的项目演示、Shader效果、程序化工具等</p>
+    </div>
+
+    <div class="demo-filters">
+        <button class="demo-filter-btn active" data-filter="all">全部</button>
+        <button class="demo-filter-btn" data-filter="shader">Shader</button>
+        <button class="demo-filter-btn" data-filter="houdini">Houdini</button>
+        <button class="demo-filter-btn" data-filter="tool">工具</button>
+    </div>
+
+    <div class="demo-grid">
+        <!--
+        ========================================
+        Demo 配置说明：
+        复制以下模板添加新的Demo项目
+        ========================================
+        
+        <div class="demo-item" data-category="shader">
+            媒体部分 - 支持视频或图片(包括GIF)
             
-            <a class="nav-item nav-item-search nav-item-icon" href="/search" >&nbsp;</a>
-            <a class="nav-item" href="/archives">文档</a>
+            视频示例：
+            <div class="demo-media">
+                <video controls poster="封面图.jpg">
+                    <source src="视频.mp4" type="video/mp4">
+                </video>
+            </div>
             
+            图片/GIF示例：
+            <div class="demo-media">
+                <img src="图片.gif" alt="描述">
+            </div>
             
-            
-            <a class="nav-item" href="/demo">Demo</a>
-            
-            
-            
-            <a class="nav-item" href="/friends">友链</a>
-            
-            
-            
-            <a class="nav-item" href="/about">关于我</a>
-            
-            
-            
-            <a class="nav-item" href="/resume">简历</a>
-            
-            
-            
-            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/GongShengs" target="_blank">&nbsp;</a>
-            
-            
-            
-            <a class="nav-item nav-item-codepen nav-item-icon" href="https://www.artstation.com/ub010b709" target="_blank">&nbsp;</a>
-            
-            
-            
-            <a class="nav-item nav-item-patreon nav-item-icon" href="https://www.zhihu.com/people/hu-xx-24-88" target="_blank">&nbsp;</a>
-            
-            
+            内容部分：
+            <div class="demo-content">
+                <h3 class="demo-title">项目标题</h3>
+                <p class="demo-description">项目描述文字</p>
+                <div class="demo-tags">
+                    <span class="demo-tag unity">Unity</span>
+                    <span class="demo-tag shader">Shader</span>
+                    <span class="demo-tag houdini">Houdini</span>
+                </div>
+                <div class="demo-actions">
+                    <a href="链接" class="demo-btn demo-btn-primary" target="_blank">查看详情</a>
+                    <a href="链接" class="demo-btn demo-btn-secondary" target="_blank">源码</a>
+                </div>
+            </div>
+        </div>
+        ========================================
+        -->
+
+        <!-- 示例 Demo 1 -->
+        <div class="demo-item" data-category="shader">
+            <div class="demo-media">
+                <img src="/2023/02/19/Unity%20Shader%20%E5%AD%A6%E4%B9%A0%20Glitch%20Art/giphy.gif" alt="Glitch Art">
+            </div>
+            <div class="demo-content">
+                <h3 class="demo-title">Glitch Art 故障艺术</h3>
+                <p class="demo-description">数字故障风格的视觉特效，包含色彩分离、扫描线、噪点等效果。</p>
+                <div class="demo-tags">
+                    <span class="demo-tag unity">Unity</span>
+                    <span class="demo-tag shader">Shader</span>
+                </div>
+                <div class="demo-actions">
+                    <a href="/2023/02/19/Unity%20Shader%20%E5%AD%A6%E4%B9%A0%20Glitch%20Art/" class="demo-btn demo-btn-primary">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 示例 Demo 2 -->
+        <div class="demo-item" data-category="shader">
+            <div class="demo-media">
+                <img src="/2023/02/19/Unity%20Shader%20%E5%AD%A6%E4%B9%A0%20Old%20TV%20Effect/crt.gif" alt="Old TV Effect">
+            </div>
+            <div class="demo-content">
+                <h3 class="demo-title">Old TV 老电视效果</h3>
+                <p class="demo-description">复古CRT显示器效果，包含扫描线、色差、噪点和屏幕弯曲。</p>
+                <div class="demo-tags">
+                    <span class="demo-tag unity">Unity</span>
+                    <span class="demo-tag shader">Shader</span>
+                </div>
+                <div class="demo-actions">
+                    <a href="/2023/02/19/Unity%20Shader%20%E5%AD%A6%E4%B9%A0%20Old%20TV%20Effect/" class="demo-btn demo-btn-primary">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 示例 Demo 3 -->
+        <div class="demo-item" data-category="shader">
+            <div class="demo-media">
+                <img src="/2023/02/19/Unity%20Shader%20%E5%AD%A6%E4%B9%A0%20Glitch%20Art/Image%20Block%20Glitch.gif" alt="Image Block Glitch">
+            </div>
+            <div class="demo-content">
+                <h3 class="demo-title">Image Block Glitch</h3>
+                <p class="demo-description">图像块状故障效果，通过UV偏移和颜色分离实现赛博朋克风格。</p>
+                <div class="demo-tags">
+                    <span class="demo-tag unity">Unity</span>
+                    <span class="demo-tag shader">Shader</span>
+                </div>
+                <div class="demo-actions">
+                    <a href="/2023/02/19/Unity%20Shader%20%E5%AD%A6%E4%B9%A0%20Glitch%20Art/" class="demo-btn demo-btn-primary">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 示例 Demo 4 - Houdini -->
+        <div class="demo-item" data-category="houdini">
+            <div class="demo-media">
+                <img src="/theme-img/background.jpg" alt="Houdini HDA">
+            </div>
+            <div class="demo-content">
+                <h3 class="demo-title">Houdini HDA 工具封装</h3>
+                <p class="demo-description">Houdini Digital Asset封装规则与最佳实践，提升程序化工作流效率。</p>
+                <div class="demo-tags">
+                    <span class="demo-tag houdini">Houdini</span>
+                    <span class="demo-tag">程序化</span>
+                </div>
+                <div class="demo-actions">
+                    <a href="/2023/02/19/Houdini%20HDA%E5%B0%81%E8%A3%85%E8%A7%84%E5%88%99/" class="demo-btn demo-btn-primary">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 示例 Demo 5 -->
+        <div class="demo-item" data-category="shader">
+            <div class="demo-media">
+                <img src="/theme-img/background.jpg" alt="Old TV Effect">
+            </div>
+            <div class="demo-content">
+                <h3 class="demo-title">Old TV 老电视效果</h3>
+                <p class="demo-description">复古CRT显示器效果，包含扫描线、色差、噪点和屏幕弯曲。</p>
+                <div class="demo-tags">
+                    <span class="demo-tag unity">Unity</span>
+                    <span class="demo-tag shader">Shader</span>
+                </div>
+                <div class="demo-actions">
+                    <a href="/2023/02/19/Unity%20Shader%20%E5%AD%A6%E4%B9%A0%20Old%20TV%20Effect/" class="demo-btn demo-btn-primary">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 示例 Demo 6 - 工具 -->
+        <div class="demo-item" data-category="tool">
+            <div class="demo-media">
+                <img src="/theme-img/background.jpg" alt="Houdini Engine">
+            </div>
+            <div class="demo-content">
+                <h3 class="demo-title">Houdini Engine for Unity</h3>
+                <p class="demo-description">在Unity中使用Houdini引擎的插件API介绍与实践应用。</p>
+                <div class="demo-tags">
+                    <span class="demo-tag unity">Unity</span>
+                    <span class="demo-tag houdini">Houdini</span>
+                </div>
+                <div class="demo-actions">
+                    <a href="/2023/02/19/Houdini%20Engine%20for%20Unity-Plugin%20API/" class="demo-btn demo-btn-primary">查看详情</a>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
-        <article class="post">
-    <div class="meta">
-        
 
-        <h2 class="title">该页面还未上线。。。。。</h2>
-    </div>
+    <footer>
+        <div class="inner">
+            &copy; 2024 Master Gong Sheng<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        </div>
+    </footer>
 
-    <div class="divider"></div>
-
-    
-</article>
-        <footer>
-    <div class="inner">
-        
-        © 2021 Master Gong Sheng<br>
-        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-</footer>
-
-        
+    <script src="/js/main.js"></script>
+    <script>
+        // 筛选功能
+        document.querySelectorAll('.demo-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                
+                // 更新按钮状态
+                document.querySelectorAll('.demo-filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 筛选项目
+                document.querySelectorAll('.demo-item').forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

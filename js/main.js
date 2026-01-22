@@ -26,4 +26,10 @@
             }
         }
     })
+
+    // 简历链接：直接打开PDF到新标签页
+    document.querySelectorAll('a[href="/resume"]').forEach(link => {
+        link.href = '/resume/简历-胡武强-技术美术.pdf';
+        link.target = '_blank';
+    });
 })()
