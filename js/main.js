@@ -32,4 +32,21 @@
         link.href = '/resume/简历-胡武强-技术美术.pdf';
         link.target = '_blank';
     });
+
+    // 动态加载搜索功能
+    (function loadSearch() {
+        // 加载搜索 CSS
+        if (!document.querySelector('link[href="/css/search.css"]')) {
+            const css = document.createElement('link');
+            css.rel = 'stylesheet';
+            css.href = '/css/search.css';
+            document.head.appendChild(css);
+        }
+        // 加载搜索 JS
+        if (!document.querySelector('script[src="/js/search.js"]')) {
+            const script = document.createElement('script');
+            script.src = '/js/search.js';
+            document.body.appendChild(script);
+        }
+    })();
 })()
