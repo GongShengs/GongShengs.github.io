@@ -6,8 +6,14 @@
     <title>简历 - 宫湦 - 技术美术</title>
     <link rel="shortcut icon" href="/friends/icon.jpg">
     <script>
-        // 自动在新标签页打开PDF
-        window.location.href = '/resume/简历-胡武强-技术美术.pdf';
+        // 新标签页打开PDF，然后返回上一页
+        window.open('/resume/简历-胡武强-技术美术.pdf', '_blank');
+        // 返回上一页，如果没有历史记录则跳转到主页
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = '/';
+        }
     </script>
     <style>
         body {
