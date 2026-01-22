@@ -52,11 +52,40 @@ nav .nav-item {
     height: 48px;
     line-height: 48px;
     padding: 0 16px;
-    transition: padding 0.2s, color 0.5s;
+    transition: all 0.25s ease;
+    position: relative;
+    border-radius: 8px;
+    margin: 6px 2px;
+    height: 36px;
+    line-height: 36px;
 }
 
-nav .nav-item:hover, nav .nav-item:focus {
-    color: var(--black-2);
+nav .nav-item:hover {
+    color: var(--blue);
+    background-color: var(--body-bg);
+    transform: translateY(-2px);
+}
+
+nav .nav-item:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* 下划线动画效果 */
+nav .nav-item:not(.nav-item-icon)::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--blue);
+    border-radius: 1px;
+    transition: all 0.25s ease;
+    transform: translateX(-50%);
+}
+
+nav .nav-item:not(.nav-item-icon):hover::after {
+    width: 60%;
 }
 
 @media screen and (max-width: 600px) {
@@ -76,12 +105,22 @@ nav .nav-item-home {
 }
 
 nav .nav-item-icon {
-    width: 32px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     background-position: center;
-    background-size: 24px 24px;
+    background-size: 20px 20px;
     background-repeat: no-repeat;
     padding: 0;
+    border-radius: 8px;
+}
+
+nav .nav-item-icon:hover {
+    background-color: var(--body-bg);
+    transform: translateY(-2px) scale(1.1);
+}
+
+nav .nav-item-icon:active {
+    transform: translateY(0) scale(0.95);
 }
 
 nav .nav-item-github {
