@@ -1,65 +1,37 @@
-/* 首页样式 - 全屏滚动 Snap Scroll (参考 ketulmajmudar.com) */
+/* 首页样式 - 全屏背景 + 居中卡片 + 背景切换 */
 
 /* 首页专用：去掉导航栏占位 */
 body.homepage {
     margin-top: 0;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* 全屏滚动容器 */
-.fullpage-container {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-}
-
-/* 每个全屏 section */
-.fullpage-section {
-    height: 100vh;
-    width: 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-/* Section 背景 */
-.section-bg {
-    position: absolute;
+/* 背景图切换容器 */
+.hero-background {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+
+.bg-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
-/* 第一屏背景 */
-.section-hero .section-bg {
-    background-image: url('/theme-img/background.jpg');
-}
-
-/* 第二屏背景 */
-.section-work .section-bg {
-    background-image: url('/theme-img/background.jpg');
-    filter: brightness(0.7);
-}
-
-/* 第三屏背景 */
-.section-about .section-bg {
-    background-image: url('/theme-img/background.jpg');
-    filter: brightness(0.5);
-}
-
-/* 深色背景 */
-.section-bg.dark {
-    background: #0a0a0a;
+.bg-slide.active {
+    opacity: 1;
 }
 
 /* 首页导航栏透明 */
@@ -68,11 +40,6 @@ body.homepage #theme-nav {
     border-bottom: none;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
 }
 
 body.homepage #theme-nav .title {
@@ -88,31 +55,18 @@ body.homepage #theme-nav .nav-item:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* 深色 section 时导航栏样式 */
-body.homepage #theme-nav.dark-section {
-    background: rgba(10, 10, 10, 0.9);
-}
-
-/* ==================== 第一屏：Hero 卡片 ==================== */
+/* 居中卡片 */
 .hero-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.95);
     padding: 48px 64px;
     text-align: center;
     max-width: 500px;
     width: 90%;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: fadeInUp 0.8s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .card-content {
@@ -162,15 +116,14 @@ body.homepage #theme-nav.dark-section {
 }
 
 /* 按钮 */
-.card-buttons,
-.about-buttons {
+.card-buttons {
     display: flex;
     justify-content: center;
     gap: 16px;
     margin-top: 32px;
 }
 
-.btn {
+.card-buttons .btn {
     padding: 10px 32px;
     border: 1px solid #1a1a1a;
     color: #1a1a1a;
@@ -178,222 +131,76 @@ body.homepage #theme-nav.dark-section {
     letter-spacing: 2px;
     text-decoration: none;
     transition: all 0.2s;
-    background: transparent;
 }
 
-.btn:hover {
+.card-buttons .btn:hover {
     background: #1a1a1a;
     color: #fff;
 }
 
-/* 滚动提示 */
-.scroll-hint {
-    position: absolute;
-    bottom: 40px;
+/* 底部社交图标 */
+.social-footer {
+    position: fixed;
+    bottom: 32px;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
-    color: #fff;
-    animation: bounce 2s infinite;
+    display: flex;
+    gap: 16px;
+    z-index: 100;
 }
 
-.scroll-hint span {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 8px;
+.social-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.2s;
 }
 
-.scroll-arrow {
+.social-icon:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
+}
+
+.social-icon img {
     width: 20px;
     height: 20px;
-    margin: 0 auto;
-    border-right: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    transform: rotate(45deg);
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(-5px);
-    }
-}
-
-/* ==================== 第二屏：Featured Work ==================== */
-.section-content {
-    text-align: center;
-    max-width: 800px;
-    padding: 0 24px;
-}
-
-.section-label {
-    font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: #fff;
-    margin: 0 0 48px 0;
-    font-weight: 400;
-}
-
-.section-label.light {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.work-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.work-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 32px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.work-item:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(10px);
-}
-
-.work-title {
-    font-size: 18px;
-    letter-spacing: 1px;
-}
-
-.work-arrow {
-    font-size: 24px;
-    transition: transform 0.3s;
-}
-
-.work-item:hover .work-arrow {
-    transform: translateX(5px);
-}
-
-/* ==================== 第三屏：About ==================== */
-.about-text {
-    font-size: 18px;
-    line-height: 1.8;
-    color: #fff;
-    margin: 0 0 32px 0;
-    max-width: 600px;
-}
-
-.skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 40px;
-}
-
-.skill-tags span {
-    padding: 8px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    font-size: 12px;
-    letter-spacing: 1px;
-}
-
-.section-about .btn {
-    border-color: #fff;
-    color: #fff;
-}
-
-.section-about .btn:hover {
-    background: #fff;
-    color: #1a1a1a;
-}
-
-/* ==================== 第四屏：Contact ==================== */
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 48px;
-    margin-bottom: 48px;
-}
-
-.social-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.social-link:hover {
-    transform: translateY(-5px);
-}
-
-.social-link img {
-    width: 48px;
-    height: 48px;
     object-fit: contain;
 }
 
-.social-link span {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.copyright {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 1px;
-}
-
-/* ==================== 页面导航点 ==================== */
-.page-dots {
+/* 背景切换指示器 */
+.bg-indicators {
     position: fixed;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 32px;
+    right: 32px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    z-index: 1000;
+    gap: 8px;
+    z-index: 100;
 }
 
-.dot {
-    width: 10px;
-    height: 10px;
+.bg-dot {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: all 0.3s;
 }
 
-.dot:hover {
-    background: rgba(255, 255, 255, 0.5);
+.bg-dot:hover {
+    background: rgba(255, 255, 255, 0.7);
 }
 
-.dot.active {
+.bg-dot.active {
     background: #fff;
-    transform: scale(1.2);
+    transform: scale(1.3);
 }
 
-/* ==================== 响应式 ==================== */
-@media screen and (max-width: 768px) {
+/* 响应式 */
+@media screen and (max-width: 600px) {
     .hero-card {
         padding: 32px 24px;
     }
@@ -407,48 +214,26 @@ body.homepage #theme-nav.dark-section {
         font-size: 10px;
     }
     
-    .card-buttons,
-    .about-buttons {
+    .card-buttons {
         flex-direction: column;
         gap: 12px;
     }
     
-    .btn {
+    .card-buttons .btn {
         padding: 12px 24px;
     }
     
-    .work-item {
-        padding: 16px 20px;
+    .social-footer {
+        bottom: 24px;
     }
     
-    .work-title {
-        font-size: 14px;
-    }
-    
-    .about-text {
-        font-size: 14px;
-    }
-    
-    .social-links {
-        gap: 24px;
-    }
-    
-    .social-link img {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .page-dots {
-        right: 12px;
-    }
-    
-    .dot {
-        width: 8px;
-        height: 8px;
+    .bg-indicators {
+        bottom: 24px;
+        right: 24px;
     }
 }
 
-/* ==================== 非首页的样式（保留给其他页面使用） ==================== */
+/* 非首页的 Hero 样式（保留给其他页面使用） */
 .hero {
     min-height: calc(100vh - 120px);
     display: flex;

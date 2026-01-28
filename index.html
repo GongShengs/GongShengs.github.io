@@ -15,6 +15,13 @@
 </head>
     
 <body class="homepage">
+    <!-- 背景图切换容器 -->
+    <div class="hero-background">
+        <div class="bg-slide active" style="background-image: url('/theme-img/background.jpg')"></div>
+        <div class="bg-slide" style="background-image: url('/theme-img/background2.jpg')"></div>
+        <div class="bg-slide" style="background-image: url('/theme-img/background3.jpg')"></div>
+    </div>
+
     <!-- 导航栏 -->
     <nav id="theme-nav">
         <div class="inner">
@@ -30,207 +37,73 @@
         </div>
     </nav>
 
-    <!-- 全屏滚动容器 -->
-    <div class="fullpage-container">
-        <!-- 第一屏：Hero -->
-        <section class="fullpage-section section-hero" data-bg="/theme-img/background.jpg">
-            <div class="section-bg"></div>
-            <div class="hero-card">
-                <div class="card-content">
-                    <p class="card-subtitle">Technical Artist - Real-Time Rendering & Tools</p>
-                    <h1 class="card-title">宫湦</h1>
-                    <div class="card-info">
-                        <p class="card-links">
-                            <a href="/demo">Demo Projects</a> | <a href="/archives">Technical Articles</a>
-                        </p>
-                        <p class="card-tags">Unity • Unreal Engine • Houdini • Shader</p>
-                    </div>
-                    <div class="card-buttons">
-                        <a href="/demo" class="btn">GAMES</a>
-                        <a href="/resume" class="btn">RESUME</a>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll-hint">
-                <span>Scroll</span>
-                <div class="scroll-arrow"></div>
-            </div>
-        </section>
-
-        <!-- 第二屏：Featured Work -->
-        <section class="fullpage-section section-work" data-bg="/theme-img/background2.jpg">
-            <div class="section-bg"></div>
-            <div class="section-content">
-                <h2 class="section-label">Featured Work</h2>
-                <div class="work-grid">
-                    <a href="/demo" class="work-item">
-                        <span class="work-title">Demo Projects</span>
-                        <span class="work-arrow">→</span>
-                    </a>
-                    <a href="/archives" class="work-item">
-                        <span class="work-title">Technical Articles</span>
-                        <span class="work-arrow">→</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 第三屏：About -->
-        <section class="fullpage-section section-about" data-bg="/theme-img/background3.jpg">
-            <div class="section-bg"></div>
-            <div class="section-content">
-                <h2 class="section-label">About</h2>
-                <p class="about-text">
-                    Technical Artist specializing in real-time rendering, procedural generation, and tools development.
+    <!-- 居中卡片 -->
+    <div class="hero-card">
+        <div class="card-content">
+            <p class="card-subtitle">Technical Artist - Real-Time Rendering & Tools</p>
+            <h1 class="card-title">宫湦</h1>
+            <div class="card-info">
+                <p class="card-links">
+                    <a href="/demo">Demo Projects</a> | <a href="/archives">Technical Articles</a>
                 </p>
-                <div class="skill-tags">
-                    <span>Unity</span>
-                    <span>Unreal Engine</span>
-                    <span>Houdini</span>
-                    <span>Shader</span>
-                    <span>C++</span>
-                    <span>Python</span>
-                </div>
-                <div class="about-buttons">
-                    <a href="/about" class="btn">Learn More</a>
-                    <a href="/resume" class="btn">Resume</a>
-                </div>
+                <p class="card-tags">Unity • Unreal Engine • Houdini • Shader</p>
             </div>
-        </section>
-
-        <!-- 第四屏：Contact -->
-        <section class="fullpage-section section-contact">
-            <div class="section-bg dark"></div>
-            <div class="section-content">
-                <h2 class="section-label light">Contact</h2>
-                <div class="social-links">
-                    <a href="https://github.com/GongShengs" target="_blank" class="social-link">
-                        <img src="/theme-img/github-mark-light.png" alt="GitHub">
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://www.artstation.com/ub010b709" target="_blank" class="social-link">
-                        <img src="/theme-img/artstation_logo_dark.png" alt="ArtStation" style="filter: invert(1);">
-                        <span>ArtStation</span>
-                    </a>
-                    <a href="https://www.zhihu.com/people/_gongsheng" target="_blank" class="social-link">
-                        <img src="/theme-img/zhihu_logo_dark.png" alt="知乎" style="filter: invert(1);">
-                        <span>知乎</span>
-                    </a>
-                </div>
-                <p class="copyright">© 2023 宫湦 - Technical Artist</p>
+            <div class="card-buttons">
+                <a href="/demo" class="btn">GAMES</a>
+                <a href="/resume" class="btn">RESUME</a>
             </div>
-        </section>
+        </div>
     </div>
 
-    <!-- 页面导航点 -->
-    <div class="page-dots">
-        <span class="dot active" data-section="0"></span>
-        <span class="dot" data-section="1"></span>
-        <span class="dot" data-section="2"></span>
-        <span class="dot" data-section="3"></span>
+    <!-- 底部社交图标 -->
+    <div class="social-footer">
+        <a href="https://github.com/GongShengs" target="_blank" class="social-icon" title="GitHub">
+            <img src="/theme-img/github-mark-light.png" alt="GitHub">
+        </a>
+        <a href="https://www.artstation.com/ub010b709" target="_blank" class="social-icon" title="ArtStation">
+            <img src="/theme-img/artstation_logo_dark.png" alt="ArtStation" style="filter: invert(1);">
+        </a>
+        <a href="https://www.zhihu.com/people/_gongsheng" target="_blank" class="social-icon" title="知乎">
+            <img src="/theme-img/zhihu_logo_dark.png" alt="知乎" style="filter: invert(1);">
+        </a>
+    </div>
+
+    <!-- 背景切换指示器 -->
+    <div class="bg-indicators">
+        <span class="bg-dot active" data-index="0"></span>
+        <span class="bg-dot" data-index="1"></span>
+        <span class="bg-dot" data-index="2"></span>
     </div>
 
     <script src="/js/main.js"></script>
     <script>
-        // 全屏滚动脚本
+        // 背景图片自动切换
         (function() {
-            const container = document.querySelector('.fullpage-container');
-            const sections = document.querySelectorAll('.fullpage-section');
-            const dots = document.querySelectorAll('.page-dots .dot');
-            let currentSection = 0;
-            let isScrolling = false;
+            const slides = document.querySelectorAll('.bg-slide');
+            const dots = document.querySelectorAll('.bg-dot');
+            let current = 0;
+            const interval = 5000; // 5秒切换一次
             
-            // 更新当前 section
-            function updateSection(index) {
-                if (index < 0 || index >= sections.length || isScrolling) return;
-                
-                isScrolling = true;
-                currentSection = index;
-                
-                // 滚动到目标 section
-                sections[index].scrollIntoView({ behavior: 'smooth' });
-                
-                // 更新导航点
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
                 dots.forEach((dot, i) => {
                     dot.classList.toggle('active', i === index);
                 });
-                
-                // 更新导航栏样式
-                const nav = document.getElementById('theme-nav');
-                if (index === sections.length - 1) {
-                    nav.classList.add('dark-section');
-                } else {
-                    nav.classList.remove('dark-section');
-                }
-                
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 800);
+                current = index;
             }
             
-            // 鼠标滚轮事件
-            container.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                if (e.deltaY > 0) {
-                    updateSection(currentSection + 1);
-                } else {
-                    updateSection(currentSection - 1);
-                }
-            }, { passive: false });
+            // 自动切换
+            setInterval(() => {
+                const next = (current + 1) % slides.length;
+                showSlide(next);
+            }, interval);
             
-            // 点击导航点
+            // 点击指示器切换
             dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    updateSection(index);
-                });
+                dot.addEventListener('click', () => showSlide(index));
             });
-            
-            // 键盘导航
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-                    e.preventDefault();
-                    updateSection(currentSection + 1);
-                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-                    e.preventDefault();
-                    updateSection(currentSection - 1);
-                }
-            });
-            
-            // 触摸滑动支持
-            let touchStartY = 0;
-            container.addEventListener('touchstart', (e) => {
-                touchStartY = e.touches[0].clientY;
-            }, { passive: true });
-            
-            container.addEventListener('touchend', (e) => {
-                const touchEndY = e.changedTouches[0].clientY;
-                const diff = touchStartY - touchEndY;
-                
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) {
-                        updateSection(currentSection + 1);
-                    } else {
-                        updateSection(currentSection - 1);
-                    }
-                }
-            }, { passive: true });
-            
-            // 监听滚动以更新当前 section（用于 scroll snap）
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-                        const index = Array.from(sections).indexOf(entry.target);
-                        if (index !== -1 && index !== currentSection) {
-                            currentSection = index;
-                            dots.forEach((dot, i) => {
-                                dot.classList.toggle('active', i === index);
-                            });
-                        }
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            sections.forEach(section => observer.observe(section));
         })();
     </script>
 </body>
