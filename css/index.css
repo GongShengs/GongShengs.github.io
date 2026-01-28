@@ -34,25 +34,9 @@ body.homepage {
     opacity: 1;
 }
 
-/* 首页导航栏透明 */
+/* 首页隐藏导航栏 */
 body.homepage #theme-nav {
-    background: rgba(0, 0, 0, 0.2);
-    border-bottom: none;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-body.homepage #theme-nav .title {
-    color: #fff !important;
-}
-
-body.homepage #theme-nav .nav-item {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-body.homepage #theme-nav .nav-item:hover {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.1);
+    display: none;
 }
 
 /* 居中卡片 */
