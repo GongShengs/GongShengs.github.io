@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
     <!DOCTYPE html>
 <html>
@@ -9,7 +9,7 @@
   
   <title>RenderDoc 学习 - 宫湦 - Technical Art</title>
   
-    <link rel="shortcut icon" href="/friends/icon.jpg">
+    <link rel="shortcut icon" href="/theme-img/icon.jpg">
   
   
     <link rel='manifest' href='/manifest.json'>
@@ -81,15 +81,11 @@
             
             
             
-            <a class="nav-item" href="/friends">友链</a>
+            <a class="nav-item" href="/about">关于�?/a>
             
             
             
-            <a class="nav-item" href="/about">关于我</a>
-            
-            
-            
-            <a class="nav-item" href="/resume">简历</a>
+            <a class="nav-item" href="/resume">简�?/a>
             
             
             
@@ -136,7 +132,7 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1><span id="renderdoc-学习">RenderDoc 学习</span></h1><h2><span id="简介">简介</span></h2><p>RenderDoc是一种图形调试器，目前可用于 Windows、Linux、Android、Stadia 和 Nintendo Switch TM 上的 Vulkan、D3D11、D3D12、OpenGL 和 OpenGL ES 开发。</p>
+        <h1><span id="renderdoc-学习">RenderDoc 学习</span></h1><h2><span id="简�?>简�?/span></h2><p>RenderDoc是一种图形调试器，目前可用于 Windows、Linux、Android、Stadia �?Nintendo Switch TM 上的 Vulkan、D3D11、D3D12、OpenGL �?OpenGL ES 开发�?/p>
 <p><a target="_blank" rel="noopener" href="https://renderdoc.org/docs/getting_started/index.html">Renderdoc官方文档</a></p>
 <h2><span id="目的">目的</span></h2><ul>
 <li><p>优化GPU</p>
@@ -148,39 +144,39 @@
 </ul>
 <h2><span id="下载地址">下载地址</span></h2><p><a target="_blank" rel="noopener" href="https://renderdoc.org/">RenderDoc</a></p>
 <h2><span id="安装使用说明">安装使用说明</span></h2><ul>
-<li><p>点击下载好的RenderDoc_版本号.msi，根据需求进行安装设置。</p>
+<li><p>点击下载好的RenderDoc_版本�?msi，根据需求进行安装设置�?/p>
 </li>
-<li><p>Unity加载设置，点击视窗右上角的设置按钮，然后点击”Load RenderDoc”,如下图所示：</p>
+<li><p>Unity加载设置，点击视窗右上角的设置按钮，然后点击”Load RenderDoc�?如下图所示：</p>
 <p>  <img src="LoadRenderDoc.gif" alt="LoadRenderDoc.gif"></p>
 </li>
 <li><p>点击加载出来UI按钮进行抓帧使用，如上图所示：</p>
 </li>
 </ul>
-<h2><span id="相关参考资料">相关参考资料</span></h2><ul>
+<h2><span id="相关参考资�?>相关参考资�?/span></h2><ul>
 <li><a href="RenderDoc%E4%BD%BF%E7%94%A8.pdf">RenderDoc使用</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/354097312">Renderdoc使用说明文档与游戏检测工具简要总结</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/404576672">Renderdoc快速入门</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/404576672">Renderdoc快速入�?/a></li>
 </ul>
-<h2><span id="使用说明">使用说明</span></h2><p>注意：由于目前本人主要是开发PC游戏，所以手机端的相关使用暂时跳过（2021年20月3日）</p>
-<h3><span id="电脑端截帧使用方法">电脑端截帧使用方法</span></h3><p><img src="getFrame.png" alt="getFrame.png"></p>
+<h2><span id="使用说明">使用说明</span></h2><p>注意：由于目前本人主要是开发PC游戏，所以手机端的相关使用暂时跳过（2021�?0�?日）</p>
+<h3><span id="电脑端截帧使用方�?>电脑端截帧使用方�?/span></h3><p><img src="getFrame.png" alt="getFrame.png"></p>
 <ol>
-<li><p>在引擎中点击UI，跳出RenderDoc主界面，点击上图按钮(Capture Frame(s) Immediately))进行截帧，截取到的帧会保存在“Captures collected”。</p>
+<li><p>在引擎中点击UI，跳出RenderDoc主界面，点击上图按钮(Capture Frame(s) Immediately))进行截帧，截取到的帧会保存在“Captures collected”�?/p>
 </li>
-<li><p>双击打开对应的文件，进行相关的渲染分析。</p>
+<li><p>双击打开对应的文件，进行相关的渲染分析�?/p>
 </li>
 </ol>
 <h3><span id="窗口介绍">窗口介绍</span></h3><ul>
 <li><p><strong>Event Browser</strong></p>
 <p>  <img src="EventBrowser.png" alt="EventBrowser.png"></p>
-<p>  Event Browser是单步执行框架并浏览其中发生的事件的主要方法。第一列EID(Event ID)按时间顺序指示这是帧中的哪个事件或API调用。</p>
+<p>  Event Browser是单步执行框架并浏览其中发生的事件的主要方法。第一列EID(Event ID)按时间顺序指示这是帧中的哪个事件或API调用�?/p>
 </li>
 <li><p><strong>TimeLine</strong></p>
 <p>  <img src="TimeLine.png" alt="TimeLine.png"></p>
-<p>  查看这一帧的时间轴</p>
+<p>  查看这一帧的时间�?/p>
 </li>
 <li><p><strong>Texture Viewer</strong></p>
 <p>  <img src="TextureViewer.png" alt="TextureViewer.png"></p>
-<p>  主要用来查看纹理显示，我们可以用它来查看在Event Browaser中选中的DrawCall或者Pass的输入和输出纹理。2中是输入纹理， 2中是输出纹理，在其中选中一个纹理，可以在 1中放大显示。</p>
+<p>  主要用来查看纹理显示，我们可以用它来查看在Event Browaser中选中的DrawCall或者Pass的输入和输出纹理�?中是输入纹理�?2中是输出纹理，在其中选中一个纹理，可以�?1中放大显示�?/p>
 </li>
 <li><p><strong>Pipline Sate</strong></p>
 <p>  <img src="PiplineSate.png" alt="PiplineSate.png"></p>
@@ -194,7 +190,7 @@
 <p>  <img src="ResourceInspector.jpg" alt="ResourceInspector.jpg"></p>
 <p>  查看这一帧中所有的资源</p>
 <ul>
-<li><p>1 是所有引用到这一个资源的的EID,点击可以跳转到Event Brower中选中。</p>
+<li><p>1 是所有引用到这一个资源的的EID,点击可以跳转到Event Brower中选中�?/p>
 </li>
 <li><p>2 是所有的资源列表</p>
 </li>
@@ -209,7 +205,7 @@
 
     <div class="about">
         <h1>关于本文</h1>
-        <p>本文作者 Master Gong Sheng, 许可由 <a
+        <p>本文作�?Master Gong Sheng, 许可�?<a
                 target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
     </div>
 

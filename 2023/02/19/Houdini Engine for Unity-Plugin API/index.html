@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
     <!DOCTYPE html>
 <html>
@@ -9,7 +9,7 @@
   
   <title>Houdini Engine for Unity-Plugin API - 宫湦 - Technical Art</title>
   
-    <link rel="shortcut icon" href="/friends/icon.jpg">
+    <link rel="shortcut icon" href="/theme-img/icon.jpg">
   
   
     <link rel='manifest' href='/manifest.json'>
@@ -81,15 +81,11 @@
             
             
             
-            <a class="nav-item" href="/friends">友链</a>
+            <a class="nav-item" href="/about">关于�?/a>
             
             
             
-            <a class="nav-item" href="/about">关于我</a>
-            
-            
-            
-            <a class="nav-item" href="/resume">简历</a>
+            <a class="nav-item" href="/resume">简�?/a>
             
             
             
@@ -136,29 +132,29 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1><span id="houdini-engine-for-unity-plugin-api">Houdini Engine for Unity-Plugin API</span></h1><p>此文档关于houdini引擎的C# API学习<br>官方文档位置：<br><a target="_blank" rel="noopener" href="http://www.sidefx.com/docs/unity/_plugin_a_p_i.html">http://www.sidefx.com/docs/unity/_plugin_a_p_i.html</a></p>
-<p>分为三部分 1&gt; Asset layer 2&gt;Utility layer 3&gt;HAPI layer<br>1&gt;资产层<br>即资产创建以及参数获取和修改的操作<br>包含以下几个类<br>HEU_HoudiniAssetRoot这是Unity中Houdini Engine资产的根组件。它是轻量级的，仅充当层次结构的根并提供用户界面。<br>HEU_HoudiniAsset这是主要的资产组件，其中包含资产的所有元数据，以及构建，烹饪，查询和修改资产的功能。<br>HEU_ParameterUtility包含便利功能，用于查询和修改资产上的参数。<br>官方提供了一个相关的实例文档：<br>Plugins / HoudiniEngineUnity / Scripts / Examples / HEU_ExampleEvergreenQuery.cs</p>
-<p>此目录为unity houdini 引擎的包位置下。</p>
+        <h1><span id="houdini-engine-for-unity-plugin-api">Houdini Engine for Unity-Plugin API</span></h1><p>此文档关于houdini引擎的C# API学习<br>官方文档位置�?br><a target="_blank" rel="noopener" href="http://www.sidefx.com/docs/unity/_plugin_a_p_i.html">http://www.sidefx.com/docs/unity/_plugin_a_p_i.html</a></p>
+<p>分为三部�?1&gt; Asset layer 2&gt;Utility layer 3&gt;HAPI layer<br>1&gt;资产�?br>即资产创建以及参数获取和修改的操�?br>包含以下几个�?br>HEU_HoudiniAssetRoot这是Unity中Houdini Engine资产的根组件。它是轻量级的，仅充当层次结构的根并提供用户界面�?br>HEU_HoudiniAsset这是主要的资产组件，其中包含资产的所有元数据，以及构建，烹饪，查询和修改资产的功能�?br>HEU_ParameterUtility包含便利功能，用于查询和修改资产上的参数�?br>官方提供了一个相关的实例文档�?br>Plugins / HoudiniEngineUnity / Scripts / Examples / HEU_ExampleEvergreenQuery.cs</p>
+<p>此目录为unity houdini 引擎的包位置下�?/p>
 <p>实例文档笔记<br>using HoudiniEngineUnity;</p>
 <p>HEU_AssetDatabase.GetAssetFullPath</p>
 <p>//Manages the asset database to store persistent assets such as materials, textures, asset data, etc. Wraps around Unity AssetDatabase. Only available in Editor. Probably not needed at runtime as data probably does not need to persist past session.<br>//Given relative path to an asset (with Assets/ in the path), this returns the full path to it.</p>
 <p>HEU_SessionBase<br>//Base class for a Houdini Engine session. Contains functionality to interface with the Houdini Engine for a particular session.</p>
-<p>HEU_SessionManager.GetOrCreateDefaultSession()<br>//Manages a session for Houdini Engine. Supports all types of sessions.<br>//获取或者创建有效会话</p>
-<p>HEU_HAPIUtility.InstantiateHDA(evergreenFullPath, Vector3.zero, session, true);<br>//houdini引擎的工作，如创建hda，cook等。<br>//Load and instantiate an HDA asset in Unity and Houdini, for the asset located at given path.创建指定路径的hda</p>
+<p>HEU_SessionManager.GetOrCreateDefaultSession()<br>//Manages a session for Houdini Engine. Supports all types of sessions.<br>//获取或者创建有效会�?/p>
+<p>HEU_HAPIUtility.InstantiateHDA(evergreenFullPath, Vector3.zero, session, true);<br>//houdini引擎的工作，如创建hda，cook等�?br>//Load and instantiate an HDA asset in Unity and Houdini, for the asset located at given path.创建指定路径的hda</p>
 <p>public static GameObject InstantiateHDA(string filePath, Vector3 initialPosition, HEU_SessionBase session, bool bBuildAsync)<br>FilePath文件路径     initialPosition 初始位置  获取会话 是否重载</p>
-<p>HEU_EditorUtility.SelectObject(rootGO);<br>//Wrapper around Unity Editor functions.Unity编辑器函数的包装。<br>//选择物体 返回数组</p>
+<p>HEU_EditorUtility.SelectObject(rootGO);<br>//Wrapper around Unity Editor functions.Unity编辑器函数的包装�?br>//选择物体 返回数组</p>
 <p>HEU_HoudiniAsset houdiniAsset = QueryHoudiniAsset(rootGO);<br>//HEU_HoudiniAsset 资产组件<br>//QueryHoudiniAsset Shows how to get the HEU_HoudiniAsset component from a HDA root gameobject.</p>
 <p>// Make sure the HDA is cooked before querying or changing its properties.<br>CookAsset(houdiniAsset);</p>
 <p>// Example of querying and changing parms.<br>ChangeParmsAndCook(houdiniAsset);</p>
 <p>// This will query objects, geometry, parts, and attributes in the asset.<br>QueryObjects(houdiniAsset);</p>
-<p>// This will query the gravity attribute.<br>QueryAttribute(houdiniAsset, “EvergreenGenerator”, “EvergreenGenerator1”, 0, “Cd”);</p>
+<p>// This will query the gravity attribute.<br>QueryAttribute(houdiniAsset, “EvergreenGenerator�? “EvergreenGenerator1�? 0, “Cd�?;</p>
 <p>HEU_HoudiniAssetRoot<br>//The root object of a Houdini Engine asset. Used for organizing hierarchy, and more importantly displaying custom UI.</p>
 
     </div>
 
     <div class="about">
         <h1>关于本文</h1>
-        <p>本文作者 Master Gong Sheng, 许可由 <a
+        <p>本文作�?Master Gong Sheng, 许可�?<a
                 target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
     </div>
 

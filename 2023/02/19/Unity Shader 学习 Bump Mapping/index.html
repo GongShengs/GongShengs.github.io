@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
     <!DOCTYPE html>
 <html>
@@ -9,7 +9,7 @@
   
   <title>Unity Shader 学习 Bump Mapping - 宫湦 - Technical Art</title>
   
-    <link rel="shortcut icon" href="/friends/icon.jpg">
+    <link rel="shortcut icon" href="/theme-img/icon.jpg">
   
   
     <link rel='manifest' href='/manifest.json'>
@@ -81,15 +81,11 @@
             
             
             
-            <a class="nav-item" href="/friends">友链</a>
+            <a class="nav-item" href="/about">关于�?/a>
             
             
             
-            <a class="nav-item" href="/about">关于我</a>
-            
-            
-            
-            <a class="nav-item" href="/resume">简历</a>
+            <a class="nav-item" href="/resume">简�?/a>
             
             
             
@@ -136,26 +132,26 @@
     <div class="divider"></div>
 
     <div class="content">
-        <h1><span id="unity-shader-学习-bump-mapping">Unity Shader 学习 Bump Mapping</span></h1><h2><span id="简介">简介</span></h2><p>Bump Mapping（凹凸映射） 是计算机图形学中的一种纹理映射技术，用于模拟物体表面的凹凸和皱纹<sup>[1]</sup>。目前有2中方法：</p>
+        <h1><span id="unity-shader-学习-bump-mapping">Unity Shader 学习 Bump Mapping</span></h1><h2><span id="简�?>简�?/span></h2><p>Bump Mapping（凹凸映射） 是计算机图形学中的一种纹理映射技术，用于模拟物体表面的凹凸和皱纹<sup>[1]</sup>。目前有2中方法：</p>
 <ul>
 <li><p>height map (高度纹理) 通过模拟置换获得修改后的法线值，又名高度映射(height mapping)</p>
 </li>
 <li><p>noraml map (法线纹理) 通过存储在纹理中的法线信息来实现的，又名法线映射(noraml mapping)</p>
-<p>  记录pixel shading过程中每个pixel的法线信息，用来描述像素级的法线信息，而不是直接使用顶点和面法线插值得到的pixel法线，从而得到更好的细节表现<sup>[3]</sup>。</p>
+<p>  记录pixel shading过程中每个pixel的法线信息，用来描述像素级的法线信息，而不是直接使用顶点和面法线插值得到的pixel法线，从而得到更好的细节表现<sup>[3]</sup>�?/p>
 </li>
 </ul>
 <h2><span id="实现逻辑">实现逻辑</span></h2><ul>
 <li><p>noraml map</p>
 <ul>
-<li><p>实现逻辑<br>  有2种方法：1.在切线空间下计算，2.在世界空间下计算。但是由于通用性问题第二种要优于第一种，例如使用CubeMap我们要在世界空间下进行采样。</p>
+<li><p>实现逻辑<br>  �?种方法：1.在切线空间下计算�?.在世界空间下计算。但是由于通用性问题第二种要优于第一种，例如使用CubeMap我们要在世界空间下进行采样�?/p>
 <ul>
 <li><p>在世界空间下计算</p>
 <ul>
-<li>在顶点着色器计算从切线空间到世界空间的变换矩阵 TBN矩阵 T切线 B副切线 N法线 B可以由TN叉乘获得  <div align="center">
+<li>在顶点着色器计算从切线空间到世界空间的变换矩�?TBN矩阵 T切线 B副切�?N法线 B可以由TN叉乘获得  <div align="center">
   <img src="TBN.png" height="330" width="495">
   </div></li>
 <li>获得切线空间下的法线纹理数据</li>
-<li>将法线纹理数据从切线空间转换到世界空间</li>
+<li>将法线纹理数据从切线空间转换到世界空�?/li>
 </ul>
 </li>
 </ul>
@@ -165,19 +161,19 @@
 </ul>
 </li>
 </ul>
-<h2><span id="问题和思考">问题和思考</span></h2><ol>
-<li><p>法线贴图为什么是蓝色的？<br> 模型空间下的法线纹理看起来是“五颜六色”的。这是因为所有法线所在的坐标空间是同一个坐标空间，即模型空间，而每个点存储的法线方向是各异的，有的是(0,1, 0), 经过映射后存储到纹理中就对应了 RGB(0.5, 1, 0.5) 浅绿色，有的是(0, -1, 0), 经过映射后存储到纹理中就对应了 0.5, 0, 0.5)紫色。而切线空间下的法线纹理看起来几乎全部是浅蓝色的这是因为，每个法线方向所在的坐标空间是不一样的，即是表面每点各自的切线空间。这种法线纹理其实就是存储了每个点在各自的切线空间中的法线扰动方向。也就是说，如果一个点的法线方向不变，那么在它的切线空间中 ，新的法线方向就是 轴方向，即值为(0,0, 1), 经过映射后存储在纹理中就对应了 RGB(0.5, 0.5, 1) 浅蓝色 。而这个颜色就是法线纹理中大片的蓝色。</p>
+<h2><span id="问题和思�?>问题和思�?/span></h2><ol>
+<li><p>法线贴图为什么是蓝色的？<br> 模型空间下的法线纹理看起来是“五颜六色”的。这是因为所有法线所在的坐标空间是同一个坐标空间，即模型空间，而每个点存储的法线方向是各异的，有的�?0,1, 0), 经过映射后存储到纹理中就对应�?RGB(0.5, 1, 0.5) 浅绿色，有的�?0, -1, 0), 经过映射后存储到纹理中就对应�?0.5, 0, 0.5)紫色。而切线空间下的法线纹理看起来几乎全部是浅蓝色的这是因为，每个法线方向所在的坐标空间是不一样的，即是表面每点各自的切线空间。这种法线纹理其实就是存储了每个点在各自的切线空间中的法线扰动方向。也就是说，如果一个点的法线方向不变，那么在它的切线空间中 ，新的法线方向就�?轴方向，即值为(0,0, 1), 经过映射后存储在纹理中就对应�?RGB(0.5, 0.5, 1) 浅蓝�?。而这个颜色就是法线纹理中大片的蓝色�?/p>
 </li>
-<li><p>为什么法线贴图一般使用的是切线空间而非模型空间？</p>
+<li><p>为什么法线贴图一般使用的是切线空间而非模型空间�?/p>
 <ul>
 <li>自由度高</li>
 <li>可进行UV动画</li>
-<li>可重用法线纹理</li>
-<li>可压缩</li>
+<li>可重用法线纹�?/li>
+<li>可压�?/li>
 </ul>
 </li>
 <li><p>什么是切线空间（Tangent space）？</p>
-<p> Tangent space是一个三维空间。对3D空间中的一个顶点来说，切空间的三条座标轴分别对应该点的法线N，切线T，和副法线（binormal）B，显然，对不同的顶点来说，切空间是不同的。</p>
+<p> Tangent space是一个三维空间。对3D空间中的一个顶点来说，切空间的三条座标轴分别对应该点的法线N，切线T，和副法线（binormal）B，显然，对不同的顶点来说，切空间是不同的�?/p>
  <div align="center">
  <img src="NTBFromUVs.png">
  </div>
@@ -186,29 +182,29 @@
 <p> N = T × normalize(dx/dv, dy/dv, dz/dv)</p>
 <p> B = N × T</p>
 </li>
-<li><p>法线贴图的设置细节。</p>
+<li><p>法线贴图的设置细节�?/p>
 <ul>
-<li>法线贴图的属性 Bump</li>
-<li>贴图属性 TextureType-Noraml Map</li>
+<li>法线贴图的属�?Bump</li>
+<li>贴图属�?TextureType-Noraml Map</li>
 </ul>
 </li>
-<li><p>法线贴图的优化方案。</p>
+<li><p>法线贴图的优化方案�?/p>
 <ol>
-<li>使用双通道进行法线数据的处理</li>
+<li>使用双通道进行法线数据的处�?/li>
 </ol>
 </li>
 </ol>
-<h2><span id="参考">参考</span></h2><p>[1] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bump_mapping">Bump mapping - wikipedia</a></p>
+<h2><span id="参�?>参�?/span></h2><p>[1] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bump_mapping">Bump mapping - wikipedia</a></p>
 <p>[2] <a href>Unity Shader 入门精要 - 凹凸映射 - 146</a></p>
-<p>[3] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ub4y1Z765?spm_id_from=333.999.0.0">图形 2.5 BUMP图改进</a></p>
-<p>[4] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ut4y1m776?spm_id_from=333.999.0.0">庄懂的技术美术入门课(美术向)-直播录屏-第8课</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ub4y1Z765?spm_id_from=333.999.0.0">图形 2.5 BUMP图改�?/a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ut4y1m776?spm_id_from=333.999.0.0">庄懂的技术美术入门课(美术�?-直播录屏-�?�?/a></p>
 <p>[5] <a target="_blank" rel="noopener" href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/">Tutorial 13 : Normal Mapping</a></p>
 
     </div>
 
     <div class="about">
         <h1>关于本文</h1>
-        <p>本文作者 Master Gong Sheng, 许可由 <a
+        <p>本文作�?Master Gong Sheng, 许可�?<a
                 target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
     </div>
 
