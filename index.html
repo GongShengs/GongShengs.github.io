@@ -15,6 +15,13 @@
 </head>
     
 <body class="homepage">
+    <!-- 语言切换按钮 -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="zh-CN">中</button>
+        <span class="lang-divider">/</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+
     <!-- 背景图切换容器 -->
     <div class="hero-background">
         <div class="bg-slide active" style="background-image: url('/theme-img/background.jpg')"></div>
@@ -25,17 +32,17 @@
     <!-- 居中卡片 -->
     <div class="hero-card">
         <div class="card-content">
-            <p class="card-subtitle">Technical Artist - Real-Time Rendering & Tools</p>
-            <h1 class="card-title">胡武强</h1>
+            <p class="card-subtitle" data-i18n="subtitle">技术美术 - 实时渲染 / 工具开发</p>
+            <h1 class="card-title" data-i18n="name">胡武强</h1>
             <div class="card-info">
                 <p class="card-links">
-                    <a href="/demo">Demo Projects</a> | <a href="/archives">Technical Articles</a>
+                    <a href="/demo" data-i18n="links.demo">演示项目</a> | <a href="/archives" data-i18n="links.articles">技术文章</a>
                 </p>
-                <p class="card-tags">Unity • Unreal Engine • Houdini • Shader</p>
+                <p class="card-tags" data-i18n="tags">Unity • Unreal Engine • Houdini • Shader</p>
             </div>
             <div class="card-buttons">
-                <a href="/demo" class="btn">GAMES</a>
-                <a href="/resume" class="btn">RESUME</a>
+                <a href="/demo" class="btn" data-i18n="buttons.games">作品</a>
+                <a href="/resume" class="btn" data-i18n="buttons.resume">简历</a>
             </div>
         </div>
     </div>
@@ -67,7 +74,7 @@
             const slides = document.querySelectorAll('.bg-slide');
             const dots = document.querySelectorAll('.bg-dot');
             let current = 0;
-            const interval = 5000; // 5秒切换一次
+            const interval = 5000;
             
             function showSlide(index) {
                 slides.forEach((slide, i) => {
@@ -79,16 +86,71 @@
                 current = index;
             }
             
-            // 自动切换
             setInterval(() => {
                 const next = (current + 1) % slides.length;
                 showSlide(next);
             }, interval);
             
-            // 点击指示器切换
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => showSlide(index));
             });
+        })();
+
+        // 多语言切换
+        (function() {
+            const langBtns = document.querySelectorAll('.lang-btn');
+            let currentLang = localStorage.getItem('lang') || 'zh-CN';
+            let i18nData = {};
+
+            // 加载语言配置
+            async function loadLang(lang) {
+                try {
+                    const response = await fetch(`/js/i18n/${lang}.json`);
+                    i18nData = await response.json();
+                    applyLang();
+                    localStorage.setItem('lang', lang);
+                    currentLang = lang;
+                    
+                    // 更新按钮状态
+                    langBtns.forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.lang === lang);
+                    });
+                    
+                    // 更新 html lang 属性
+                    document.documentElement.lang = lang;
+                    
+                    // 更新页面标题
+                    document.title = i18nData.title;
+                } catch (e) {
+                    console.error('Failed to load language:', e);
+                }
+            }
+
+            // 应用语言到页面
+            function applyLang() {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.dataset.i18n;
+                    const value = getNestedValue(i18nData, key);
+                    if (value) {
+                        el.textContent = value;
+                    }
+                });
+            }
+
+            // 获取嵌套对象的值
+            function getNestedValue(obj, key) {
+                return key.split('.').reduce((o, k) => (o || {})[k], obj);
+            }
+
+            // 绑定按钮点击事件
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    loadLang(btn.dataset.lang);
+                });
+            });
+
+            // 初始化
+            loadLang(currentLang);
         })();
     </script>
 </body>

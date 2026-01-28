@@ -7,6 +7,48 @@ body.homepage {
     overflow-x: hidden;
 }
 
+/* 语言切换按钮 */
+.lang-switcher {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.lang-btn:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.lang-btn.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.lang-divider {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+}
+
 /* 背景图切换容器 */
 .hero-background {
     position: fixed;

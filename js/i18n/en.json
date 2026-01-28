@@ -1,0 +1,38 @@
+{
+  "lang": "en",
+  "langName": "English",
+  
+  "title": "Wuqiang Hu - Technical Art",
+  "subtitle": "Technical Artist - Real-Time Rendering & Tools",
+  "name": "Wuqiang Hu",
+  
+  "links": {
+    "demo": "Demo Projects",
+    "articles": "Technical Articles"
+  },
+  
+  "tags": "Unity • Unreal Engine • Houdini • Shader",
+  
+  "buttons": {
+    "games": "GAMES",
+    "resume": "RESUME"
+  },
+  
+  "nav": {
+    "home": "Home",
+    "archives": "Archives",
+    "demo": "Demo",
+    "about": "About",
+    "resume": "Resume"
+  },
+  
+  "social": {
+    "github": "GitHub",
+    "artstation": "ArtStation",
+    "zhihu": "Zhihu"
+  },
+  
+  "footer": {
+    "copyright": "© 2023 Wuqiang Hu - Technical Artist"
+  }
+}

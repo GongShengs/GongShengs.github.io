@@ -1,0 +1,38 @@
+{
+  "lang": "zh-CN",
+  "langName": "中文",
+  
+  "title": "胡武强 - 技术美术",
+  "subtitle": "技术美术 - 实时渲染 / 工具开发",
+  "name": "胡武强",
+  
+  "links": {
+    "demo": "演示项目",
+    "articles": "技术文章"
+  },
+  
+  "tags": "Unity • Unreal Engine • Houdini • Shader",
+  
+  "buttons": {
+    "games": "作品",
+    "resume": "简历"
+  },
+  
+  "nav": {
+    "home": "主页",
+    "archives": "文档",
+    "demo": "Demo",
+    "about": "关于我",
+    "resume": "简历"
+  },
+  
+  "social": {
+    "github": "GitHub",
+    "artstation": "ArtStation",
+    "zhihu": "知乎"
+  },
+  
+  "footer": {
+    "copyright": "© 2023 胡武强 - 技术美术"
+  }
+}
