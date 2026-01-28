@@ -1,4 +1,195 @@
-/* Hero 区域 - 极简风格 */
+/* 首页样式 - 全屏背景 + 居中卡片 (参考 ketulmajmudar.com) */
+
+/* 首页专用：去掉导航栏占位 */
+body.homepage {
+    margin-top: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* 全屏背景图 */
+.hero-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 首页导航栏透明 */
+body.homepage #theme-nav {
+    background: transparent;
+    border-bottom: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+body.homepage #theme-nav .title {
+    color: #fff !important;
+}
+
+body.homepage #theme-nav .nav-item {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body.homepage #theme-nav .nav-item:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 居中卡片 */
+.hero-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 48px 64px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.card-content {
+    color: #1a1a1a;
+}
+
+.card-subtitle {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0 0 16px 0;
+}
+
+.card-title {
+    font-size: 48px;
+    font-weight: 400;
+    margin: 0 0 24px 0;
+    letter-spacing: 4px;
+    color: #1a1a1a;
+}
+
+.card-info {
+    margin-bottom: 24px;
+}
+
+.card-links {
+    font-size: 13px;
+    margin: 0 0 8px 0;
+}
+
+.card-links a {
+    color: #1a1a1a;
+    text-decoration: underline;
+    transition: opacity 0.2s;
+}
+
+.card-links a:hover {
+    opacity: 0.7;
+}
+
+.card-tags {
+    font-size: 11px;
+    color: #888;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* 按钮 */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.card-buttons .btn {
+    padding: 10px 32px;
+    border: 1px solid #1a1a1a;
+    color: #1a1a1a;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.card-buttons .btn:hover {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* 底部社交图标 */
+.social-footer {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    z-index: 100;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.2s;
+}
+
+.social-icon:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
+}
+
+.social-icon img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* 响应式 */
+@media screen and (max-width: 600px) {
+    .hero-card {
+        padding: 32px 24px;
+    }
+    
+    .card-title {
+        font-size: 36px;
+        letter-spacing: 2px;
+    }
+    
+    .card-subtitle {
+        font-size: 10px;
+    }
+    
+    .card-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .card-buttons .btn {
+        padding: 12px 24px;
+    }
+    
+    .social-footer {
+        bottom: 24px;
+    }
+}
+
+/* 非首页的 Hero 样式（保留给其他页面使用） */
 .hero {
     min-height: calc(100vh - 120px);
     display: flex;
@@ -11,7 +202,6 @@
     max-width: 900px;
 }
 
-/* 副标题 */
 .hero .sub {
     font-size: 14px;
     letter-spacing: 3px;
@@ -22,7 +212,6 @@
     opacity: 0.8;
 }
 
-/* 主标题 */
 .hero .large {
     font-size: clamp(48px, 10vw, 96px);
     font-weight: 700;
@@ -30,72 +219,6 @@
     margin: 0 0 32px 0;
     line-height: 1.1;
     letter-spacing: -2px;
-}
-
-/* 个人介绍区域 */
-.hero-intro {
-    margin-top: 48px;
-    padding-top: 48px;
-    border-top: 1px solid var(--border-color);
-}
-
-.hero-intro .label {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-}
-
-.hero-intro .highlight-links {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.hero-intro .highlight-link {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--text-primary);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-    display: inline-block;
-}
-
-.hero-intro .highlight-link:hover {
-    color: var(--accent);
-    text-decoration: none;
-}
-
-.hero-intro .company-tags {
-    margin-top: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    color: var(--text-muted);
-    font-size: 14px;
-}
-
-/* 快速导航链接 */
-.quick-nav {
-    margin-top: 48px;
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-
-.quick-nav a {
-    color: var(--text-secondary);
-    font-size: 14px;
-    text-decoration: none;
-    padding: 8px 0;
-    border-bottom: 1px solid transparent;
-    transition: all var(--transition-fast);
-}
-
-.quick-nav a:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
 }
 
 /* Section 标题 */
@@ -108,25 +231,4 @@
     margin: 80px 0 32px 0;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border-color);
-}
-
-/* 响应式 */
-@media screen and (max-width: 768px) {
-    .hero {
-        min-height: auto;
-        padding: 60px 0;
-    }
-    
-    .hero .sub {
-        font-size: 12px;
-        letter-spacing: 2px;
-    }
-    
-    .hero-intro .highlight-link {
-        font-size: 20px;
-    }
-    
-    .quick-nav {
-        gap: 16px;
-    }
 }
