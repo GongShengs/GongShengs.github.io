@@ -1,26 +1,46 @@
+/* 分页器 - 极简风格 */
 .paginator {
-    display: block;
-    text-align: center;
-    padding: 16px;
-    margin: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 48px 0;
+    margin: 0;
 }
 
-.paginator>* {
-    border-radius: 32px;
-    padding: 6px 12px;
-    margin: 0 2px;
+.paginator > * {
+    padding: 8px 16px;
+    border-radius: 4px;
     user-select: none;
-    transition: all 0.2s;
+    transition: all var(--transition-fast);
+    font-size: 14px;
+    color: var(--text-secondary);
 }
 
-.paginator>*:hover {
-    background-color: var(--card-bg);
+.paginator a {
+    text-decoration: none;
 }
 
-.paginator>*:active {
-    background-color: var(--card-border);
+.paginator > *:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.paginator .current {
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    font-weight: 600;
 }
 
 .paginator .current:hover {
-    background-color: transparent;
+    background-color: var(--accent);
+    color: var(--bg-primary);
+}
+
+.paginator .extend {
+    color: var(--accent);
+}
+
+.paginator .extend:hover {
+    background-color: rgba(212, 175, 55, 0.1);
 }

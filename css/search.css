@@ -1,17 +1,17 @@
-/* 搜索遮罩层 */
+/* 搜索遮罩层 - 极简深色风格 */
 .search-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .search-overlay.active {
@@ -28,9 +28,10 @@
     width: 90%;
     max-width: 600px;
     max-height: 80vh;
-    background: var(--card-bg);
-    border-radius: 16px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
     z-index: 10000;
     opacity: 0;
     visibility: hidden;
@@ -65,36 +66,36 @@
     flex: 1;
     border: none;
     outline: none;
-    font-size: 18px;
+    font-size: 16px;
     background: transparent;
-    color: var(--card-title);
+    color: var(--text-primary);
 }
 
 .search-input::placeholder {
-    color: var(--card-time);
+    color: var(--text-muted);
 }
 
 .search-close {
     width: 32px;
     height: 32px;
     border: none;
-    background: var(--body-bg);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s ease;
+    transition: background var(--transition-fast);
 }
 
 .search-close:hover {
-    background: var(--border-color);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .search-close svg {
     width: 16px;
     height: 16px;
-    stroke: var(--card-time);
+    stroke: var(--text-secondary);
 }
 
 /* 搜索结果区域 */
@@ -105,25 +106,12 @@
     max-height: calc(80vh - 70px);
 }
 
-.search-results::-webkit-scrollbar {
-    width: 6px;
-}
-
-.search-results::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.search-results::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 3px;
-}
-
 /* 搜索结果项 */
 .search-result-item {
     display: block;
-    padding: 12px 20px;
+    padding: 16px 20px;
     text-decoration: none;
-    transition: background 0.2s ease;
+    transition: background var(--transition-fast);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -132,28 +120,28 @@
 }
 
 .search-result-item:hover {
-    background: var(--body-bg);
+    background: rgba(255, 255, 255, 0.03);
     text-decoration: none;
 }
 
 .search-result-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--card-title);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
     margin: 0 0 6px 0;
     line-height: 1.4;
 }
 
 .search-result-title mark {
-    background: rgba(0, 113, 227, 0.2);
-    color: var(--blue);
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--accent);
     padding: 0 2px;
     border-radius: 2px;
 }
 
 .search-result-content {
     font-size: 13px;
-    color: var(--card-time);
+    color: var(--text-secondary);
     margin: 0;
     line-height: 1.5;
     display: -webkit-box;
@@ -163,8 +151,8 @@
 }
 
 .search-result-content mark {
-    background: rgba(0, 113, 227, 0.15);
-    color: var(--link);
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--accent);
     padding: 0 1px;
     border-radius: 2px;
 }
@@ -173,7 +161,7 @@
 .search-status {
     padding: 40px 20px;
     text-align: center;
-    color: var(--card-time);
+    color: var(--text-muted);
 }
 
 .search-status-icon {
@@ -190,7 +178,7 @@
 .search-hint {
     padding: 12px 20px;
     font-size: 12px;
-    color: var(--card-time);
+    color: var(--text-muted);
     border-top: 1px solid var(--border-color);
     display: flex;
     gap: 16px;
@@ -201,7 +189,8 @@
     padding: 2px 6px;
     font-size: 11px;
     font-family: inherit;
-    background: var(--body-bg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     margin-right: 4px;
 }
@@ -218,7 +207,7 @@
     width: 24px;
     height: 24px;
     border: 2px solid var(--border-color);
-    border-top-color: var(--blue);
+    border-top-color: var(--accent);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
 }
@@ -233,7 +222,7 @@
     font-size: 11px;
     padding: 2px 8px;
     border-radius: 10px;
-    background: var(--body-bg);
-    color: var(--card-time);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
     margin-bottom: 6px;
 }

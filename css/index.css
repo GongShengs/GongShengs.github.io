@@ -1,37 +1,132 @@
+/* Hero 区域 - 极简风格 */
 .hero {
-    height: calc(100vh - 56px);
-    display: grid;
-    place-items: center;
-
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0;
 }
 
 .hero .group {
-    width: 100%;
+    max-width: 900px;
 }
 
+/* 副标题 */
 .hero .sub {
+    font-size: 14px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    font-size: 24px;
-    transform: translate(0% ,-300%);
-    color: var(--black-4);
-    font-weight: 100;
-    margin: 0;
-    transition: font-size 0.5s;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin: 0 0 24px 0;
+    opacity: 0.8;
 }
 
+/* 主标题 */
 .hero .large {
-    font-size: 100px;
-    transform: translate(0% ,-84%);
-    color: var(--black-2);
-    margin: 0;
-    transition: font-size 0.5s;
+    font-size: clamp(48px, 10vw, 96px);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 32px 0;
+    line-height: 1.1;
+    letter-spacing: -2px;
 }
 
-@media screen and (max-width: 800px) {
-    .hero .sub {
-        font-size: 16px;
+/* 个人介绍区域 */
+.hero-intro {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border-color);
+}
+
+.hero-intro .label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.hero-intro .highlight-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hero-intro .highlight-link {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    display: inline-block;
+}
+
+.hero-intro .highlight-link:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.hero-intro .company-tags {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* 快速导航链接 */
+.quick-nav {
+    margin-top: 48px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.quick-nav a {
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.quick-nav a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* Section 标题 */
+.section-title {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin: 80px 0 32px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* 响应式 */
+@media screen and (max-width: 768px) {
+    .hero {
+        min-height: auto;
+        padding: 60px 0;
     }
-    .hero .large {
-        font-size: 84px;
+    
+    .hero .sub {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+    
+    .hero-intro .highlight-link {
+        font-size: 20px;
+    }
+    
+    .quick-nav {
+        gap: 16px;
     }
 }

@@ -1,61 +1,74 @@
 :root {
-    --white-opacity-8: rgba(255, 255, 255, .8);
-    --white-1-opacity-8: rgba(229.5, 229.5, 229.5, .8);
-    --white: #fff;
-    --white-1: rgb(229.5, 229.5, 229.5);
-    --white-2: rgb(204, 204, 204);
-
-    --grey: rgb(127.5, 127.5, 127.5);
-
-    --black: #000;
-    --black-2: rgb(51, 51, 51);
-    --black-4: rgb(102, 102, 102);
-
-    --border-color: #8882;
-
-    --link: #06c;
-
-    --blur: blur(32px);
-
-    --blue: #0071e3;
-    --white-txt-on-blue-bg: #fff;
-
-    --body-bg: #fbfbfd;
-    --card-bg: #fff;
-    --card-title: #1d1d1f;
-    --card-time: #6e6e73;
-    --date-txt: #6e6e73;
-
-    --nav-arrow: #1d1d1f;
+    /* 深色主题为默认 - 参考 ketulmajmudar.com 风格 */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-card: #151515;
+    --bg-card-hover: #1a1a1a;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --text-muted: #555555;
+    
+    --accent: #d4af37;
+    --accent-hover: #e5c454;
+    --link: #d4af37;
+    --link-hover: #e5c454;
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-hover: rgba(255, 255, 255, 0.2);
+    
+    --nav-bg: rgba(10, 10, 10, 0.85);
+    --nav-blur: blur(20px);
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* 兼容旧变量 */
+    --white: #0a0a0a;
+    --white-1: #111111;
+    --white-2: #1a1a1a;
+    --white-opacity-8: rgba(10, 10, 10, 0.85);
+    --white-1-opacity-8: rgba(17, 17, 17, 0.85);
+    --black: #ffffff;
+    --black-2: #e5e5e5;
+    --black-4: #888888;
+    --grey: #666666;
+    --blue: #d4af37;
+    --white-txt-on-blue-bg: #0a0a0a;
+    --body-bg: #0a0a0a;
+    --card-bg: #151515;
+    --card-title: #ffffff;
+    --card-time: #888888;
+    --date-txt: #888888;
+    --nav-arrow: #ffffff;
+    --blur: blur(20px);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --white-opacity-8: rgba(0, 0, 0, .8);
-        --white-1-opacity-8: rgba(25.5, 25.5, 25.5, .8);
-        --white: #000;
-        --white-1: rgb(25.5, 25.5, 25.5);
-        --white-2: rgb(51, 51, 51);
-
-        --black: #fff;
-        --black-2: rgb(204, 204, 204);
-        --black-4: rgb(153, 153, 153);
-
-        --border-color: #8884;
-
-        --link: #5fafff;
-
-        --blur: blur(32px);
-
-        --blue: #00376f;
-        --white-txt-on-blue-bg: #c0dfff;
-
-        --body-bg: #101010;
-        --card-bg: #181818;
-        --card-title: #cfcfda;
-        --card-time: #6e6e73;
-        --date-txt: #6e6e73;
-
-        --nav-arrow: #e5e5ee;
+/* 亮色主题备选 */
+@media (prefers-color-scheme: light) {
+    :root.light-mode {
+        --bg-primary: #fafafa;
+        --bg-secondary: #f0f0f0;
+        --bg-card: #ffffff;
+        --bg-card-hover: #f5f5f5;
+        
+        --text-primary: #1a1a1a;
+        --text-secondary: #666666;
+        --text-muted: #999999;
+        
+        --accent: #0066cc;
+        --accent-hover: #0077ee;
+        --link: #0066cc;
+        --link-hover: #0077ee;
+        
+        --border-color: rgba(0, 0, 0, 0.1);
+        --border-color-hover: rgba(0, 0, 0, 0.2);
+        
+        --nav-bg: rgba(250, 250, 250, 0.85);
     }
 }
