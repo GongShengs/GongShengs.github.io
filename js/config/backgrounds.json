@@ -1,0 +1,30 @@
+{
+  "backgrounds": [
+    {
+      "url": "/theme-img/sandrock_hero.jpg",
+      "name": "沙石镇时光"
+    },
+    {
+      "url": "/theme-img/tides_annihilation_hero.jpg",
+      "name": "湮灭之潮"
+    },
+    {
+      "url": "/theme-img/arc_raiders_hero.jpg",
+      "name": "Arc Raiders"
+    },
+    {
+      "url": "/theme-img/dragonstone.jpg",
+      "name": "龙石战争"
+    },
+    {
+      "url": "/theme-img/stellar_era.png",
+      "name": "群星纪元"
+    },
+    {
+      "url": "/theme-img/tarisland.jpg",
+      "name": "塔瑞斯世界"
+    }
+  ],
+  "interval": 5000,
+  "transition": 1000
+}

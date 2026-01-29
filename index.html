@@ -22,12 +22,8 @@
         <button class="lang-btn" data-lang="en">EN</button>
     </div>
 
-    <!-- 背景图切换容器 -->
-    <div class="hero-background">
-        <div class="bg-slide active" style="background-image: url('/theme-img/background.jpg')"></div>
-        <div class="bg-slide" style="background-image: url('/theme-img/background2.jpg')"></div>
-        <div class="bg-slide" style="background-image: url('/theme-img/background3.jpg')"></div>
-    </div>
+    <!-- 背景图切换容器（由配置文件动态生成） -->
+    <div class="hero-background" id="hero-background"></div>
 
     <!-- 居中卡片 -->
     <div class="hero-card">
@@ -60,23 +56,73 @@
         </a>
     </div>
 
-    <!-- 背景切换指示器 -->
-    <div class="bg-indicators">
-        <span class="bg-dot active" data-index="0"></span>
-        <span class="bg-dot" data-index="1"></span>
-        <span class="bg-dot" data-index="2"></span>
-    </div>
+    <!-- 背景切换指示器（由配置文件动态生成） -->
+    <div class="bg-indicators" id="bg-indicators"></div>
 
     <script src="/js/main.js"></script>
     <script>
-        // 背景图片自动切换
+        // 背景图片管理（从配置文件加载）
         (function() {
-            const slides = document.querySelectorAll('.bg-slide');
-            const dots = document.querySelectorAll('.bg-dot');
+            const bgContainer = document.getElementById('hero-background');
+            const dotsContainer = document.getElementById('bg-indicators');
+            let slides = [];
+            let dots = [];
             let current = 0;
-            const interval = 5000;
-            
+            let autoPlayTimer = null;
+            let config = { interval: 5000, transition: 1000 };
+
+            // 加载背景配置
+            async function loadBackgrounds() {
+                try {
+                    const response = await fetch('/js/config/backgrounds.json');
+                    const data = await response.json();
+                    config = { ...config, ...data };
+                    
+                    // 设置过渡时间
+                    document.documentElement.style.setProperty('--bg-transition', `${config.transition}ms`);
+                    
+                    // 生成背景图和指示器
+                    createSlides(data.backgrounds);
+                    
+                    // 开始自动播放
+                    startAutoPlay();
+                } catch (e) {
+                    console.error('Failed to load backgrounds config:', e);
+                    // 降级：使用默认背景
+                    createSlides([{ url: '/theme-img/background.jpg', name: '默认' }]);
+                }
+            }
+
+            // 创建幻灯片和指示器
+            function createSlides(backgrounds) {
+                bgContainer.innerHTML = '';
+                dotsContainer.innerHTML = '';
+                slides = [];
+                dots = [];
+
+                backgrounds.forEach((bg, index) => {
+                    // 创建背景 slide
+                    const slide = document.createElement('div');
+                    slide.className = 'bg-slide' + (index === 0 ? ' active' : '');
+                    slide.style.backgroundImage = `url('${bg.url}')`;
+                    bgContainer.appendChild(slide);
+                    slides.push(slide);
+
+                    // 创建指示器点
+                    const dot = document.createElement('span');
+                    dot.className = 'bg-dot' + (index === 0 ? ' active' : '');
+                    dot.dataset.index = index;
+                    dot.title = bg.name || `背景 ${index + 1}`;
+                    dot.addEventListener('click', () => showSlide(index));
+                    dotsContainer.appendChild(dot);
+                    dots.push(dot);
+                });
+            }
+
+            // 显示指定幻灯片
             function showSlide(index) {
+                if (index < 0 || index >= slides.length) return;
+                
                 slides.forEach((slide, i) => {
                     slide.classList.toggle('active', i === index);
                 });
@@ -85,15 +131,19 @@
                 });
                 current = index;
             }
-            
-            setInterval(() => {
-                const next = (current + 1) % slides.length;
-                showSlide(next);
-            }, interval);
-            
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => showSlide(index));
-            });
+
+            // 开始自动播放
+            function startAutoPlay() {
+                if (slides.length <= 1) return;
+                
+                autoPlayTimer = setInterval(() => {
+                    const next = (current + 1) % slides.length;
+                    showSlide(next);
+                }, config.interval);
+            }
+
+            // 初始化
+            loadBackgrounds();
         })();
 
         // 多语言切换
@@ -102,7 +152,6 @@
             let currentLang = localStorage.getItem('lang') || 'zh-CN';
             let i18nData = {};
 
-            // 加载语言配置
             async function loadLang(lang) {
                 try {
                     const response = await fetch(`/js/i18n/${lang}.json`);
@@ -111,22 +160,17 @@
                     localStorage.setItem('lang', lang);
                     currentLang = lang;
                     
-                    // 更新按钮状态
                     langBtns.forEach(btn => {
                         btn.classList.toggle('active', btn.dataset.lang === lang);
                     });
                     
-                    // 更新 html lang 属性
                     document.documentElement.lang = lang;
-                    
-                    // 更新页面标题
                     document.title = i18nData.title;
                 } catch (e) {
                     console.error('Failed to load language:', e);
                 }
             }
 
-            // 应用语言到页面
             function applyLang() {
                 document.querySelectorAll('[data-i18n]').forEach(el => {
                     const key = el.dataset.i18n;
@@ -137,19 +181,16 @@
                 });
             }
 
-            // 获取嵌套对象的值
             function getNestedValue(obj, key) {
                 return key.split('.').reduce((o, k) => (o || {})[k], obj);
             }
 
-            // 绑定按钮点击事件
             langBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     loadLang(btn.dataset.lang);
                 });
             });
 
-            // 初始化
             loadLang(currentLang);
         })();
     </script>
