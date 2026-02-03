@@ -3,32 +3,34 @@ body {
 }
 
 .post {
-    margin: 128px 0;
+    margin: var(--spacing-3xl, 128px) 0;
 }
 
 .meta .date {
     color: var(--grey);
     font-weight: 600;
+    font-size: var(--font-md, 14px);
 }
 
 .meta .title {
-    font-size: 48px;
-    margin-top: 16px;
+    font-size: var(--font-4xl, 48px);
+    margin-top: var(--spacing-md, 16px);
+    line-height: 1.2;
 }
 
 .content p, .content h1, .content h2, .content h3, .content h4, .content h5, .content h6, .meta .date, .content figure, .divider, .container, hr, .meta .title, .content blockquote, .content table, .content video, .content ul, .content ol, .about {
-    max-width: 800px;
+    max-width: var(--container-narrow, 800px);
     margin-left: auto;
     margin-right: auto;
-    padding: 0 16px;
+    padding: 0 var(--container-padding, 16px);
 }
 
 .content .highlight {
     overflow-x: auto;
     overflow-y: hidden;
     background-color: var(--body-bg);
-    border-radius: 4px;
-    max-width: calc(800px - 16px * 2);
+    border-radius: var(--radius-sm, 4px);
+    max-width: calc(var(--container-narrow, 800px) - var(--container-padding, 16px) * 2);
 }
 
 @media screen and (max-width: 800px) {
@@ -38,7 +40,7 @@ body {
 }
 
 .content .highlight .gutter {
-    padding-right: 16px;
+    padding-right: var(--spacing-md, 16px);
 }
 
 .content table, .content video {
@@ -56,14 +58,14 @@ body {
     height: auto !important;
     width: auto !important;
     display: block;
-    margin: 16px auto;
-    border-radius: 8px;
+    margin: var(--spacing-md, 16px) auto;
+    border-radius: var(--radius-md, 8px);
 }
 
 .content div[align="center"] {
-    max-width: 800px;
-    margin: 16px auto;
-    padding: 0 16px;
+    max-width: var(--container-narrow, 800px);
+    margin: var(--spacing-md, 16px) auto;
+    padding: 0 var(--container-padding, 16px);
 }
 
 .content div[align="center"] img {
@@ -73,9 +75,9 @@ body {
 }
 
 .content ul, .content ol {
-    padding: 0 16px;
-    padding-left: 32px;
-    max-width: calc(800px - 16px * 2);
+    padding: 0 var(--container-padding, 16px);
+    padding-left: var(--spacing-xl, 32px);
+    max-width: calc(var(--container-narrow, 800px) - var(--container-padding, 16px) * 2);
 }
 
 .content ul *, .content ol * {
@@ -83,17 +85,95 @@ body {
 }
 
 .content blockquote {
-    max-width: calc(800px - 16px * 2);
-    padding: 0 8px;
+    max-width: calc(var(--container-narrow, 800px) - var(--container-padding, 16px) * 2);
+    padding: 0 var(--spacing-sm, 8px);
 }
 
 .about {
     border-radius: 7px;
     background-color: var(--body-bg);
-    padding: 16px;
-    margin: 64px auto;
+    padding: var(--spacing-md, 16px);
+    margin: var(--spacing-3xl, 64px) auto;
 }
 
 .about h1 {
     margin: 0;
+}
+
+/* ========== 文章页响应式 ========== */
+
+/* 平板 */
+@media screen and (max-width: 768px) {
+    .post {
+        margin: var(--spacing-2xl, 64px) 0;
+    }
+    
+    .meta .title {
+        font-size: var(--font-3xl, 36px);
+    }
+    
+    .meta .date {
+        font-size: var(--font-sm, 12px);
+    }
+}
+
+/* 手机 */
+@media screen and (max-width: 600px) {
+    .post {
+        margin: var(--spacing-xl, 40px) 0;
+    }
+    
+    .meta .title {
+        font-size: var(--font-2xl, 28px);
+        margin-top: var(--spacing-sm, 8px);
+    }
+    
+    .content p, .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+        font-size: var(--font-lg, 15px);
+    }
+    
+    .content h1 {
+        font-size: var(--font-2xl, 24px);
+    }
+    
+    .content h2 {
+        font-size: var(--font-xl, 20px);
+    }
+    
+    .content h3 {
+        font-size: var(--font-lg, 18px);
+    }
+    
+    .content img {
+        border-radius: var(--radius-sm, 4px);
+        margin: var(--spacing-sm, 12px) auto;
+    }
+    
+    .about {
+        margin: var(--spacing-xl, 32px) auto;
+        padding: var(--spacing-sm, 12px);
+    }
+}
+
+/* 小手机 */
+@media screen and (max-width: 480px) {
+    .meta .title {
+        font-size: var(--font-2xl, 24px);
+    }
+    
+    .content p {
+        font-size: var(--font-md, 14px);
+        line-height: 1.7;
+    }
+}
+
+/* 超小屏 */
+@media screen and (max-width: 360px) {
+    .meta .title {
+        font-size: 20px;
+    }
+    
+    .post {
+        margin: var(--spacing-lg, 24px) 0;
+    }
 }

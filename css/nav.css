@@ -14,13 +14,13 @@ nav {
 }
 
 nav > .inner {
-    max-width: 1200px;
+    max-width: var(--container-max, 1200px);
     margin: auto;
-    padding: 0 24px;
+    padding: 0 var(--container-padding, 24px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 64px;
+    height: var(--nav-height, 64px);
 }
 
 nav a, nav a:hover, nav a:focus, nav a:active, nav a:link, nav a:visited {
@@ -29,7 +29,7 @@ nav a, nav a:hover, nav a:focus, nav a:active, nav a:link, nav a:visited {
 
 /* Logo/标题 */
 nav .title {
-    font-size: 18px;
+    font-size: var(--font-xl, 18px);
     font-weight: 600;
     letter-spacing: 1px;
     color: var(--text-primary) !important;
@@ -43,15 +43,15 @@ nav .nav-arrow {
 nav .nav-items {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-sm, 8px);
 }
 
 /* 导航项 */
 nav .nav-item {
-    font-size: 13px;
+    font-size: var(--font-md, 13px);
     letter-spacing: 0.5px;
     color: var(--text-secondary);
-    padding: 8px 16px;
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
     transition: all var(--transition-fast);
     position: relative;
 }
@@ -106,16 +106,20 @@ nav .nav-item-search {
     filter: invert(1);
 }
 
-/* 移动端响应式 */
-@media screen and (max-width: 768px) {
-    nav > .inner {
-        padding: 0 16px;
-        height: 56px;
-    }
-    
+/* ========== 响应式导航 ========== */
+
+/* 平板横屏 */
+@media screen and (max-width: 1024px) {
     nav .nav-item {
-        padding: 8px 12px;
-        font-size: 12px;
+        padding: var(--spacing-sm, 8px) 12px;
+    }
+}
+
+/* 平板竖屏 */
+@media screen and (max-width: 768px) {
+    nav .nav-item {
+        padding: var(--spacing-sm, 8px) 10px;
+        font-size: var(--font-sm, 12px);
     }
     
     nav .nav-item-icon {
@@ -123,11 +127,16 @@ nav .nav-item-search {
         height: 36px;
         background-size: 16px 16px;
     }
+    
+    nav .title {
+        font-size: var(--font-lg, 16px);
+    }
 }
 
+/* 手机端 - 折叠菜单 */
 @media screen and (max-width: 600px) {
     nav {
-        height: 56px;
+        height: var(--nav-height, 56px);
         overflow: hidden;
     }
     
@@ -139,7 +148,7 @@ nav .nav-item-search {
     }
     
     nav .title {
-        font-size: 16px;
+        font-size: var(--font-lg, 15px);
     }
     
     nav .nav-arrow {
@@ -182,13 +191,14 @@ nav .nav-item-search {
         transform: translateY(-10px);
         transition: all var(--transition-normal);
         pointer-events: none;
-        padding-top: 16px;
+        padding-top: var(--spacing-md, 16px);
     }
     
     nav .nav-item {
         width: 100%;
         padding: 12px 0;
         border-bottom: 1px solid var(--border-color);
+        font-size: var(--font-md, 14px);
     }
     
     nav .nav-item-icon {
@@ -214,5 +224,40 @@ nav .nav-item-search {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
+    }
+}
+
+/* 超小屏幕 */
+@media screen and (max-width: 360px) {
+    nav .title {
+        font-size: var(--font-md, 14px);
+    }
+    
+    nav .nav-arrow {
+        width: 28px;
+        height: 28px;
+    }
+    
+    nav .nav-item {
+        padding: 10px 0;
+        font-size: var(--font-sm, 13px);
+    }
+}
+
+/* 横屏手机 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    nav > .inner {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    
+    nav .title {
+        font-size: var(--font-md, 14px);
+    }
+    
+    nav .nav-item-icon {
+        width: 32px;
+        height: 32px;
+        background-size: 14px 14px;
     }
 }

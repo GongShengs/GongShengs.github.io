@@ -4,29 +4,29 @@ footer {
     width: 100%;
     border-top: 1px solid var(--border-color);
     user-select: none;
-    padding: 48px 0;
+    padding: var(--spacing-2xl, 48px) 0;
 }
 
 footer .inner {
-    max-width: 1200px;
+    max-width: var(--container-max, 1200px);
     margin: auto;
-    padding: 0 24px;
+    padding: 0 var(--container-padding, 24px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: var(--spacing-lg, 24px);
 }
 
 footer .links {
     display: flex;
-    gap: 24px;
+    gap: var(--spacing-lg, 24px);
     flex-wrap: wrap;
 }
 
 footer .links a {
     color: var(--text-secondary);
-    font-size: 13px;
+    font-size: var(--font-md, 13px);
     text-decoration: none;
     transition: color var(--transition-fast);
 }
@@ -38,7 +38,7 @@ footer .links a:hover {
 /* 社交图标 */
 footer .social-icons {
     display: flex;
-    gap: 16px;
+    gap: var(--spacing-md, 16px);
 }
 
 footer .social-icons a {
@@ -65,12 +65,12 @@ footer .social-icons svg {
 
 /* 版权信息 */
 footer .copyright {
-    font-size: 12px;
+    font-size: var(--font-sm, 12px);
     color: var(--text-muted);
     text-align: center;
     width: 100%;
-    margin-top: 24px;
-    padding-top: 24px;
+    margin-top: var(--spacing-lg, 24px);
+    padding-top: var(--spacing-lg, 24px);
     border-top: 1px solid var(--border-color);
 }
 
@@ -91,24 +91,81 @@ footer .item {
     display: none;
 }
 
-/* 响应式 */
+/* ========== Footer 响应式 ========== */
+
+/* 平板 */
+@media screen and (max-width: 768px) {
+    footer {
+        padding: var(--spacing-xl, 36px) 0;
+    }
+    
+    footer .links {
+        gap: var(--spacing-md, 16px);
+    }
+    
+    footer .links a {
+        font-size: var(--font-sm, 12px);
+    }
+    
+    footer .social-icons a {
+        width: 32px;
+        height: 32px;
+    }
+    
+    footer .social-icons svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* 手机 */
 @media screen and (max-width: 600px) {
     footer {
-        padding: 32px 0;
+        padding: var(--spacing-xl, 32px) 0;
     }
     
     footer .inner {
-        padding: 0 16px;
         flex-direction: column;
         text-align: center;
     }
     
     footer .links {
         justify-content: center;
+        gap: var(--spacing-md, 12px);
     }
     
     footer .copyright {
-        margin-top: 16px;
-        padding-top: 16px;
+        margin-top: var(--spacing-md, 16px);
+        padding-top: var(--spacing-md, 16px);
+        font-size: var(--font-xs, 11px);
+    }
+}
+
+/* 小手机 */
+@media screen and (max-width: 400px) {
+    footer {
+        padding: var(--spacing-lg, 24px) 0;
+    }
+    
+    footer .links {
+        gap: var(--spacing-sm, 10px);
+    }
+    
+    footer .links a {
+        font-size: var(--font-xs, 11px);
+    }
+    
+    footer .social-icons {
+        gap: var(--spacing-sm, 10px);
+    }
+    
+    footer .social-icons a {
+        width: 28px;
+        height: 28px;
+    }
+    
+    footer .social-icons svg {
+        width: 14px;
+        height: 14px;
     }
 }

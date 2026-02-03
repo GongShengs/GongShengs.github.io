@@ -1,14 +1,12 @@
 .card-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-}
-
-.card-grid {
     max-width: 1000px;
     margin: auto;
-    padding: 0 16px;
+    padding: 0 var(--container-padding, 16px);
 }
 
+/* ========== Card Grid 响应式 ========== */
 @media screen and (max-width: 1000px) {
     .card-grid {
         max-width: 800px;
@@ -29,34 +27,34 @@
 
 .card {
     overflow: hidden;
-    border-radius: 7px;
+    border-radius: var(--radius-md, 7px);
     background-color: var(--card-bg);
-    margin-bottom: 21px;
+    margin-bottom: var(--spacing-lg, 21px);
     transition: all 200ms ease;
 }
 
 .card:nth-child(3n-2) {
     margin-left: 0;
-    margin-right: 8px;
+    margin-right: var(--spacing-sm, 8px);
 }
 
 .card:nth-child(3n-1) {
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: var(--spacing-sm, 8px);
+    margin-right: var(--spacing-sm, 8px);
 }
 
 .card:nth-child(3n) {
-    margin-left: 8px;
+    margin-left: var(--spacing-sm, 8px);
     margin-right: 0;
 }
 
 @media screen and (max-width: 800px) {
     .card:nth-child(2n-1) {
         margin-left: 0;
-        margin-right: 8px;
+        margin-right: var(--spacing-sm, 8px);
     }
     .card:nth-child(2n) {
-        margin-left: 8px;
+        margin-left: var(--spacing-sm, 8px);
         margin-right: 0;
     }
 }
@@ -65,12 +63,25 @@
     .card {
         margin-left: 0px!important;
         margin-right: 0px!important;
+        margin-bottom: var(--spacing-md, 16px);
     }
 }
 
 .card .cover-img {
     overflow: hidden;
     height: 266px;
+}
+
+@media screen and (max-width: 600px) {
+    .card .cover-img {
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .card .cover-img {
+        height: 180px;
+    }
 }
 
 .card .cover-img img {
@@ -87,25 +98,37 @@
 }
 
 .card .content {
-    padding: 18px;
+    padding: var(--spacing-md, 18px);
 }
 
 .card .title {
     font-weight: bold;
-    font-size: 24px;
+    font-size: var(--font-2xl, 24px);
     color: var(--black);
     text-decoration: none;
     padding: 0;
 }
 
+@media screen and (max-width: 600px) {
+    .card .title {
+        font-size: var(--font-xl, 20px);
+    }
+}
+
 .card .description {
-    font-size: 17px;
+    font-size: var(--font-lg, 17px);
     color: var(--black-1);
     padding: 0;
 }
 
+@media screen and (max-width: 600px) {
+    .card .description {
+        font-size: var(--font-md, 15px);
+    }
+}
+
 .card .actions {
-    padding: 16px;
+    padding: var(--spacing-md, 16px);
     padding-top: 0;
     display: flex;
 }
@@ -126,6 +149,7 @@
     border-radius: 32px;
     text-decoration: none;
     transition: 0.5s;
+    font-size: var(--font-md, 14px);
 }
 
 .actions .action-button-primary:hover {
@@ -139,12 +163,20 @@
 
 .badge {
     --color: var(--link);
-    font-size: 16px;
+    font-size: var(--font-lg, 16px);
     border: 2px solid var(--color);
     color: var(--color);
-    padding: 0 8px;
+    padding: 0 var(--spacing-sm, 8px);
     margin: 0 6px;
     border-radius: 24px;
+}
+
+@media screen and (max-width: 600px) {
+    .badge {
+        font-size: var(--font-md, 14px);
+        padding: 0 6px;
+        margin: 0 4px;
+    }
 }
 
 .badge.warning {
@@ -173,4 +205,12 @@
 
 .text-right {
     text-align: right;
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .card:hover .cover-img img {
+        transform: none;
+        filter: brightness(1);
+    }
 }

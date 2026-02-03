@@ -248,37 +248,410 @@ body.homepage #theme-nav {
     transform: scale(1.3);
 }
 
-/* 响应式 */
-@media screen and (max-width: 600px) {
+/* ========== 响应式设计 ========== */
+
+/* 超大屏幕 (>1440px) */
+@media screen and (min-width: 1441px) {
     .hero-card {
-        padding: 32px 24px;
+        padding: 56px 72px;
+        max-width: 560px;
     }
     
     .card-title {
-        font-size: 36px;
+        font-size: 56px;
+    }
+    
+    .card-subtitle {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+    
+    .social-icon {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .social-icon img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .bg-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* 大屏幕/桌面 (1024px - 1440px) - 默认样式，无需额外定义 */
+
+/* 平板横屏 (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .hero-card {
+        padding: 40px 48px;
+        max-width: 450px;
+    }
+    
+    .card-title {
+        font-size: 42px;
+        letter-spacing: 3px;
+    }
+    
+    .card-subtitle {
+        font-size: 11px;
+    }
+    
+    .lang-switcher {
+        top: 20px;
+        right: 20px;
+        padding: 6px 14px;
+    }
+    
+    .social-footer {
+        bottom: 28px;
+    }
+    
+    .bg-indicators {
+        bottom: 28px;
+        right: 28px;
+    }
+}
+
+/* 平板竖屏 (600px - 768px) */
+@media screen and (max-width: 768px) {
+    .hero-card {
+        padding: 36px 40px;
+        max-width: 420px;
+    }
+    
+    .card-title {
+        font-size: 38px;
         letter-spacing: 2px;
+        margin-bottom: 20px;
     }
     
     .card-subtitle {
         font-size: 10px;
+        margin-bottom: 12px;
+    }
+    
+    .card-links {
+        font-size: 12px;
+    }
+    
+    .card-tags {
+        font-size: 10px;
+    }
+    
+    .card-info {
+        margin-bottom: 20px;
     }
     
     .card-buttons {
-        flex-direction: column;
         gap: 12px;
+        margin-top: 24px;
     }
     
     .card-buttons .btn {
-        padding: 12px 24px;
+        padding: 10px 28px;
+        font-size: 11px;
+    }
+    
+    .lang-switcher {
+        top: 16px;
+        right: 16px;
+        padding: 6px 12px;
+    }
+    
+    .lang-btn {
+        font-size: 13px;
+        padding: 3px 6px;
     }
     
     .social-footer {
         bottom: 24px;
+        gap: 14px;
+    }
+    
+    .social-icon {
+        width: 34px;
+        height: 34px;
+    }
+    
+    .social-icon img {
+        width: 18px;
+        height: 18px;
     }
     
     .bg-indicators {
         bottom: 24px;
         right: 24px;
+        gap: 6px;
+    }
+    
+    /* 调整渐变范围 */
+    .hero-background::after {
+        background: 
+            linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 12%),
+            linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 12%),
+            linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 10%),
+            linear-gradient(to left, rgba(0,0,0,0.7) 0%, transparent 10%);
+    }
+}
+
+/* 大手机 (480px - 600px) */
+@media screen and (max-width: 600px) {
+    .hero-card {
+        padding: 32px 28px;
+        max-width: 360px;
+        width: 85%;
+    }
+    
+    .card-title {
+        font-size: 32px;
+        letter-spacing: 2px;
+        margin-bottom: 16px;
+    }
+    
+    .card-subtitle {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+    }
+    
+    .card-links {
+        font-size: 11px;
+    }
+    
+    .card-tags {
+        font-size: 9px;
+    }
+    
+    .card-info {
+        margin-bottom: 16px;
+    }
+    
+    .card-buttons {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .card-buttons .btn {
+        padding: 12px 24px;
+        font-size: 11px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .lang-switcher {
+        top: 12px;
+        right: 12px;
+        padding: 5px 10px;
+        border-radius: 16px;
+    }
+    
+    .lang-btn {
+        font-size: 12px;
+        padding: 2px 5px;
+    }
+    
+    .social-footer {
+        bottom: 20px;
+        gap: 12px;
+    }
+    
+    .social-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .social-icon img {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .bg-indicators {
+        bottom: 20px;
+        right: 20px;
+        gap: 6px;
+    }
+    
+    .bg-dot {
+        width: 7px;
+        height: 7px;
+    }
+    
+    /* 手机上渐变更柔和 */
+    .hero-background::after {
+        background: 
+            linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 10%),
+            linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 10%),
+            linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 8%),
+            linear-gradient(to left, rgba(0,0,0,0.5) 0%, transparent 8%);
+    }
+}
+
+/* 小手机 (<480px) */
+@media screen and (max-width: 480px) {
+    .hero-card {
+        padding: 28px 24px;
+        max-width: 320px;
+        width: 88%;
+    }
+    
+    .card-title {
+        font-size: 28px;
+        letter-spacing: 1px;
+        margin-bottom: 14px;
+    }
+    
+    .card-subtitle {
+        font-size: 8px;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+    
+    .card-links {
+        font-size: 10px;
+    }
+    
+    .card-tags {
+        font-size: 8px;
+        letter-spacing: 0.5px;
+    }
+    
+    .card-info {
+        margin-bottom: 14px;
+    }
+    
+    .card-buttons {
+        gap: 8px;
+        margin-top: 16px;
+    }
+    
+    .card-buttons .btn {
+        padding: 10px 20px;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+    
+    .lang-switcher {
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+    }
+    
+    .lang-btn {
+        font-size: 11px;
+        padding: 2px 4px;
+    }
+    
+    .lang-divider {
+        font-size: 12px;
+    }
+    
+    .social-footer {
+        bottom: 16px;
+        gap: 10px;
+    }
+    
+    .social-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .social-icon img {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .bg-indicators {
+        bottom: 16px;
+        right: 16px;
+        gap: 5px;
+    }
+    
+    .bg-dot {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* 超小屏幕 (<360px) */
+@media screen and (max-width: 360px) {
+    .hero-card {
+        padding: 24px 20px;
+        width: 90%;
+    }
+    
+    .card-title {
+        font-size: 24px;
+    }
+    
+    .card-subtitle {
+        font-size: 7px;
+    }
+    
+    .card-buttons .btn {
+        padding: 10px 16px;
+        font-size: 9px;
+    }
+}
+
+/* 横屏手机优化 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .hero-card {
+        padding: 20px 32px;
+        max-width: 400px;
+    }
+    
+    .card-title {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+    
+    .card-subtitle {
+        font-size: 9px;
+        margin-bottom: 8px;
+    }
+    
+    .card-info {
+        margin-bottom: 12px;
+    }
+    
+    .card-buttons {
+        flex-direction: row;
+        gap: 12px;
+        margin-top: 16px;
+    }
+    
+    .card-buttons .btn {
+        padding: 8px 20px;
+        width: auto;
+    }
+    
+    .social-footer {
+        bottom: 12px;
+    }
+    
+    .social-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .social-icon img {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .bg-indicators {
+        bottom: 12px;
+        right: 16px;
+    }
+    
+    .lang-switcher {
+        top: 10px;
+        right: 10px;
     }
 }
 

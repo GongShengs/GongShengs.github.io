@@ -22,8 +22,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 0;
-    gap: 24px;
+    padding: var(--spacing-lg, 24px) 0;
+    gap: var(--spacing-lg, 24px);
 }
 
 .post-list-item a,
@@ -38,7 +38,7 @@
 
 /* 标题 */
 .post-list-item .title {
-    font-size: 20px;
+    font-size: var(--font-xl, 20px);
     font-weight: 500;
     color: var(--text-primary);
     margin: 0;
@@ -55,7 +55,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--spacing-sm, 8px);
 }
 
 /* 隐藏封面图 */
@@ -65,7 +65,7 @@
 
 /* 摘要 */
 .post-list-item .excerpt {
-    font-size: 14px;
+    font-size: var(--font-md, 14px);
     color: var(--text-secondary);
     margin: 0;
     line-height: 1.5;
@@ -77,7 +77,7 @@
 
 /* 时间 */
 .post-list-item .time {
-    font-size: 13px;
+    font-size: var(--font-md, 13px);
     color: var(--text-muted);
     white-space: nowrap;
     flex-shrink: 0;
@@ -91,7 +91,7 @@
 /* 箭头指示 */
 .post-list-item > a::after {
     content: '→';
-    font-size: 18px;
+    font-size: var(--font-xl, 18px);
     color: var(--text-muted);
     transition: all var(--transition-fast);
     opacity: 0;
@@ -104,21 +104,27 @@
     color: var(--accent);
 }
 
-/* 响应式 */
+/* ========== 文章列表响应式 ========== */
+
+/* 平板 */
 @media screen and (max-width: 768px) {
     .post-list-item > a {
-        padding: 20px 0;
+        padding: var(--spacing-md, 20px) 0;
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: var(--spacing-sm, 8px);
     }
     
     .post-list-item .title {
-        font-size: 18px;
+        font-size: var(--font-lg, 18px);
     }
     
     .post-list-item .time {
-        font-size: 12px;
+        font-size: var(--font-sm, 12px);
+    }
+    
+    .post-list-item .excerpt {
+        font-size: var(--font-sm, 13px);
     }
     
     .post-list-item > a::after {
@@ -126,8 +132,32 @@
     }
 }
 
+/* 手机 */
+@media screen and (max-width: 600px) {
+    .post-list-item > a {
+        padding: var(--spacing-md, 16px) 0;
+    }
+    
+    .post-list-item .title {
+        font-size: var(--font-lg, 16px);
+    }
+    
+    .post-list-item .excerpt {
+        -webkit-line-clamp: 1;
+    }
+}
+
+/* 小手机 */
 @media screen and (max-width: 400px) {
     .post-list-item .title {
-        font-size: 16px;
+        font-size: var(--font-md, 15px);
+    }
+    
+    .post-list-item .excerpt {
+        display: none;
+    }
+    
+    .post-list-item .time {
+        font-size: var(--font-xs, 11px);
     }
 }
