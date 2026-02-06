@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -18,9 +18,9 @@
 <body class="homepage">
     <!-- 语言切换按钮 -->
     <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="zh-CN">中</button>
+        <button class="lang-btn" data-lang="zh-CN">中</button>
         <span class="lang-divider">/</span>
-        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn active" data-lang="en">EN</button>
     </div>
 
     <!-- 背景图切换容器（由配置文件动态生成） -->
@@ -150,7 +150,7 @@
         // 多语言切换
         (function() {
             const langBtns = document.querySelectorAll('.lang-btn');
-            let currentLang = localStorage.getItem('lang') || 'zh-CN';
+            let currentLang = localStorage.getItem('lang') || 'en';
             let i18nData = {};
 
             async function loadLang(lang) {
