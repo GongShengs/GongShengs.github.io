@@ -27,11 +27,28 @@
         }
     })
 
-    // 简历链接：直接打开PDF到新标签页
+    // 简历链接：根据语言打开对应PDF
+    function updateResumeLinks() {
+        const lang = localStorage.getItem('lang') || 'en';
+        const pdf = lang === 'zh-CN' 
+            ? '/resume/简历-胡武强-技术美术.pdf' 
+            : '/resume/简历-胡武强-技术美术_EN.pdf';
+        document.querySelectorAll('a[href^="/resume"]').forEach(link => {
+            if (!link.href.includes('.pdf')) return;
+            link.href = pdf;
+            link.target = '_blank';
+        });
+    }
+    // 初始设置
     document.querySelectorAll('a[href="/resume"]').forEach(link => {
-        link.href = '/resume/简历-胡武强-技术美术.pdf';
+        const lang = localStorage.getItem('lang') || 'en';
+        link.href = lang === 'zh-CN' 
+            ? '/resume/简历-胡武强-技术美术.pdf' 
+            : '/resume/简历-胡武强-技术美术_EN.pdf';
         link.target = '_blank';
     });
+    // 暴露给全局，供语言切换时调用
+    window.updateResumeLinks = updateResumeLinks;
 
     // 动态加载搜索功能
     (function loadSearch() {

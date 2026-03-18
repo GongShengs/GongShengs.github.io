@@ -167,6 +167,14 @@
                     
                     document.documentElement.lang = lang;
                     document.title = i18nData.title;
+                    
+                    // 更新简历链接
+                    const pdf = lang === 'zh-CN' 
+                        ? '/resume/简历-胡武强-技术美术.pdf' 
+                        : '/resume/简历-胡武强-技术美术_EN.pdf';
+                    document.querySelectorAll('a[href*="/resume/"]').forEach(link => {
+                        link.href = pdf;
+                    });
                 } catch (e) {
                     console.error('Failed to load language:', e);
                 }
