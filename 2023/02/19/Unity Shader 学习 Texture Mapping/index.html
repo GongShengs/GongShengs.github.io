@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
     <!DOCTYPE html>
 <html>
@@ -82,11 +82,11 @@
             
             
             
-            <a class="nav-item" href="/about">关于�?/a>
+            <a class="nav-item" href="/about">关于我</a>
             
             
             
-            <a class="nav-item" href="/resume">简�?/a>
+            <a class="nav-item" href="/resume">简我</a>
             
             
             
@@ -139,7 +139,7 @@
   <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">sampler2D</span> _MainTex;</span><br><span class="line">float4 _MainTex_ST</span><br><span class="line"><span class="comment">// 纹理名_ST 声明的是纹理的缩放和平移，分别存储在 纹理名_ST.xy �?纹理名_ST.zw</span></span><br></pre></td></tr></table></figure></li>
 <li><p>纹理缩放和平移的应用</p>
   <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">o.uv = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;</span><br></pre></td></tr></table></figure></li>
-<li><p>纹理属�?/p>
+<li><p>纹理属等</p>
 <ol>
 <li><p>Warp Mode </p>
 <ul>
@@ -153,13 +153,13 @@
 <li>Bilinear</li>
 <li>Trilinear</li>
 </ul>
-<p> 滤波效果依次提升，但消耗依次增大�?/p>
+<p> 滤波效果依次提升，但消耗依次增大等</p>
 </li>
 <li><p>mipmapping(多级渐远纹理)</p>
-<p> 预先计算的的图像序列，目的时为了提高渲染速度，代价时需要额外的存储空间，每个纹理的内存增加33%<sup>[3]</sup>�?/p>
+<p> 预先计算的的图像序列，目的时为了提高渲染速度，代价时需要额外的存储空间，每个纹理的内存增加33%<sup>[3]</sup>等</p>
 </li>
-<li><p>纹理长宽需要时二次�?/p>
-<p> 如果使用了非二次幂的纹理(NPOT Texture)<sup>[4]</sup>,可能会占用更多的内存空间，GPU读取速度也会有所下降�?/p>
+<li><p>纹理长宽需要时二次等</p>
+<p> 如果使用了非二次幂的纹理(NPOT Texture)<sup>[4]</sup>,可能会占用更多的内存空间，GPU读取速度也会有所下降等</p>
 </li>
 </ol>
 </li>
